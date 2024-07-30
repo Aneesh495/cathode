@@ -1,0 +1,21 @@
+[package]
+name = "cathode_rustcore"
+version = "0.1.0"
+edition = "2021"
+description = "CATHODE Rust compute core — colorimetry, reaction-diffusion, cloth, attractors, terrain. Exposes a C ABI (see include/cathode/rustcore.h)."
+
+[lib]
+name = "cathode_rustcore"
+crate-type = ["staticlib"]   # produces libcathode_rustcore.a for linking into the C host
+path = "src/lib.rs"
+
+# panic=abort avoids the unwinding-runtime dependency at the FFI boundary; a
+# Rust panic crossing into C is UB, so we abort instead.
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+
+[profile.dev]
+panic = "abort"
