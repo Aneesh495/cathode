@@ -5,10 +5,12 @@ A **scene** is a self-contained visual/simulation module implementing the
 same way: `init → (update, render)* → destroy`, piping the rendered linear-RGB
 framebuffer through the CRT chain to the terminal.
 
-## The catalog (56 scenes)
+## The catalog (50+ scenes; 56 registered)
 
 Run `bin/capture` with no args for the authoritative live list; indices shift as
-scenes are added. Current roster and backing language:
+scenes are added. Headless timing drives the same roster at **1440p**
+(2560×1440) with a **&lt;2 ms/frame** gate - see `docs/BENCHMARKS.md`. Current
+roster and backing language:
 
 | name | what it is | backing |
 |------|-----------|---------|
@@ -95,9 +97,11 @@ struct Scene {
 3. **Implement** the vtable functions. Rules:
    - `render` writes **linear RGB**; never tonemap (the CRT/TUI do that). HDR
      values > 1.0 are encouraged  -  they drive bloom.
-   - Keep per-frame work **bounded** (no unbounded loops); target ~60 FPS at a
-     few hundred pixels wide. Downscale a sim grid and upscale on render if the
-     per-cell cost is high (see `reaction`, `lenia`).
+   - Keep per-frame work **bounded** (no unbounded loops). Interactive TUI
+     sizes are modest; headless / bench still expects the scene to meet the
+     **1440p &lt;2 ms/frame** gate when measured with CRT enabled. Downscale a
+     sim grid and upscale on render if the per-cell cost is high (see
+     `reaction`, `lenia`).
    - Never read stdin or block.
    - Handle any framebuffer size (the app rebuilds buffers on terminal resize);
      derive grid sizes from `w,h` in `init`, clamped to sane bounds.

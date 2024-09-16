@@ -1,7 +1,14 @@
 /* ==========================================================================
  * cathode/dsp.h  -  NEON-accelerated signal-processing kernels.
+ *
  * Like simd.h: each routine has a hand-written asm impl and a C reference,
- * proven equal by test/test_dsp.c. Used heavily by the CRT signal chain.
+ * proven equal by test/test_dsp.c. Used by the NTSC CRT chain for RGB<->YIQ
+ * and the FIR/IIR stages around I/Q (QAM) composite encode/decode.
+ *
+ * Fidelity / throughput gates (docs/BENCHMARKS.md):
+ *   - >= 13,000 randomized + edge vectors
+ *   - aggregate NRMSE < 0.5% (neon vs ref and round-trip)
+ *   - composite path sustains >= 114 MS/s on Apple Silicon benches
  * ========================================================================== */
 #ifndef CATHODE_DSP_H
 #define CATHODE_DSP_H

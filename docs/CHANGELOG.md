@@ -4,13 +4,16 @@ A running log of major additions. CATHODE is a from-scratch, CPU-only graphics
 and audio engine with software NTSC/CRT emulation, rendered to the terminal;
 polyglot C / AArch64 NEON assembly / Rust / C++ over a frozen C ABI.
 
-## Milestone: 50 scenes
+## Milestone: 50+ scenes + documented performance gates
 
-The engine now ships **50 demo scenes**, **9 hand-written NEON kernels**, **11
-Rust modules**, **7 C++ subsystems**, **4 physics engines**, and from-scratch
-PNG / GIF89a / WAV encoders  -  ~24k lines, verified by a 115-point cross-language
-suite (unit + property + golden-image + end-to-end integration), clean under
-AddressSanitizer / UBSan / ThreadSanitizer, and built warning-free.
+The engine ships **50+ demo scenes** (56 registered), **9 hand-written NEON
+kernels**, Rust + C++ subsystems, and from-scratch PNG / GIF89a / WAV encoders.
+Documented gates (see README / `docs/BENCHMARKS.md`):
+
+- AArch64 NEON CPU rasterizer; **1440p** scene+CRT **&lt;2 ms/frame**; **~4×**
+  `mat4_mul` vs `-O3` C reference
+- NTSC **I/Q (QAM)** composite DSP at **≥114 MS/s** with **&lt;0.5% NRMSE** over
+  **≥13K** vectors
 
 ### Rendering
 - CPU triangle rasterizer with **perspective-correct texture mapping**

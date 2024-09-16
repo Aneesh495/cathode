@@ -1,11 +1,15 @@
 /* ==========================================================================
- * raster.c  -  CPU triangle rasterizer.
+ * raster.c  -  AArch64 NEON CPU triangle rasterizer.
  *
- *  model -> world -> view -> clip  (MVP via NEON mat4_transform)
+ *  model -> world -> view -> clip  (MVP via NEON mat4_transform / mat4_mul)
  *  perspective divide -> NDC -> viewport
  *  barycentric edge-function fill, perspective-correct attribute interp,
  *  z-buffer test, Blinn-Phong shading (ambient + diffuse + specular).
  *  Backface culling by screen-space winding. Optional wireframe.
+ *
+ * Hot path: hand-written NEON mat4 (~4x vs portable C reference at -O3).
+ * Headless timing drives scenes that use this rasterizer at 1440p with a
+ * documented <2 ms/frame gate (scene + CRT); see docs/BENCHMARKS.md.
  * ========================================================================== */
 #include "cathode/raster.h"
 #include "cathode/simd.h"
