@@ -29,6 +29,13 @@ audio library at all (see `docs/AUDIO.md`).
 
 Scope: ~24,000 lines  -  C ~12.5k, AArch64 assembly ~1.8k, Rust ~3.4k, C++ ~2.1k.
 
+| At a glance | |
+| --- | --- |
+| Target | Apple Silicon, AArch64 NEON hot paths |
+| Verification | 115-point cross-language suite; ASan / UBSan / TSan clean |
+| Output | Truecolor terminal (Unicode half-block), PNG/GIF/WAV capture |
+| Docs | `docs/ARCHITECTURE.md`, `docs/SCENES.md`, `docs/AUDIO.md`, `docs/TESTING.md` |
+
 ```
    scene (linear-RGB framebuffer, HDR)
         │
