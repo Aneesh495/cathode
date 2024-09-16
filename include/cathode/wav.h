@@ -1,10 +1,10 @@
 /* ==========================================================================
- * cathode/wav.h — a from-scratch RIFF/WAVE (PCM) audio encoder.
+ * cathode/wav.h  -  a from-scratch RIFF/WAVE (PCM) audio encoder.
  *
  * Companion to the from-scratch PNG and GIF89a image encoders: writes a
  * canonical 44-byte-header WAV file with 16-bit signed little-endian PCM
  * samples. This is what turns the C++ synth's f32 sample stream into a real,
- * playable audio artifact — no libsndfile, no dependencies, just the bytes.
+ * playable audio artifact  -  no libsndfile, no dependencies, just the bytes.
  *
  * Two interfaces:
  *   - one-shot: hand it a whole float buffer, it clamps/quantizes and writes.

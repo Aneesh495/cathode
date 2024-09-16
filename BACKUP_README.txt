@@ -1,4 +1,4 @@
-CATHODE — personal project backup
+CATHODE  -  personal project backup
 Exported 2026-07-29 from work laptop before handing it in.
 
 What this is: a CPU-only real-time graphics engine that emulates an analog
@@ -17,4 +17,4 @@ Requires: Apple clang, Rust toolchain (cargo), a truecolor terminal.
 Build artifacts (build/, rustsrc/target/, assets/) were excluded to keep this
 small; `make` regenerates them.
 
-Docs are in cathode/docs/ — start with docs/README.md, then ARCHITECTURE.md.
+Docs are in cathode/docs/  -  start with docs/README.md, then ARCHITECTURE.md.

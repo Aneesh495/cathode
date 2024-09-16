@@ -1,7 +1,7 @@
 /* ==========================================================================
- * scene_voxel.c — Comanche-style voxel-heightmap terrain (column ray-caster).
+ * scene_voxel.c  -  Comanche-style voxel-heightmap terrain (column ray-caster).
  *
- * The early-90s "voxel space" technique (Novalogic's Comanche): no polygons —
+ * The early-90s "voxel space" technique (Novalogic's Comanche): no polygons  - 
  * for each screen column, march a ray forward across a heightmap from front to
  * back, and for each step project the terrain height to a screen y; wherever it
  * rises above the highest column drawn so far, paint that vertical span with the

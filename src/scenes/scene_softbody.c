@@ -1,8 +1,8 @@
 /* ==========================================================================
- * scene_softbody.c — bouncing pressurized soft-body blobs (C++ Verlet sim).
+ * scene_softbody.c  -  bouncing pressurized soft-body blobs (C++ Verlet sim).
  *
  * Drives the C++ pressurized soft-body simulator (cpp_softbody_*): a few gooey
- * blobs fall under gravity, squash on the floor, and spring back — holding
+ * blobs fall under gravity, squash on the floor, and spring back  -  holding
  * their volume via the ideal-gas pressure force. We read each blob's ring of
  * world points, scanline-fill the polygon with a jelly color, and outline it
  * with a bright rim; a periodic "kick" tosses them so they keep wobbling.

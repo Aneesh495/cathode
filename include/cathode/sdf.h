@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/sdf.h — signed-distance-field ray marcher.
+ * cathode/sdf.h  -  signed-distance-field ray marcher.
  * Renders analytic scenes (spheres, boxes, tori, mandelbulb) with soft
  * shadows, ambient occlusion, and normals via gradient of the field.
  * ========================================================================== */
@@ -37,7 +37,7 @@ f32 sdf_scene_primitives(Vec3 p, f32 t, i32 *mat, void *user);
 f32 sdf_scene_mandelbulb(Vec3 p, f32 t, i32 *mat, void *user);
 f32 sdf_scene_infinite  (Vec3 p, f32 t, i32 *mat, void *user);
 
-/* Render a horizontal band [y0,y1) of fb — enables tiled threading. */
+/* Render a horizontal band [y0,y1) of fb  -  enables tiled threading. */
 void sdf_render_band(Framebuffer *fb, const SdfScene *sc, i32 y0, i32 y1);
 void sdf_render(Framebuffer *fb, const SdfScene *sc);
 

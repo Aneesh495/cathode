@@ -1,5 +1,5 @@
 /* ==========================================================================
- * noise.c — implementation of cathode/noise.h
+ * noise.c  -  implementation of cathode/noise.h
  *
  *   * Rng: xoshiro256** (Blackman & Vigna), seeded through splitmix64.
  *   * Coherent noise: value noise, Perlin 2D/3D (improved fade + permutation
@@ -135,7 +135,7 @@ static inline f32 fade(f32 t) {
     return t * t * t * (t * (t * 6.0f - 15.0f) + 10.0f);
 }
 
-/* Classic Hermite smoothstep 3t^2 - 2t^3 (C1) — used for value noise. */
+/* Classic Hermite smoothstep 3t^2 - 2t^3 (C1)  -  used for value noise. */
 static inline f32 smoothstep(f32 t) {
     return t * t * (3.0f - 2.0f * t);
 }
@@ -151,7 +151,7 @@ static inline f32 grad3(int hash, f32 x, f32 y, f32 z) {
 }
 
 /* ==========================================================================
- * Value noise — hashed lattice values + smoothstep interpolation
+ * Value noise  -  hashed lattice values + smoothstep interpolation
  * ========================================================================== */
 
 /* Integer hash of a 2D lattice point → deterministic value in [-1,1). */

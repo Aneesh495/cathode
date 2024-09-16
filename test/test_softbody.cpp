@@ -1,4 +1,4 @@
-// test_softbody.cpp — invariants for the 2D pressurized soft-body blob.
+// test_softbody.cpp  -  invariants for the 2D pressurized soft-body blob.
 //
 // Checks: it stays inside the world box, its enclosed area stays near the
 // target (gas pressure holds volume, doesn't collapse or explode), a dropped

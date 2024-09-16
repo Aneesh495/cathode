@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_julia.c — animated Julia set, rendered with the NEON fractal kernel.
+ * scene_julia.c  -  animated Julia set, rendered with the NEON fractal kernel.
  *
  * The Julia constant c traces a slow loop around the boundary of the
  * Mandelbrot set, so the Julia set continuously metamorphoses between
@@ -44,7 +44,7 @@ static Color3 julia_palette(int pal, f32 mu, int max_iter){
     if (mu >= (f32)max_iter - 0.5f) return col3(0,0,0);   /* inside the set */
     /* Normalize escape count to 0..1 with a sqrt so low-iteration exterior
      * (the bulk of a dusty Julia set) stays dark and the filaments near the
-     * boundary — where mu is large — glow bright. */
+     * boundary  -  where mu is large  -  glow bright. */
     f32 t = sqrtf(mu / (f32)max_iter);        /* 0 (fast escape) .. 1 (near set) */
     f32 g = t;                                 /* overall brightness ramp */
     f32 v = mu * 0.14f;                        /* hue phase */

@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_planet.c — a procedurally-textured rotating planet.
+ * scene_planet.c  -  a procedurally-textured rotating planet.
  *
  * An icosphere Phong-shaded by the CPU rasterizer, its surface colored by a
  * procedural texture sampled through the rasterizer's new UV texture hook

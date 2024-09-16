@@ -1,4 +1,4 @@
-/* test_fastmath.c — NEON transcendental approximations vs libm reference. */
+/* test_fastmath.c  -  NEON transcendental approximations vs libm reference. */
 #include "cathode/fastmath.h"
 #include <stdio.h>
 #include <stdlib.h>

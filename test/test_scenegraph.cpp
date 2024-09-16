@@ -1,5 +1,5 @@
 // ==========================================================================
-// test_scenegraph.cpp — unit tests for the retained-mode wireframe scene graph
+// test_scenegraph.cpp  -  unit tests for the retained-mode wireframe scene graph
 // (cpp_sg_* in cppcore.h). Headless, deterministic, terminates in ms.
 //
 // Coverage:

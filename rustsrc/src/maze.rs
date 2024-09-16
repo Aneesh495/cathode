@@ -1,4 +1,4 @@
-//! maze.rs — perfect-maze generation + BFS flood-fill solve, over the C ABI.
+//! maze.rs  -  perfect-maze generation + BFS flood-fill solve, over the C ABI.
 //!
 //! A "perfect" maze (exactly one path between any two cells, no loops) is grown
 //! with the **recursive-backtracker** algorithm: from a start cell, repeatedly

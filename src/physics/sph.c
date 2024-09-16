@@ -1,9 +1,9 @@
 /* ==========================================================================
- * sph.c — 2D Smoothed Particle Hydrodynamics (Müller et al. 2003).
+ * sph.c  -  2D Smoothed Particle Hydrodynamics (Müller et al. 2003).
  *
  * Per step:
  *   1. build a uniform spatial hash (cell size = smoothing radius h) so each
- *      particle only checks its 3x3 neighboring cells — near-O(N).
+ *      particle only checks its 3x3 neighboring cells  -  near-O(N).
  *   2. density_i = sum_j m * W_poly6(r_ij, h);  pressure_i = k*(density-rho0).
  *   3. force_i   = -pressure grad (spiky kernel) + viscosity (laplacian kernel)
  *                  + gravity.

@@ -1,5 +1,5 @@
 /* ==========================================================================
- * raster.c — CPU triangle rasterizer.
+ * raster.c  -  CPU triangle rasterizer.
  *
  *  model -> world -> view -> clip  (MVP via NEON mat4_transform)
  *  perspective divide -> NDC -> viewport

@@ -1,4 +1,4 @@
-/* test_tui.c — headless test of the half-block diff renderer (no real tty). */
+/* test_tui.c  -  headless test of the half-block diff renderer (no real tty). */
 #include "cathode/tui.h"
 #include "cathode/framebuffer.h"
 #include "cathode/vec.h"

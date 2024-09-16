@@ -1,15 +1,15 @@
-# CATHODE — Build system
+# CATHODE  -  Build system
 
 Polyglot build: C + hand-written AArch64 assembly + a Rust staticlib + C++20,
 all linked into two binaries. Driven by a single `Makefile`.
 
 ## Prerequisites
 
-- Apple clang / clang++ (arm64-darwin) — the reference toolchain.
+- Apple clang / clang++ (arm64-darwin)  -  the reference toolchain.
 - `cargo` / rustc (the Rust core is a `staticlib`).
 - A truecolor terminal for the interactive binary. Everything else (tests,
   PNG/GIF capture) is headless.
-- No third-party libraries. The PNG and GIF encoders, the DSP, the physics —
+- No third-party libraries. The PNG and GIF encoders, the DSP, the physics  - 
   all from scratch. Only libc / libm / libc++ / pthreads and the Rust std.
 
 ## Targets
@@ -65,9 +65,9 @@ changes (a Make prerequisite on the `.a`).
 
 ## Verification you should run before declaring done
 
-1. `make clean && make all` — clean polyglot build, no errors.
-2. `make test-all` — every suite green.
+1. `make clean && make all`  -  clean polyglot build, no errors.
+2. `make test-all`  -  every suite green.
 3. Sanitizers: build `capture` with `-fsanitize=address,undefined` and run
    `--all` over every scene (this is how the octree use-after-free was caught).
-4. `make capture` and eyeball the PNGs — the ultimate "does it actually look
+4. `make capture` and eyeball the PNGs  -  the ultimate "does it actually look
    right" check.

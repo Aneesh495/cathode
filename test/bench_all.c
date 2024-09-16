@@ -1,9 +1,9 @@
 /* ==========================================================================
- * bench_all.c — throughput benchmarks for every NEON kernel vs its C
+ * bench_all.c  -  throughput benchmarks for every NEON kernel vs its C
  * reference. Prints Mops/s and speedup. Compile-time note: build the C
  * references at the SAME -O3 -ffast-math as production so the comparison is
  * fair (auto-vectorized C vs hand asm), except fractalkernel which needs
- * strict FP — measured separately.
+ * strict FP  -  measured separately.
  * ========================================================================== */
 #include "cathode/simd.h"
 #include "cathode/dsp.h"

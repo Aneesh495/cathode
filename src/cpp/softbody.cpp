@@ -1,5 +1,5 @@
 // ==========================================================================
-// softbody.cpp — 2D pressurized soft body (Verlet blob).
+// softbody.cpp  -  2D pressurized soft body (Verlet blob).
 //
 // A closed ring of point masses joined by springs, inflated by an ideal-gas
 // pressure force (Matthias Müller's "pressurized soft body"). Each step:
@@ -9,7 +9,7 @@
 //   2. Relax the spring distance-constraints for `iterations` passes so the
 //      outline keeps its rest shape without stiff explicit springs.
 //   3. Compute the enclosed area (shoelace) and push each edge outward along
-//      its outward normal with force ∝ (targetArea/area − 1) — the gas law that
+//      its outward normal with force ∝ (targetArea/area − 1)  -  the gas law that
 //      makes the blob hold volume and bounce back when squashed.
 //   4. Resolve collisions with the world box (floor + walls) by projecting
 //      points back inside and damping the normal component.

@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_ifs.c — Iterated Function System fractals (Barnsley fern & friends).
+ * scene_ifs.c  -  Iterated Function System fractals (Barnsley fern & friends).
  *
  * The chaos game with purely affine maps chosen by probability: each iteration
  * applies one of N affine transforms (x' = a x + b y + e ; y' = c x + d y + f)

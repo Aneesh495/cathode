@@ -1,5 +1,5 @@
 /* ==========================================================================
- * registry.c — the scene registry. Scenes register a name + factory here;
+ * registry.c  -  the scene registry. Scenes register a name + factory here;
  * the app enumerates and instantiates them by index.
  * ========================================================================== */
 #include "cathode/scene.h"
@@ -15,7 +15,7 @@ static i32      g_nscenes = 0;
 void scene_register(const char *name, SceneFactory f) {
     if (!f) return;
     if (g_nscenes >= MAX_SCENES) {
-        /* Don't fail silently — a dropped scene is an invisible bug (this bit
+        /* Don't fail silently  -  a dropped scene is an invisible bug (this bit
          * us once when the cap was 32). Warn loudly; bump MAX_SCENES to fix. */
         fprintf(stderr, "cathode: scene registry full (MAX_SCENES=%d), dropping '%s'\n",
                 MAX_SCENES, name ? name : "?");

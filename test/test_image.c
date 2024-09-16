@@ -1,4 +1,4 @@
-/* test_image.c — verifies PPM round-trip and PNG validity.
+/* test_image.c  -  verifies PPM round-trip and PNG validity.
  *
  * (a) Build an 8x8 HDR gradient framebuffer, write P6 PPM, re-read it, check
  *     the header dims and that every byte equals image_tonemap_srgb output.

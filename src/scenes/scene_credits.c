@@ -1,12 +1,12 @@
 /* ==========================================================================
- * scene_credits.c — a perspective "star wars" credits crawl.
+ * scene_credits.c  -  a perspective "star wars" credits crawl.
  *
  * A block of text scrolls upward while receding into the distance: each text
  * line is placed at a world-space Z that increases up the screen, then
  * perspective-projected so lines shrink and converge toward a vanishing point
  * near the top. Lines fade out as they approach the horizon and fade in at the
  * bottom. The whole thing is drawn with the 5x7 bitmap font into the linear-RGB
- * framebuffer, so it glows and bleeds through the NTSC/CRT chain — a classic
+ * framebuffer, so it glows and bleeds through the NTSC/CRT chain  -  a classic
  * title-sequence look on a CRT.
  *
  * Deterministic given t (it loops), so it golden-tests cleanly.

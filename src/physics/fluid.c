@@ -1,5 +1,5 @@
 /* ==========================================================================
- * fluid.c — 2D stable fluid solver (Jos Stam, "Stable Fluids" / "Real-Time
+ * fluid.c  -  2D stable fluid solver (Jos Stam, "Stable Fluids" / "Real-Time
  * Fluid Dynamics for Games").
  *
  * Grid with a 1-cell border. Velocity (u,v) + colored dye density (r,g,b).

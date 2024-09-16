@@ -1,15 +1,15 @@
 /* ==========================================================================
- * scene_magnetic.c — magnetic-pendulum fractal basins of attraction.
+ * scene_magnetic.c  -  magnetic-pendulum fractal basins of attraction.
  *
  * A pendulum bob swings over a plane with several magnets. From each starting
- * position it traces a chaotic path — pulled by each magnet (inverse-square,
- * softened), a restoring spring toward the origin, and friction — until it
+ * position it traces a chaotic path  -  pulled by each magnet (inverse-square,
+ * softened), a restoring spring toward the origin, and friction  -  until it
  * settles near one magnet. Coloring every starting pixel by *which* magnet it
  * ends on produces the famous fractal basin-of-attraction map: smooth regions
  * near each magnet, but an infinitely intricate fractal boundary between them.
  *
  * We integrate the ODE per pixel (bounded step count), so it's embarrassingly
- * parallel — split across cores by the thread pool. The magnet configuration
+ * parallel  -  split across cores by the thread pool. The magnet configuration
  * slowly rotates, morphing the whole basin structure. Pure C.
  * ========================================================================== */
 #include "cathode/scene.h"

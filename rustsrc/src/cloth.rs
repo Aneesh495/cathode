@@ -9,9 +9,9 @@
 //! flag under gravity and wind, and requires no velocity state or matrices.
 //!
 //! Constraint set per interior quad:
-//!   * structural  — horizontal `(ix,iy)-(ix+1,iy)` and vertical
+//!   * structural   -  horizontal `(ix,iy)-(ix+1,iy)` and vertical
 //!                    `(ix,iy)-(ix,iy+1)` neighbours (rest = `spacing`).
-//!   * shear       — the two diagonals of the quad (rest = `spacing*sqrt(2)`),
+//!   * shear        -  the two diagonals of the quad (rest = `spacing*sqrt(2)`),
 //!                    which stop the sheet from collapsing/folding flat.
 //!
 //! Layout convention: node `(ix,iy)` sits at world `(ix*spacing, iy*spacing, 0)`
@@ -170,7 +170,7 @@ impl RustCloth {
                 let wb = if self.pinned[c.b] { 0.0 } else { 1.0 };
                 let total = wa + wb;
                 if total == 0.0 {
-                    continue; // both endpoints pinned — constraint is inert
+                    continue; // both endpoints pinned  -  constraint is inert
                 }
                 // corr = full closing vector; split between endpoints by weight.
                 let corr_x = delta.x * diff;

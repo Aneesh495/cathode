@@ -1,10 +1,10 @@
 /* ==========================================================================
- * scene_buddhabrot.c — the Buddhabrot: density of escaping Mandelbrot orbits.
+ * scene_buddhabrot.c  -  the Buddhabrot: density of escaping Mandelbrot orbits.
  *
  * Unlike the Mandelbrot set (which colors points by escape time), the
  * Buddhabrot plots, for each point c that DOES escape, the entire trajectory
  * z_0..z_escape it traced through the plane, accumulating a density histogram.
- * The result is a ghostly, three-lobed figure resembling a seated Buddha —
+ * The result is a ghostly, three-lobed figure resembling a seated Buddha  - 
  * an emergent structure nobody designs. We accumulate samples every frame
  * (progressive refinement), split the escape-time thresholds into R/G/B
  * channels ("Nebulabrot") for color, and log-map the density.

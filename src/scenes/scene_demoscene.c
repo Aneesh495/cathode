@@ -1,14 +1,14 @@
 /* ==========================================================================
- * scene_demoscene.c — a classic early-90s cracktro / demo screen.
+ * scene_demoscene.c  -  a classic early-90s cracktro / demo screen.
  *
  * Three layered effects, all pure C into the linear-RGB framebuffer, then run
  * through the NTSC/CRT chain (so the raster bars bloom and the text bleeds
  * chroma exactly like a real Amiga/C64 demo on a CRT):
  *
- *   1. copper raster bars — horizontal color bands whose vertical position is
+ *   1. copper raster bars  -  horizontal color bands whose vertical position is
  *      driven by stacked sines (the "copper list" look), additively blended.
- *   2. starfield parallax — three depth layers of drifting points.
- *   3. sine-scroller       — a greeting scrolled right-to-left, each glyph
+ *   2. starfield parallax  -  three depth layers of drifting points.
+ *   3. sine-scroller        -  a greeting scrolled right-to-left, each glyph
  *      vertically displaced by a travelling sine wave and hue-cycled, the
  *      signature demoscene text effect.
  *

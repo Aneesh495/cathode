@@ -1,5 +1,5 @@
 /* ==========================================================================
- * main.c — CATHODE interactive front-end.
+ * main.c  -  CATHODE interactive front-end.
  *
  * Pipeline per frame:
  *   scene->render(scene_fb)          // linear RGB, scene-referred
@@ -35,7 +35,7 @@ int main(int argc, char **argv) {
     /* --help / -h: print usage + scene list and exit (don't launch the loop). */
     for (int i = 1; i < argc; ++i) {
         if (strcmp(argv[i], "--help") == 0 || strcmp(argv[i], "-h") == 0) {
-            printf("CATHODE — CPU graphics engine with software NTSC/CRT emulation.\n\n");
+            printf("CATHODE  -  CPU graphics engine with software NTSC/CRT emulation.\n\n");
             printf("usage: cathode [scene] [--quality N]\n");
             printf("  --quality N   terminal cells to paint (default 2000).\n");
             printf("                Higher = bigger picture, lower frame rate;\n");
@@ -50,7 +50,7 @@ int main(int argc, char **argv) {
                 printf(" %s", scene_name_at(s));
                 if ((s % 6) == 5) printf("\n ");
             }
-            printf("\n\nheadless rendering: use the `capture` tool —\n");
+            printf("\n\nheadless rendering: use the `capture` tool  - \n");
             printf("  capture <scene> <frames> out.png [w] [h] [preset]\n");
             printf("  capture --all <frames> <dir>        # PNG per scene\n");
             printf("  capture --gif <scene> <frames> out.gif\n");
@@ -71,7 +71,7 @@ int main(int argc, char **argv) {
     /* Framebuffer dimensions are derived from the live terminal size. The
      * half-block trick shows two vertical pixels per character row, so the
      * pixel height is 2*(rows-1) (one row reserved for the HUD). We recompute
-     * these every frame and rebuild buffers on change — this is what makes the
+     * these every frame and rebuild buffers on change  -  this is what makes the
      * demo fill the window and survive a resize instead of drawing a fixed
      * small image with stale cells around it. */
     i32 cols = 80, rows = 24;
@@ -79,7 +79,7 @@ int main(int argc, char **argv) {
     /* Cell budget. Every terminal cell we paint costs the emulator a truecolor
      * glyph render, and it must ingest ~25 bytes of escape codes for it. Past a
      * few thousand cells per frame even fast emulators (Terminal.app, iTerm2)
-     * fall off a cliff — a maximized window is ~11k cells, which is why the
+     * fall off a cliff  -  a maximized window is ~11k cells, which is why the
      * demo used to run at 3 fps. We therefore render at most `pixel_step`-
      * reduced resolution and let each framebuffer pixel cover a pixel_step
      * block of terminal cells, keeping the picture full-screen but the cell
@@ -258,7 +258,7 @@ int main(int argc, char **argv) {
 
         if (show_help) {
             /* Build the scene list into overlay lines. The number of COLUMNS is
-             * chosen from the terminal height so the whole box always fits —
+             * chosen from the terminal height so the whole box always fits  - 
              * with 56+ scenes a fixed 3-column layout overflowed the screen. */
             enum { MAXL = 48, LINEW = 160 };
             static char linebuf[MAXL][LINEW];
@@ -288,7 +288,7 @@ int main(int argc, char **argv) {
             {
                 static char title[48];
                 snprintf(title, sizeof(title),
-                         "CATHODE — %d scenes  (press ? to close)", (int)nscenes);
+                         "CATHODE  -  %d scenes  (press ? to close)", (int)nscenes);
                 tui_overlay(tui, title, lines, nl);
             }
         }

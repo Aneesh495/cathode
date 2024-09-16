@@ -1,10 +1,10 @@
 /* ==========================================================================
- * scene_metaballs.c — animated 3D metaballs: C++ marching cubes + C rasterizer.
+ * scene_metaballs.c  -  animated 3D metaballs: C++ marching cubes + C rasterizer.
  *
  * A handful of moving spheres define a scalar field (sum of 1/r^2 potentials,
  * cpp_metaball_field). Each frame we extract the iso-surface as a triangle mesh
  * via marching cubes (cpp_marching_cubes) and render it with the Phong
- * rasterizer. The blobs merge and separate organically — the quintessential
+ * rasterizer. The blobs merge and separate organically  -  the quintessential
  * "liquid mercury" demoscene look, but real 3D geometry, not a 2D fake.
  * ========================================================================== */
 #include "cathode/scene.h"

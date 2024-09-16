@@ -1,8 +1,8 @@
 /* ==========================================================================
- * scene_wfc.c — Wave Function Collapse procedural generation (Rust-backed).
+ * scene_wfc.c  -  Wave Function Collapse procedural generation (Rust-backed).
  *
  * Watches the WFC solver (rust_wfc_* in rustcore.h) fill a grid cell-by-cell:
- * each frame it performs a batch of collapses, and we draw the current state —
+ * each frame it performs a batch of collapses, and we draw the current state  - 
  * collapsed cells in their tile color, still-superposed cells dark. When the
  * grid is solved (or hits a contradiction) it pauses, then reseeds with the
  * next ruleset (pipes → circuit → maze). The emergent coherent patterns are

@@ -1,11 +1,11 @@
 /* ==========================================================================
- * scene_attractor.c — chaotic strange attractors traced as glowing point-clouds.
+ * scene_attractor.c  -  chaotic strange attractors traced as glowing point-clouds.
  *
  * Integrates a chaotic ODE (Lorenz, Aizawa, Thomas, Halvorsen) with RK4 and
  * keeps a rolling buffer of the last N points, splatting them additively with
  * an age-based color ramp so the trajectory glows like a phosphor oscilloscope
  * (a Lissajous/vectorscope aesthetic). The camera slowly orbits the strange
- * geometry. Pure C — a standalone twin of the Rust attractor module.
+ * geometry. Pure C  -  a standalone twin of the Rust attractor module.
  * ========================================================================== */
 #include "cathode/scene.h"
 #include "cathode/tui.h"

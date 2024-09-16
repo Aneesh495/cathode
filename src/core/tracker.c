@@ -1,5 +1,5 @@
 /* ==========================================================================
- * tracker.c — pattern-sequencer playback engine (see tracker.h).
+ * tracker.c  -  pattern-sequencer playback engine (see tracker.h).
  *
  * The engine walks the order list row by row. On each row start it looks at
  * every channel's cell and emits the note on/off events implied by the note

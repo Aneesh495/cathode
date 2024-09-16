@@ -1,10 +1,10 @@
 /* ==========================================================================
- * test_golden.c — golden-image regression test for every scene.
+ * test_golden.c  -  golden-image regression test for every scene.
  *
  * Renders each scene deterministically (fixed size, fixed frame count, the
  * same dt/t sequence the capture tool uses) through the CRT chain, hashes the
  * tonemapped output, and compares against a stored golden hash. Any change that
- * alters a scene's rendering — intentional or a regression — shows up as a
+ * alters a scene's rendering  -  intentional or a regression  -  shows up as a
  * hash mismatch, which is the point: you then eyeball the scene and, if the
  * change was intended, run with UPDATE=1 to rewrite the golden file.
  *
@@ -27,7 +27,7 @@
 #define FRAMES 24
 #define GOLDEN_PATH "test/golden.txt"
 
-/* FNV-1a over the tonemapped 8-bit RGB — stable across runs, sensitive to any
+/* FNV-1a over the tonemapped 8-bit RGB  -  stable across runs, sensitive to any
  * pixel change. */
 static u64 hash_scene(i32 idx){
     Scene *sc = scene_create(idx);

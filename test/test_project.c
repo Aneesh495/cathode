@@ -1,4 +1,4 @@
-/* test_project.c — batched NEON point projection vs C reference. */
+/* test_project.c  -  batched NEON point projection vs C reference. */
 #include "cathode/simd.h"
 #include <stdio.h>
 #include <stdlib.h>

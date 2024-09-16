@@ -1,11 +1,11 @@
 /* ==========================================================================
- * scene_flame.c — fractal flame renderer (Scott Draves' algorithm).
+ * scene_flame.c  -  fractal flame renderer (Scott Draves' algorithm).
  *
  * The "chaos game" with nonlinear variations: repeatedly pick a random affine
  * transform (weighted), apply it to the running point, then apply a nonlinear
  * "variation" function (sinusoidal, spherical, swirl, horseshoe, …). Plot the
  * visited points into an accumulation buffer with per-transform color, and
- * tone-map by log(density) — the signature glowing, organic flame structures
+ * tone-map by log(density)  -  the signature glowing, organic flame structures
  * behind Electric Sheep. Transforms morph slowly over time so the flame
  * breathes and metamorphoses.
  *

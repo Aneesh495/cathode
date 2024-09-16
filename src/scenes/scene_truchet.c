@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_truchet.c — animated multi-scale Truchet tilings.
+ * scene_truchet.c  -  animated multi-scale Truchet tilings.
  *
  * Truchet tiles fill a grid with a small motif placed in one of a few random
  * orientations; adjacent tiles' arcs/lines connect into surprising large-scale

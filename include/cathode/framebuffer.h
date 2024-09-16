@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/framebuffer.h — the central shared surface.
+ * cathode/framebuffer.h  -  the central shared surface.
  *
  * Everything that produces pixels writes into a Framebuffer of linear RGB
  * f32 (scene-referred, HDR-capable, values may exceed 1.0). The CRT signal
