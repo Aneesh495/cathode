@@ -1,4 +1,4 @@
-/* test_raster.c — rasterizer + mesh generators, headless. */
+/* test_raster.c  -  rasterizer + mesh generators, headless. */
 #include "cathode/raster.h"
 #include "cathode/framebuffer.h"
 #include "cathode/vec.h"

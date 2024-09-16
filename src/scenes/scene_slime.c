@@ -1,11 +1,11 @@
 /* ==========================================================================
- * scene_slime.c — Physarum polycephalum ("slime mold") transport-network sim.
+ * scene_slime.c  -  Physarum polycephalum ("slime mold") transport-network sim.
  *
  * Thousands of agents wander a 2D trail field. Each agent samples the trail
  * at three points ahead (left / center / right sensors), steers toward the
  * strongest, moves forward, and deposits trail where it lands. The trail field
  * diffuses (blur) and decays each step. From these three local rules a
- * global, self-optimizing transport network emerges — the same organism that
+ * global, self-optimizing transport network emerges  -  the same organism that
  * famously reproduced the Tokyo rail map. Pairs beautifully with CRT phosphor.
  *
  * Refs: Jeff Jones, "Characteristics of pattern formation and evolution in
@@ -35,7 +35,7 @@ typedef struct {
 } SlimeState;
 
 static void slime_seed(SlimeState *s){
-    /* Spread agents across the whole field with fully random headings — this
+    /* Spread agents across the whole field with fully random headings  -  this
      * lets the trail-following dynamics discover a global network rather than
      * collapsing a central disc into one clump. */
     for (i32 i=0;i<s->n_agents;++i){

@@ -1,9 +1,9 @@
 /* ==========================================================================
- * scene_reaction.c — Gray-Scott reaction-diffusion, computed in Rust.
+ * scene_reaction.c  -  Gray-Scott reaction-diffusion, computed in Rust.
  *
  * This scene is a thin C shell over the Rust reaction-diffusion engine
  * (rustsrc/src/reaction.rs, contract in rustcore.h). It cycles through several
- * classic (feed, kill) parameter regimes — solitons, mitosis, coral, worms —
+ * classic (feed, kill) parameter regimes  -  solitons, mitosis, coral, worms  - 
  * and maps the chemical concentration field through a palette. The self-
  * organizing Turing patterns pair beautifully with CRT phosphor bleed.
  * ========================================================================== */
@@ -120,7 +120,7 @@ static void re_destroy(Scene *sc){ if(sc){ ReactionState*s=sc->state; if(s->rd)r
 Scene *scene_reaction_create(void){
     Scene *sc=calloc(1,sizeof(Scene));
     sc->name="reaction";
-    sc->description="Gray-Scott reaction-diffusion (computed in Rust) — Turing patterns";
+    sc->description="Gray-Scott reaction-diffusion (computed in Rust)  -  Turing patterns";
     sc->state=calloc(1,sizeof(ReactionState));
     sc->init=re_init; sc->update=re_update; sc->render=re_render;
     sc->on_key=re_key; sc->destroy=re_destroy; sc->preferred_crt=re_crt;

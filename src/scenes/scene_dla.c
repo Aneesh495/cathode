@@ -1,9 +1,9 @@
 /* ==========================================================================
- * scene_dla.c — diffusion-limited aggregation crystal growth (Rust-backed).
+ * scene_dla.c  -  diffusion-limited aggregation crystal growth (Rust-backed).
  *
  * Grows a fractal dendrite from a central seed by sticking random-walker
  * particles (rust_dla_* in rustcore.h). The per-cell "age" is mapped through a
- * heat ramp so you watch the crystal grow outward in time-colored layers —
+ * heat ramp so you watch the crystal grow outward in time-colored layers  - 
  * like frost spreading across a window. When the cluster fills the frame it
  * reseeds. The CRT bloom gives the tips a glow.
  * ========================================================================== */
@@ -51,7 +51,7 @@ static void dl_update(Scene *sc, f32 dt, f32 t){
         /* grow a batch of walkers per frame */
         i32 stuck = rust_dla_grow(s->dla, 250);
         if (stuck==0){
-            /* frontier reached the border or stalled — freeze this crystal */
+            /* frontier reached the border or stalled  -  freeze this crystal */
             s->target = 0;
         }
     } else {

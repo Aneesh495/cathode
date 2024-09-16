@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_cloth.c — a waving flag: Rust Verlet cloth + C rasterizer.
+ * scene_cloth.c  -  a waving flag: Rust Verlet cloth + C rasterizer.
  *
  * The cloth physics run in Rust (rustsrc/src/cloth.rs). Each frame we pull the
  * node positions and triangle indices across the FFI boundary, build a Mesh,

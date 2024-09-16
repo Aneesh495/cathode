@@ -1,4 +1,4 @@
-/* test_fluid.c — stable fluids solver properties. */
+/* test_fluid.c  -  stable fluids solver properties. */
 #include "cathode/physics.h"
 #include "cathode/vec.h"
 #include "cathode/framebuffer.h"
@@ -49,7 +49,7 @@ int main(void){
     /* gentle swirl */
     for(int j=1;j<=48;++j)for(int i=1;i<=48;++i) fluid_add_velocity(g,i,j, 0.3f*sinf(j*0.2f), 0.3f*cosf(i*0.2f));
     /* sum raw dye by rendering is nonlinear (tonemap); instead compare rendered
-       total at step 2 vs step 12 — should not blow up or vanish. */
+       total at step 2 vs step 12  -  should not blow up or vanish. */
     for(int s=0;s<2;++s) fluid_step(g,0.05f,0.0f,0.0f);
     f32 t_early=total_density(g,gb);
     for(int s=0;s<10;++s) fluid_step(g,0.05f,0.0f,0.0f);

@@ -1,5 +1,5 @@
 /* ==========================================================================
- * postfx.h — NEON-accelerated post-processing kernels (internal app helper,
+ * postfx.h  -  NEON-accelerated post-processing kernels (internal app helper,
  * not part of the frozen ABI). Each has a hand-written asm impl + C reference,
  * proven equal by test/test_postfx.c. Used by the bloom / exposure path.
  * ========================================================================== */

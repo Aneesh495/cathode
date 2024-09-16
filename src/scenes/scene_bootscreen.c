@@ -1,9 +1,9 @@
 /* ==========================================================================
- * scene_bootscreen.c — a retro computer power-on / POST sequence.
+ * scene_bootscreen.c  -  a retro computer power-on / POST sequence.
  *
  * A loving pastiche of an 8/16-bit machine booting: the ROM banner appears,
  * a RAM test counts up kilobyte by kilobyte, a sequence of POST lines type
- * themselves out, and a block cursor blinks at a "READY." prompt — then the
+ * themselves out, and a block cursor blinks at a "READY." prompt  -  then the
  * whole thing loops. Everything is drawn with the 5x7 bitmap font straight
  * into the linear-RGB framebuffer, so it flows through the NTSC/CRT chain and
  * gets phosphor glow, scanlines, and chroma fringing like the real thing.

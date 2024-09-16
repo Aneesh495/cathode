@@ -1,11 +1,11 @@
 /* ==========================================================================
- * scene_tesseract.c — rotating 4D polytopes (tesseract, 16-cell, 5-cell).
+ * scene_tesseract.c  -  rotating 4D polytopes (tesseract, 16-cell, 5-cell).
  *
  * Vertices live in 4-space. Each frame we rotate them by two simultaneous
- * 4D rotations (in the XW and YZ planes — genuinely 4-dimensional, not just a
+ * 4D rotations (in the XW and YZ planes  -  genuinely 4-dimensional, not just a
  * spinning 3D shadow), perspective-project 4D→3D (divide by w-distance), then
  * 3D→2D (divide by z-distance), and draw the edges as glowing lines. The
- * "unfolding" you see — inner cube growing as it swings toward the 4D camera —
+ * "unfolding" you see  -  inner cube growing as it swings toward the 4D camera  - 
  * is the real hypercube rotation, impossible to fake with 3D alone.
  * ========================================================================== */
 #include "cathode/scene.h"

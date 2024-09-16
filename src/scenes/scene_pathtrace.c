@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_pathtrace.c — real-time Monte-Carlo path tracing via the C++ tracer.
+ * scene_pathtrace.c  -  real-time Monte-Carlo path tracing via the C++ tracer.
  *
  * The C++ BVH path tracer (src/cpp/tracer.cpp, contract in cppcore.h) renders
  * a small scene of spheres (diffuse / metal / glass / emissive) with global

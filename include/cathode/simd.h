@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/simd.h — ABI contract for hand-written AArch64 NEON assembly.
+ * cathode/simd.h  -  ABI contract for hand-written AArch64 NEON assembly.
  *
  * Every function declared here is implemented TWICE:
  *   1. in src/asm (hand-written NEON, the fast path)

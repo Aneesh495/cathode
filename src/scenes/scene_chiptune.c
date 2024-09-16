@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_chiptune.c — a live tracker player UI, the capstone of the audio stack.
+ * scene_chiptune.c  -  a live tracker player UI, the capstone of the audio stack.
  *
  * This scene ties together every audio subsystem CATHODE has:
  *

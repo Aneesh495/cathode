@@ -1,4 +1,4 @@
-/* test_gravkernel.c — NEON gravity force kernel vs C reference. */
+/* test_gravkernel.c  -  NEON gravity force kernel vs C reference. */
 #include "cathode/gravkernel.h"
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,5 +1,5 @@
 /* ==========================================================================
- * dsp_ref.c — portable C reference for the NEON DSP kernels (dsp.h).
+ * dsp_ref.c  -  portable C reference for the NEON DSP kernels (dsp.h).
  * NTSC YIQ matrices; symmetric FIR; one-pole IIR; scale/bias/clamp.
  * ========================================================================== */
 #include "cathode/dsp.h"

@@ -1,12 +1,12 @@
 /* ==========================================================================
- * scene_physics.c — 2D rigid-body playground: polygons tumble and stack.
+ * scene_physics.c  -  2D rigid-body playground: polygons tumble and stack.
  *
  * Drives the impulse-based rigid-body solver (src/physics/rigidbody.c): a
  * static angled ramp and floor, with boxes and regular polygons spawned above
  * that fall, collide, tumble, and settle into a pile. Bodies are filled with a
  * flat color and outlined by drawing their edges into the framebuffer; the CRT
  * chain gives them glow. New bodies spawn periodically until the world is full,
- * then it resets — a hypnotic, always-moving physics toy.
+ * then it resets  -  a hypnotic, always-moving physics toy.
  * ========================================================================== */
 #include "cathode/scene.h"
 #include "cathode/tui.h"
@@ -83,7 +83,7 @@ static void ph_update(Scene *sc, f32 dt, f32 t){
             }
             if (id>=0){ s->colors[id]=rand_hue(&s->rng); if(id>=s->ncolors)s->ncolors=id+1; }
         } else if (s->spawn_timer==0) {
-            /* full — will reset below */
+            /* full  -  will reset below */
         }
     }
     /* when full and settled a while, reset for a fresh pile */

@@ -1,9 +1,9 @@
 /* ==========================================================================
- * scene_csg.c — constructive solid geometry: an animated boolean solid.
+ * scene_csg.c  -  constructive solid geometry: an animated boolean solid.
  *
- * Builds a CSG tree in the C++ core (cpp_csg_eval) — a rounded box with a
+ * Builds a CSG tree in the C++ core (cpp_csg_eval)  -  a rounded box with a
  * sphere bored out of it, unioned with a spinning torus, all with animated
- * smooth-blend radii — samples it into a scalar field, extracts the surface
+ * smooth-blend radii  -  samples it into a scalar field, extracts the surface
  * with marching cubes (cpp_marching_cubes), and Phong-shades it with the C
  * rasterizer. The boolean structure morphs over time: the sphere pumps in and
  * out (carving a deeper/shallower cavity) and the blend radius breathes, so the

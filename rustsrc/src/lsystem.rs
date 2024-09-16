@@ -1,4 +1,4 @@
-//! lsystem.rs — Lindenmayer-system turtle-graphics generator, over the C ABI.
+//! lsystem.rs  -  Lindenmayer-system turtle-graphics generator, over the C ABI.
 //!
 //! An L-system rewrites a start string (the *axiom*) by simultaneously applying
 //! production rules for a number of iterations, then interprets the resulting

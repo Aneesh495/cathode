@@ -1,11 +1,11 @@
 /* ==========================================================================
- * test_wav.c — verifies the from-scratch RIFF/WAVE PCM16 encoder.
+ * test_wav.c  -  verifies the from-scratch RIFF/WAVE PCM16 encoder.
  *
  * Writes files with both the one-shot and streaming APIs, then reads the raw
  * bytes back and checks every header field against the spec, the reported data
  * size against the sample count, and that a few known f32 inputs quantize to
  * the expected int16 little-endian values (incl. hard-clipping of out-of-range
- * input). Uses only stdio — no decoder dependency.
+ * input). Uses only stdio  -  no decoder dependency.
  * ========================================================================== */
 #include "cathode/wav.h"
 #include <stdio.h>

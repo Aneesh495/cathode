@@ -1,10 +1,10 @@
 /* ==========================================================================
- * scene_pendulum.c — a field of double pendulums demonstrating chaos.
+ * scene_pendulum.c  -  a field of double pendulums demonstrating chaos.
  *
  * Each screen column seeds a double pendulum whose initial angle differs by an
  * infinitesimal amount from its neighbor. All are integrated with the exact
  * double-pendulum equations of motion (RK4). Because the double pendulum is
- * chaotic, states that start indistinguishably close diverge exponentially —
+ * chaotic, states that start indistinguishably close diverge exponentially  - 
  * so an initially smooth band of color dissolves into shimmering turbulence.
  * We map each pendulum's angle to a hue; the whole thing is a living picture of
  * sensitive dependence on initial conditions.
@@ -68,7 +68,7 @@ static void pd_seed(PendState *s){
         /* Released from high energy (both arms up) where the double pendulum is
          * most violently chaotic. A modest per-column spread across the array
          * makes neighbors' exponential divergence visible within a second or
-         * two — the whole band shears from smooth into turbulence. */
+         * two  -  the whole band shears from smooth into turbulence. */
         f64 base=CT_PI + 0.4;              /* both arms up-ish: max chaos */
         f64 eps=(f64)i/(f64)s->n * 0.5;    /* 0..0.5 rad spread across columns */
         s->p[i].a1=base+eps; s->p[i].a2=base+eps*0.5;

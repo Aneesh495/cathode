@@ -1,5 +1,5 @@
 /* ==========================================================================
- * text.c — 5x7 bitmap font + framebuffer text rasterizer.
+ * text.c  -  5x7 bitmap font + framebuffer text rasterizer.
  *
  * The glyph table below covers ASCII 0x20..0x7E. Each glyph is 7 row-bytes;
  * within a byte the low 5 bits are the columns, bit 4 = leftmost pixel. So a

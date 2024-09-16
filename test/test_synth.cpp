@@ -1,12 +1,12 @@
 // ==========================================================================
-// test_synth.cpp — unit tests for the headless polyphonic synth
+// test_synth.cpp  -  unit tests for the headless polyphonic synth
 // (cpp_synth_* in cppcore.h). Headless, deterministic, terminates in ms.
 //
 // Coverage (per the module spec):
 //   (a) no notes  -> rendered block is near-silent (tiny RMS);
 //   (b) note_on(p) -> non-zero RMS AND the dominant spectrum bin corresponds
 //       to that pitch (within a small bin tolerance);
-//   (c) different waveforms (sine vs square/saw) produce different spectra —
+//   (c) different waveforms (sine vs square/saw) produce different spectra  - 
 //       richer harmonic energy above the fundamental for the non-sine shapes;
 //   (d) rendered samples are always finite and bounded (|s| < 4);
 //   plus a couple of sanity checks (polyphony, note_off fade, sequencer runs).

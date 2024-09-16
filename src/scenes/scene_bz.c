@@ -1,12 +1,12 @@
 /* ==========================================================================
- * scene_bz.c — excitable-media cellular automaton (Belousov–Zhabotinsky-like
- * spiral waves), Greenberg–Hastings model.
+ * scene_bz.c  -  excitable-media cellular automaton (Belousov-Zhabotinsky-like
+ * spiral waves), Greenberg-Hastings model.
  *
  * Each cell is in one of N states: 0 = resting, 1..K = excited (refractory
  * countdown). A resting cell becomes excited (state 1) if enough neighbors are
  * in the leading excited states; an excited cell in state k advances to k+1
  * each tick and returns to rest after state N-1. From random noise this
- * self-organizes into rotating spiral waves and target patterns — the discrete
+ * self-organizes into rotating spiral waves and target patterns  -  the discrete
  * cousin of the BZ chemical oscillator. The refractory gradient maps to a fiery
  * palette; CRT bloom lights the wavefronts.
  * ========================================================================== */

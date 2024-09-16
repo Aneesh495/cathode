@@ -1,4 +1,4 @@
-# CATHODE — Scene catalog & authoring guide
+# CATHODE  -  Scene catalog & authoring guide
 
 A **scene** is a self-contained visual/simulation module implementing the
 `Scene` vtable (`include/cathode/scene.h`). The engine drives every scene the
@@ -13,10 +13,10 @@ scenes are added. Current roster and backing language:
 | name | what it is | backing |
 |------|-----------|---------|
 | starfield | 3D star-warp with motion streaks over an fbm nebula | C |
-| galaxy | live Barnes–Hut N-body galaxy / collision | C |
+| galaxy | live Barnes-Hut N-body galaxy / collision | C |
 | raymarch | SDF primitives, mandelbulb, infinite field (multithreaded) | C |
 | solids | Phong-shaded procedural meshes via the rasterizer | C |
-| fluid | stable Navier–Stokes colored dye (grid, Stam) | C |
+| fluid | stable Navier-Stokes colored dye (grid, Stam) | C |
 | tunnel | classic demoscene tunnel | C |
 | plasma | multi-sine + fbm plasma | C |
 | terrain | flight over an infinite fractal landscape | C |
@@ -36,7 +36,7 @@ scenes are added. Current roster and backing language:
 | buddhabrot | Buddhabrot / Nebulabrot escape-orbit density | C |
 | tesseract | rotating 4D polytopes (real 4D→3D→2D projection) | C |
 | pendulum | double-pendulum chaos array (RK4, sensitive deps) | C |
-| bz | Belousov–Zhabotinsky excitable-media spiral waves | C |
+| bz | Belousov-Zhabotinsky excitable-media spiral waves | C |
 | orbital | volume-rendered hydrogen \|ψ\|² electron clouds | C |
 | wireworld | Wireworld electron cellular-automaton circuits | C |
 | observatory | terrain + N-body galaxy, one camera (NEON projector) | C + asm |
@@ -54,7 +54,7 @@ scenes are added. Current roster and backing language:
 | chladni | Chladni cymatics: sand collects on plate nodal lines | C |
 | magnetic | magnetic-pendulum fractal basins of attraction (threaded) | C |
 | fire | classic Doom-PSX fire effect + burning CATHODE text | C |
-| reaction | Gray–Scott reaction-diffusion (Turing patterns) | **Rust** |
+| reaction | Gray-Scott reaction-diffusion (Turing patterns) | **Rust** |
 | cloth | waving flag: Verlet cloth + Phong rasterizer | **Rust** |
 | dla | diffusion-limited aggregation crystal growth | **Rust** |
 | wfc | Wave Function Collapse procedural tiles (live solve) | **Rust** |
@@ -94,7 +94,7 @@ struct Scene {
 2. **Define** a `<Name>State` struct; stash it in `sc->state`.
 3. **Implement** the vtable functions. Rules:
    - `render` writes **linear RGB**; never tonemap (the CRT/TUI do that). HDR
-     values > 1.0 are encouraged — they drive bloom.
+     values > 1.0 are encouraged  -  they drive bloom.
    - Keep per-frame work **bounded** (no unbounded loops); target ~60 FPS at a
      few hundred pixels wide. Downscale a sim grid and upscale on render if the
      per-cell cost is high (see `reaction`, `lenia`).
@@ -107,7 +107,7 @@ struct Scene {
    `scenes_register_polyglot` for Rust/C++-backed), and the factory itself at
    the bottom of your `.c`.
 5. **Build & look**: `make` then
-   `bin/capture <name> <frames> /tmp/x.png <w> <h>` — open the PNG. For motion,
+   `bin/capture <name> <frames> /tmp/x.png <w> <h>`  -  open the PNG. For motion,
    `bin/capture --gif <name> <frames> /tmp/x.gif` makes an animated loop.
 6. **Tune** against the render. Common fixes seen in this codebase:
    - washed-out / all-one-color → your value→color mapping needs contrast

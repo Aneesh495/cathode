@@ -1,4 +1,4 @@
-# CATHODE — The polyglot ABI boundary
+# CATHODE  -  The polyglot ABI boundary
 
 CATHODE is C, Rust, and C++ linked into one binary. They talk over a **C ABI**.
 This document is the contract's rulebook: follow it and cross-language calls are
@@ -54,9 +54,9 @@ library matches the header it was compiled against.
 ## Assembly side rules
 
 See `docs/NEON.md` for the full AArch64 Apple ABI notes. The short version:
-integer/pointer args in x0–x7, float/SIMD in v0–v7 (**separate banks** — a
+integer/pointer args in x0-x7, float/SIMD in v0-v7 (**separate banks**  -  a
 `size_t n` after three `float` params is still the next *integer* register), a
-float result in s0, v8–v15 callee-saved, save the link register before `bl`.
+float result in s0, v8-v15 callee-saved, save the link register before `bl`.
 Every asm routine has a C reference and a test proving bit-for-bit agreement.
 
 ## Memory ownership cheat-sheet

@@ -1,5 +1,5 @@
 // ==========================================================================
-// csg.cpp — constructive solid geometry: a boolean tree of signed-distance
+// csg.cpp  -  constructive solid geometry: a boolean tree of signed-distance
 // primitives, evaluated into a scalar field for marching cubes.
 //
 // Each node is either a primitive (sphere/box/cylinder/torus) or a boolean
@@ -100,7 +100,7 @@ static float eval_node(const CsgNode* nodes, int n, int idx, V3 p, int depth, bo
 
 // Validate the tree ONCE up front: every operator's children must be in range
 // and the graph must be acyclic (a self- or mutually-referential operator would
-// otherwise drive eval_node into ~2^depth recursion — an effective hang). We do
+// otherwise drive eval_node into ~2^depth recursion  -  an effective hang). We do
 // a DFS coloring nodes white/grey/black; a grey node reached again is a back
 // edge (cycle). Returns true iff the tree rooted at `root` is well formed.
 static bool validate(const CsgNode* nodes, int n, int idx, char* color) {

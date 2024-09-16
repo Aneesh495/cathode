@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/physics.h — N-body gravity (Barnes-Hut) + 2D fluid (Navier-Stokes).
+ * cathode/physics.h  -  N-body gravity (Barnes-Hut) + 2D fluid (Navier-Stokes).
  * ========================================================================== */
 #ifndef CATHODE_PHYSICS_H
 #define CATHODE_PHYSICS_H
@@ -65,7 +65,7 @@ f32     sph_domain_w(const SphSim *s);
 f32     sph_domain_h(const SphSim *s);
 
 /* ---------------- 2D rigid-body dynamics (impulse-based) --------------- *
- * A small sequential-impulse rigid-body solver over convex polygons — the
+ * A small sequential-impulse rigid-body solver over convex polygons  -  the
  * classic Box2D-lite recipe: integrate velocities under gravity, detect
  * collisions with SAT (separating-axis test) between convex hulls + the static
  * floor/walls, then resolve each contact with iterated normal + friction

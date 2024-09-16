@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_terrain.c — flight over an infinite scrolling fractal landscape.
+ * scene_terrain.c  -  flight over an infinite scrolling fractal landscape.
  * A heightfield generated with fbm/ridged noise scrolls under the camera;
  * rasterized with altitude/slope coloring and distance fog.
  * ========================================================================== */

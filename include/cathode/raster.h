@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/raster.h — CPU triangle rasterizer with a full transform pipeline.
+ * cathode/raster.h  -  CPU triangle rasterizer with a full transform pipeline.
  * Barycentric, perspective-correct, z-buffered, with Phong-ish shading.
  * ========================================================================== */
 #ifndef CATHODE_RASTER_H

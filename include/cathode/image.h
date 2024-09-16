@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/image.h — framebuffer -> PPM/PNG exporter (for headless capture &
+ * cathode/image.h  -  framebuffer -> PPM/PNG exporter (for headless capture &
  * visual verification). Applies Reinhard tonemap + sRGB gamma on the way out.
  * ========================================================================== */
 #ifndef CATHODE_IMAGE_H

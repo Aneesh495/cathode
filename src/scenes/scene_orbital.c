@@ -1,11 +1,11 @@
 /* ==========================================================================
- * scene_orbital.c — hydrogen atomic orbitals, volume-rendered.
+ * scene_orbital.c  -  hydrogen atomic orbitals, volume-rendered.
  *
  * Ray-marches the probability density |psi_{n,l,m}(r,theta,phi)|^2 of real
  * hydrogen-like orbitals (built from associated Laguerre radial parts and real
  * spherical harmonics) as a glowing volumetric cloud. Absorption-emission
  * integration along each ray accumulates color by density; the camera orbits.
- * Cycles through s, p, d, f orbitals. This is genuine quantum chemistry — the
+ * Cycles through s, p, d, f orbitals. This is genuine quantum chemistry  -  the
  * shapes are the real electron clouds, not decorative blobs.
  * ========================================================================== */
 #include "cathode/scene.h"
@@ -76,7 +76,7 @@ static void or_render(Scene*sc, Framebuffer*fb){
     Vec3 up=v3_cross(right,fwd);
     f32 aspect=(f32)fb->w/fb->h, tanf_half=tanf(0.5f);
     /* |psi|^2 peaks ~0.5 and is exactly 0 off the orbital's lobes, so no huge
-     * scale is needed — a modest emission per unit length lets the anisotropic
+     * scale is needed  -  a modest emission per unit length lets the anisotropic
      * lobes glow while empty space stays black. */
     const f32 emission=0.28f;   /* calibrated so lobe cores glow, halo fades */
     for (i32 py=0;py<fb->h;++py){

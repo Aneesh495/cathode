@@ -1,5 +1,5 @@
 // ==========================================================================
-// audio_out.cpp — real audio device output for the synth, via macOS
+// audio_out.cpp  -  real audio device output for the synth, via macOS
 // AudioQueue (AudioToolbox). Optional and headless-safe: if CATHODE_AUDIO is
 // not defined at build time, these become no-ops that report "no device" so
 // the audioviz scene still runs silently in CI / over SSH.

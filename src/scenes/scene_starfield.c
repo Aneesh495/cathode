@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_starfield.c — 3D star-warp with motion streaks and an fbm nebula.
+ * scene_starfield.c  -  3D star-warp with motion streaks and an fbm nebula.
  * ========================================================================== */
 #include "cathode/scene.h"
 #include "cathode/tui.h"

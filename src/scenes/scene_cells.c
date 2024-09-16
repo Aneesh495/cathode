@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_cells.c — animated Voronoi / cellular texture from Worley noise.
+ * scene_cells.c  -  animated Voronoi / cellular texture from Worley noise.
  *
  * Layers Worley noise (noise.h worley2 / worley2_f2f1) into an organic living
  * texture: F1 gives cell-body shading, F2-F1 gives glowing membrane edges. We

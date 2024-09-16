@@ -1,8 +1,8 @@
 /* ==========================================================================
- * scene_life.c — Conway's Game of Life with heat-trail rendering.
+ * scene_life.c  -  Conway's Game of Life with heat-trail rendering.
  *
  * A toroidal cellular automaton. Live cells glow; recently-dead cells leave a
- * cooling trail (an "age" field), which the CRT phosphor then smears further —
+ * cooling trail (an "age" field), which the CRT phosphor then smears further  - 
  * giving the classic organic bloom of a life simulation on an old monitor.
  * Periodically reseeds with interesting soups / patterns so it never stalls.
  * ========================================================================== */

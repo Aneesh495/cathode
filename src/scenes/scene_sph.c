@@ -1,9 +1,9 @@
 /* ==========================================================================
- * scene_sph.c — particle fluid via Smoothed Particle Hydrodynamics.
+ * scene_sph.c  -  particle fluid via Smoothed Particle Hydrodynamics.
  *
  * A blob of SPH fluid (physics.h sph_*) sloshes under a gravity vector that
  * slowly rotates, so the liquid pours from side to side, splashes off the
- * walls, and settles — behavior the grid solver can't show (free surface,
+ * walls, and settles  -  behavior the grid solver can't show (free surface,
  * droplets). Particles are splatted with a speed-based color ramp (deep blue
  * at rest → white foam when fast) and the CRT bloom lights the spray.
  * ========================================================================== */

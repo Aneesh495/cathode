@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/rustcore.h — C ABI exposed by the Rust compute core (rustsrc/).
+ * cathode/rustcore.h  -  C ABI exposed by the Rust compute core (rustsrc/).
  *
  * FROZEN CONTRACT. The Rust side (rustsrc) implements exactly these
  * symbols with #[no_mangle] pub extern "C". The C/C++ side calls them through
@@ -128,7 +128,7 @@ i32      rust_wfc_height(const RustWFC *g);
 /* Fill out_rgb (ntiles*3 floats) with a display color per tile id. */
 void     rust_wfc_palette(const RustWFC *g, f32 *out_rgb);
 
-/* ================= FFT (radix-2 Cooley–Tukey, in-place) ================= *
+/* ================= FFT (radix-2 Cooley-Tukey, in-place) ================= *
  * Power-of-two real->complex magnitude spectrum, computed with an iterative
  * radix-2 FFT (bit-reversal permutation + butterflies). `n` must be a power of
  * two. `in` is n real samples; `out_mag` receives the first n/2 magnitudes

@@ -1,4 +1,4 @@
-/* fastmath_ref.c — libm reference for the NEON transcendental kernels. */
+/* fastmath_ref.c  -  libm reference for the NEON transcendental kernels. */
 #include "cathode/fastmath.h"
 #include <math.h>
 

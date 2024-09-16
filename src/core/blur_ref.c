@@ -1,4 +1,4 @@
-/* blur_ref.c — C reference + kernel builder for the NEON separable blur. */
+/* blur_ref.c  -  C reference + kernel builder for the NEON separable blur. */
 #include "cathode/blur.h"
 #include <math.h>
 #include <stddef.h>

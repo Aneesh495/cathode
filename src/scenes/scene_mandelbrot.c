@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_mandelbrot.c — animated Mandelbrot-set deep zoom.
+ * scene_mandelbrot.c  -  animated Mandelbrot-set deep zoom.
  *
  * Classic escape-time fractal with smooth (continuous) iteration coloring.
  * The view continuously zooms toward a pre-chosen "interesting" point on the
@@ -56,7 +56,7 @@ static void mb_update(Scene *sc, f32 dt, f32 t){
     if (s->max_iter > 2000) s->max_iter = 2000;
 }
 
-/* render rows [y0,y1) — the thread-pool band callback (see mb_render) */
+/* render rows [y0,y1)  -  the thread-pool band callback (see mb_render) */
 static void mb_band(MbState *s, Framebuffer *fb, i32 ry0, i32 ry1){
     f64 aspect = (f64)fb->w/(f64)fb->h;
     f64 half_h = s->zoom;
@@ -97,7 +97,7 @@ static void mb_band(MbState *s, Framebuffer *fb, i32 ry0, i32 ry1){
 }
 
 /* thread-pool trampoline: rows are disjoint per band, so each thread writes its
- * own pixels — no shared-write race (same pattern as the SDF marcher). */
+ * own pixels  -  no shared-write race (same pattern as the SDF marcher). */
 typedef struct { MbState *s; Framebuffer *fb; } MbBandCtx;
 static void mb_band_cb(void *user, i32 y0, i32 y1){
     MbBandCtx *c=(MbBandCtx*)user; mb_band(c->s, c->fb, y0, y1);

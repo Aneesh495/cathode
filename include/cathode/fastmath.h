@@ -1,10 +1,10 @@
 /* ==========================================================================
- * cathode/fastmath.h — NEON-vectorized transcendental approximations.
+ * cathode/fastmath.h  -  NEON-vectorized transcendental approximations.
  *
  * Like simd.h/dsp.h: each routine has a hand-written NEON implementation and a
  * portable C reference (which calls libm), proven to agree within a stated
  * tolerance by test/test_fastmath.c. These are 4-wide polynomial minimax
- * approximations with range reduction — fast enough to run per-pixel in the
+ * approximations with range reduction  -  fast enough to run per-pixel in the
  * plasma/tunnel/shader-style scenes without the per-call overhead of libm.
  * ========================================================================== */
 #ifndef CATHODE_FASTMATH_H

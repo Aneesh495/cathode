@@ -1,4 +1,4 @@
-/* test_raykernel.c — NEON batched ray intersection vs C reference. */
+/* test_raykernel.c  -  NEON batched ray intersection vs C reference. */
 #include "cathode/raykernel.h"
 #include <stdio.h>
 #include <stdlib.h>

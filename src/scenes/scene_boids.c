@@ -1,7 +1,7 @@
 /* ==========================================================================
- * scene_boids.c — Reynolds boids flocking, 3D, projected to screen.
+ * scene_boids.c  -  Reynolds boids flocking, 3D, projected to screen.
  *
- * Classic three rules — separation, alignment, cohesion — plus a gentle
+ * Classic three rules  -  separation, alignment, cohesion  -  plus a gentle
  * attractor toward a slowly-moving target and soft wrapping in a box. Boids
  * are rendered as short motion-trails colored by heading, splatted additively
  * so dense flocks glow. A spatial hash keeps neighbor queries cheap.
@@ -52,7 +52,7 @@ static void bo_update(Scene *sc, f32 dt, f32 t){
     if (dt>0.05f) dt=0.05f;
     f32 pr2 = s->perception*s->perception;
     Vec3 target = v3(6.0f*sinf(t*0.4f), 3.0f*cosf(t*0.3f), 6.0f*cosf(t*0.5f));
-    /* O(n^2) neighbor sum — n is bounded and this stays well within frame budget */
+    /* O(n^2) neighbor sum  -  n is bounded and this stays well within frame budget */
     for (i32 i=0;i<s->n;++i){
         Vec3 sep=v3(0,0,0), ali=v3(0,0,0), coh=v3(0,0,0);
         i32 cnt=0;

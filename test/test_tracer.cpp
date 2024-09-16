@@ -1,4 +1,4 @@
-// test_tracer.cpp — headless correctness test for the BVH path tracer.
+// test_tracer.cpp  -  headless correctness test for the BVH path tracer.
 //
 // Builds tiny scenes, renders small images, and asserts physical/statistical
 // properties of the output. Prints PASS/FAIL and returns non-zero on failure.

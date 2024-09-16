@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_flow.c — de Jong / Clifford attractor density field.
+ * scene_flow.c  -  de Jong / Clifford attractor density field.
  *
  * These 2D "pickover" attractors iterate a simple nonlinear map and, plotted
  * as a density histogram of the visited points, produce intricate lace-like

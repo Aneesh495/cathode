@@ -1,7 +1,7 @@
 /* ==========================================================================
- * cathode/fractalkernel.h — NEON-accelerated escape-time fractal iteration.
+ * cathode/fractalkernel.h  -  NEON-accelerated escape-time fractal iteration.
  *
- * Computes smooth (continuous) escape counts for 4 complex points at once —
+ * Computes smooth (continuous) escape counts for 4 complex points at once  - 
  * the inner loop of a Mandelbrot / Julia renderer. Each routine has a NEON
  * impl and a C reference, proven equal by test/test_fractalkernel.c.
  *

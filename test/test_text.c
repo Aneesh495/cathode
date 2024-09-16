@@ -1,11 +1,11 @@
 /* ==========================================================================
- * test_text.c — unit + property tests for the 5x7 bitmap font subsystem.
+ * test_text.c  -  unit + property tests for the 5x7 bitmap font subsystem.
  *
  * Verifies: glyph lookup is total (never NULL, out-of-range -> blank), space is
  * empty and a solid glyph is non-empty, scaling multiplies lit-pixel count by
  * scale^2 exactly, text_width matches measured extents, drawing stays inside
  * the framebuffer (bounds-safe), additive vs overwrite semantics, and newline
- * advances to a fresh line. All deterministic — no RNG needed.
+ * advances to a fresh line. All deterministic  -  no RNG needed.
  * ========================================================================== */
 #include "cathode/text.h"
 #include "cathode/framebuffer.h"

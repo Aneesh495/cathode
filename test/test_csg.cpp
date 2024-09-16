@@ -1,4 +1,4 @@
-// test_csg.cpp — constructive solid geometry field evaluator.
+// test_csg.cpp  -  constructive solid geometry field evaluator.
 //
 // Checks the boolean semantics and field sign convention of cpp_csg_eval:
 //   - a single sphere: field > 0 strictly inside, < 0 well outside;

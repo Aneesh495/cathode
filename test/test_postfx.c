@@ -1,4 +1,4 @@
-/* test_postfx.c — proves the NEON post-FX kernels equal the C reference. */
+/* test_postfx.c  -  proves the NEON post-FX kernels equal the C reference. */
 #include "app/postfx.h"
 #include <stdio.h>
 #include <stdlib.h>

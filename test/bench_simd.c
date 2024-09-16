@@ -1,5 +1,5 @@
 /* ==========================================================================
- * bench_simd.c — measure the hand-written NEON asm speedup over the C
+ * bench_simd.c  -  measure the hand-written NEON asm speedup over the C
  * reference for the hot kernels. Prints throughput + speedup ratios.
  * ========================================================================== */
 #include "cathode/simd.h"

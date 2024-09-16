@@ -1,4 +1,4 @@
-/* test_sdf.c — SDF ray-marcher, headless. */
+/* test_sdf.c  -  SDF ray-marcher, headless. */
 #include "cathode/sdf.h"
 #include "cathode/framebuffer.h"
 #include "cathode/vec.h"

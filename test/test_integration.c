@@ -1,5 +1,5 @@
 /* ==========================================================================
- * test_integration.c — end-to-end pipeline integration test.
+ * test_integration.c  -  end-to-end pipeline integration test.
  *
  * Unlike the per-module unit tests, this exercises the whole headless chain as
  * one flow and validates the artifacts it emits:

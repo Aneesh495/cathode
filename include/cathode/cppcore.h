@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/cppcore.h — C ABI exposed by the C++20 subsystems (src/cpp/).
+ * cathode/cppcore.h  -  C ABI exposed by the C++20 subsystems (src/cpp/).
  *
  * FROZEN CONTRACT. The C++ side uses templates/RAII/STL internally but exposes
  * only these extern "C" POD functions. Opaque handles hide C++ objects.
@@ -150,7 +150,7 @@ i32 cpp_csg_eval(f32 *field, i32 nx, i32 ny, i32 nz,
 
 /* ================= pressurized soft-body (2D Verlet blob) ============== *
  * A closed loop of point masses connected by springs, with an ideal-gas
- * pressure force pushing the outline outward (∝ 1/area) — the classic
+ * pressure force pushing the outline outward (∝ 1/area)  -  the classic
  * "pressurized soft body" (Matthias Müller). The result is a squishy 2D blob
  * that wobbles, squashes on impact, and holds its volume. Verlet integration
  * with distance-constraint relaxation keeps it stable; it collides with the

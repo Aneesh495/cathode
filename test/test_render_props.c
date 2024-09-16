@@ -1,5 +1,5 @@
 /* ==========================================================================
- * test_render_props.c — property-based tests for the renderers.
+ * test_render_props.c  -  property-based tests for the renderers.
  *
  * Invariants that must hold for ANY input, checked over many random cases:
  *   rasterizer : a filled triangle only writes pixels inside its screen bbox;

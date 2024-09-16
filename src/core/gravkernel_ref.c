@@ -1,4 +1,4 @@
-/* gravkernel_ref.c — C reference for the NEON gravitational force kernel. */
+/* gravkernel_ref.c  -  C reference for the NEON gravitational force kernel. */
 #include "cathode/gravkernel.h"
 #include <math.h>
 

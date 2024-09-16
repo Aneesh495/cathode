@@ -1,5 +1,5 @@
 /* ==========================================================================
- * wav.c — RIFF/WAVE PCM16 encoder, written to the spec by hand.
+ * wav.c  -  RIFF/WAVE PCM16 encoder, written to the spec by hand.
  *
  * WAV layout we emit (canonical 44-byte header + PCM data):
  *
@@ -20,7 +20,7 @@
  *   44      ...   PCM samples          int16 LE, interleaved
  *
  * All multi-byte integer fields are little-endian (WAV is a little-endian
- * format, unlike PNG's big-endian network order — a nice contrast to the
+ * format, unlike PNG's big-endian network order  -  a nice contrast to the
  * image.c encoder). Samples are f32 in [-1,1], hard-clamped then rounded to
  * signed 16-bit.
  * ========================================================================== */
@@ -41,7 +41,7 @@ static void w_tag(FILE *f, const char *t) { fwrite(t, 1, 4, f); }
 
 /* Quantize one f32 sample in [-1,1] to int16 with hard clipping + rounding. */
 static i16 quantize(f32 s) {
-    /* Guard against NaN/Inf (e.g. a diverged synth filter) before the cast —
+    /* Guard against NaN/Inf (e.g. a diverged synth filter) before the cast  - 
      * a NaN cast to int is UB. We test the IEEE-754 bit pattern rather than
      * `s==s`/isnan, because the file is built with -ffast-math, under which the
      * compiler assumes finiteness and folds those checks away. Exponent all-ones

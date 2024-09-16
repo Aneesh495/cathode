@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/crt.h — physically-modeled NTSC composite + CRT display chain.
+ * cathode/crt.h  -  physically-modeled NTSC composite + CRT display chain.
  *
  * Pipeline (all in software DSP):
  *   linear RGB framebuffer

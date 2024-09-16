@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/vec.h — inline vector/matrix/quaternion math.
+ * cathode/vec.h  -  inline vector/matrix/quaternion math.
  * Header-only so every module gets it with zero link deps. The heavy
  * matrix multiply / transform have NEON asm fast paths (see simd.h); these
  * inline helpers are for glue code and setup, not inner loops.

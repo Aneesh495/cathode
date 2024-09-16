@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_galaxy.c — live Barnes-Hut N-body galaxy / two-galaxy collision.
+ * scene_galaxy.c  -  live Barnes-Hut N-body galaxy / two-galaxy collision.
  * ========================================================================== */
 #include "cathode/scene.h"
 #include "cathode/tui.h"

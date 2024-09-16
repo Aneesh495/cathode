@@ -1,7 +1,7 @@
 /* ==========================================================================
- * cathode/raykernel.h — NEON batched ray-intersection kernels.
+ * cathode/raykernel.h  -  NEON batched ray-intersection kernels.
  *
- * All 4 lanes computed in parallel — the building block of a wide CPU ray
+ * All 4 lanes computed in parallel  -  the building block of a wide CPU ray
  * tracer. Each routine has a NEON impl and a C reference, proven equal by
  * test/test_raykernel.c.
  *

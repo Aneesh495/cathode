@@ -1,4 +1,4 @@
-/* test_simd.c — proves hand-written NEON asm agrees with the C reference. */
+/* test_simd.c  -  proves hand-written NEON asm agrees with the C reference. */
 #include "cathode/simd.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -81,7 +81,7 @@ int main(void) {
         chk_arr("vec3_normalize", o1, o2, 4, 1e-3f);
     }
 
-    /* saxpy — exercises the vector loop + scalar tail (n not a multiple of 4) */
+    /* saxpy  -  exercises the vector loop + scalar tail (n not a multiple of 4) */
     for (int trial = 0; trial < 3; ++trial) {
         unsigned long n = 17 + trial * 100;
         float *x  = malloc(n * sizeof(float));

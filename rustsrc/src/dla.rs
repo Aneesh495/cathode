@@ -1,14 +1,14 @@
 //! Diffusion-limited aggregation (DLA).
 //!
 //! Particles released at the cluster's frontier random-walk until they touch
-//! an occupied cell, then stick — producing fractal dendrites (the structure
+//! an occupied cell, then stick  -  producing fractal dendrites (the structure
 //! of mineral deposits, coral, frost, lightning Lichtenberg figures). We store
 //! the *age* each cell was added so a scene can color the growth history.
 //!
 //! Implementation notes for performance and correctness:
 //!   * Walkers spawn on a circle just outside the current cluster radius and
 //!     are killed if they wander too far (a "kill radius" a bit beyond spawn),
-//!     the standard trick to keep walks bounded — without it a walker can
+//!     the standard trick to keep walks bounded  -  without it a walker can
 //!     wander for an unbounded time.
 //!   * 8-neighbour stickiness gives fuller, more natural dendrites than 4.
 //!   * A self-contained xorshift RNG (no external crates) keeps runs

@@ -1,5 +1,5 @@
 /* ==========================================================================
- * simd_ref.c — portable C reference for every NEON asm routine.
+ * simd_ref.c  -  portable C reference for every NEON asm routine.
  * These are the ground truth the assembly is validated against.
  * ========================================================================== */
 #include "cathode/simd.h"

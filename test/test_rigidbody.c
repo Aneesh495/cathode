@@ -1,12 +1,12 @@
 /* ==========================================================================
- * test_rigidbody.c — invariants for the 2D impulse rigid-body solver.
+ * test_rigidbody.c  -  invariants for the 2D impulse rigid-body solver.
  *
  * Physical properties that must hold regardless of the exact numbers:
  *   - a box dropped onto the floor comes to REST above y=0 (doesn't sink or
  *     tunnel through), and its kinetic energy decays toward ~0;
  *   - a static body never moves;
  *   - all bodies stay within the domain [0,W]x[0,H≈] (no escaping walls);
- *   - a settled stack has bounded (non-exploding) energy — the solver is stable;
+ *   - a settled stack has bounded (non-exploding) energy  -  the solver is stable;
  *   - free-fall for one step matches v = g*dt (integration sanity).
  * Deterministic (no RNG in the asserts that matter).
  * ========================================================================== */

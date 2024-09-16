@@ -150,7 +150,7 @@ mod tests {
         // *rounded published* constants (matching src/core/dsp_ref.c and the
         // NEON path), not exact numerical inverses. So a roundtrip carries a
         // small, bounded error (~1e-3). We assert that bound rather than exact
-        // identity — the whole point is that all three impls share these exact
+        // identity  -  the whole point is that all three impls share these exact
         // constants and therefore agree with each other.
         let rgb = [0.2f64, 0.5, 0.8, 0.9, 0.1, 0.3];
         let mut yiq = [0.0f64; 6];

@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/gravkernel.h — NEON-accelerated gravitational force kernel.
+ * cathode/gravkernel.h  -  NEON-accelerated gravitational force kernel.
  *
  * Computes the acceleration on a single body from a batch of source bodies,
  * 4 sources at a time, with Plummer softening:

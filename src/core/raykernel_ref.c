@@ -1,4 +1,4 @@
-/* raykernel_ref.c — portable C reference for the NEON ray-intersection kernels.
+/* raykernel_ref.c  -  portable C reference for the NEON ray-intersection kernels.
  * These define the exact semantics the NEON code must reproduce. */
 #include "cathode/raykernel.h"
 #include <math.h>
@@ -47,7 +47,7 @@ void rk_ray4_aabb_ref(float *out4, const float *ro, const float *rd, const float
         if (miss || tmax < tmin || tmax < 0.0f){ out4[i] = -1.0f; continue; }
         float t = (tmin > 0.0f) ? tmin : tmax;  /* origin inside -> tmax */
         /* Guard against the -1e30/1e30 sentinels leaking when a ray is parallel
-         * to (and inside) every slab it tests — treat an unbounded interval as
+         * to (and inside) every slab it tests  -  treat an unbounded interval as
          * a miss rather than returning a huge bogus distance. */
         if (t > 1e29f || t < -1e29f){ out4[i] = -1.0f; continue; }
         out4[i] = t;

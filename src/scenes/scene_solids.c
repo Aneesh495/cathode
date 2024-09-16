@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_solids.c — rotating Phong-shaded procedural solids via the rasterizer.
+ * scene_solids.c  -  rotating Phong-shaded procedural solids via the rasterizer.
  * ========================================================================== */
 #include "cathode/scene.h"
 #include "cathode/tui.h"

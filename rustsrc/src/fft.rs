@@ -1,4 +1,4 @@
-//! Radix-2 iterative Cooley–Tukey FFT (in-place), plus a real->magnitude helper.
+//! Radix-2 iterative Cooley-Tukey FFT (in-place), plus a real->magnitude helper.
 //!
 //! The transform is the standard decimation-in-time algorithm:
 //!   1. bit-reversal permutation of the input,

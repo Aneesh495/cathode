@@ -1,9 +1,9 @@
 /* ==========================================================================
- * scene_spectrogram.c — scrolling FFT spectrogram of a synthesized signal.
+ * scene_spectrogram.c  -  scrolling FFT spectrogram of a synthesized signal.
  *
  * Generates a rich, evolving audio-like signal (sweeping chirps + harmonics +
  * noise), takes a sliding-window FFT of it each frame via the Rust radix-2 FFT
- * (rust_fft_mag), and scrolls the magnitude spectrum upward as a waterfall —
+ * (rust_fft_mag), and scrolls the magnitude spectrum upward as a waterfall  - 
  * frequency on X, time scrolling up, magnitude as a heat color. The classic
  * spectrogram you'd see in audio software, driven entirely by the from-scratch
  * Rust FFT. Bright ridges are the chirps sweeping across the band.

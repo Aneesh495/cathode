@@ -1,4 +1,4 @@
-/* test_dsp.c — proves the NEON DSP kernels equal the C reference. */
+/* test_dsp.c  -  proves the NEON DSP kernels equal the C reference. */
 #include "cathode/dsp.h"
 #include <stdio.h>
 #include <stdlib.h>

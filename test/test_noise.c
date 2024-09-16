@@ -1,10 +1,10 @@
-/* test_noise.c — exercises the CATHODE noise module:
- *   (a) rng determinism            — same seed reproduces the sequence
- *   (b) rng_f32 range              — stays in [0,1) over 1e5 draws
- *   (c) rng_normal statistics      — mean ~0, stddev ~1 over 1e5 draws
- *   (d) perlin2 continuity         — tiny coord step => tiny output step
- *   (e) perlin/value range         — within [-1.001, 1.001]
- *   (f) fbm2 finiteness            — finite across a grid
+/* test_noise.c  -  exercises the CATHODE noise module:
+ *   (a) rng determinism             -  same seed reproduces the sequence
+ *   (b) rng_f32 range               -  stays in [0,1) over 1e5 draws
+ *   (c) rng_normal statistics       -  mean ~0, stddev ~1 over 1e5 draws
+ *   (d) perlin2 continuity          -  tiny coord step => tiny output step
+ *   (e) perlin/value range          -  within [-1.001, 1.001]
+ *   (f) fbm2 finiteness             -  finite across a grid
  * plus sanity checks on perlin3, simplex2, fbm3, ridged2.
  */
 #include "cathode/noise.h"

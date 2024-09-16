@@ -1,4 +1,4 @@
-/* test_crt.c — functional tests for the NTSC/CRT signal chain. */
+/* test_crt.c  -  functional tests for the NTSC/CRT signal chain. */
 #include "cathode/crt.h"
 #include "cathode/framebuffer.h"
 #include "cathode/vec.h"

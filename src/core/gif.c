@@ -1,14 +1,14 @@
 /* ==========================================================================
- * gif.c — from-scratch animated GIF89a encoder (no external libraries).
+ * gif.c  -  from-scratch animated GIF89a encoder (no external libraries).
  *
  * Implements the two non-trivial pieces itself:
  *   1. Color quantization: a fixed 6x7x6 = 252-entry RGB palette (a slightly
  *      green-weighted "web-safe"-style cube). A fixed palette shared by all
  *      frames keeps the animation stable (no palette flicker) and lets us map
- *      a pixel to its index with pure arithmetic — no per-frame clustering.
+ *      a pixel to its index with pure arithmetic  -  no per-frame clustering.
  *   2. GIF-LZW compression: variable-width codes, a hash-chained string table,
  *      Clear / End-of-Information codes, code-width growth, and the packed
- *      sub-block bitstream — the actual GIF LZW variant.
+ *      sub-block bitstream  -  the actual GIF LZW variant.
  *
  * References: GIF89a spec (CompuServe, 1990); the LZW-for-GIF appendix.
  * ========================================================================== */

@@ -1,5 +1,5 @@
 // ==========================================================================
-// marching_cubes.cpp — classic marching-cubes isosurface extraction (C++20).
+// marching_cubes.cpp  -  classic marching-cubes isosurface extraction (C++20).
 //
 // For each cube of 8 field samples, an 8-bit index (one bit per corner, set if
 // that corner is inside the surface) selects which edges the surface crosses

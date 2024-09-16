@@ -1,4 +1,4 @@
-/* test_fractalkernel.c — NEON escape-time fractal kernels vs C reference. */
+/* test_fractalkernel.c  -  NEON escape-time fractal kernels vs C reference. */
 #include "cathode/fractalkernel.h"
 #include <stdio.h>
 #include <stdlib.h>

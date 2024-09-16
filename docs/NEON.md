@@ -1,4 +1,4 @@
-# CATHODE — Hand-written AArch64 NEON assembly
+# CATHODE  -  Hand-written AArch64 NEON assembly
 
 The hot kernels are hand-written NEON. This document captures the conventions
 and the traps, so the next person writing a kernel gets it right the first time.
@@ -34,7 +34,7 @@ asm ships without a passing equivalence test.
 - **Return:** float in `s0`, integer in `x0`.
 - **Callee-saved SIMD:** the low 64 bits of `v8..v15` must be preserved across a
   call. If a leaf/helper scribbles `v8..v15` without saving them, the *caller's*
-  live floats get corrupted — a bug that shows up as unrelated wrong values, not
+  live floats get corrupted  -  a bug that shows up as unrelated wrong values, not
   a crash. Use `v0..v7` and `v16..v31` (all caller-saved) in leaf routines.
 - **Link register:** `bl` clobbers `x30`. Save/restore it in any routine that
   calls a helper: `str x30,[sp,#-16]!` … `ldr x30,[sp],#16`.
@@ -43,26 +43,26 @@ asm ships without a passing equivalence test.
 
 ## Idioms used throughout
 
-- `ld1 {v0.4s},[x0]` / `st1 {v0.4s},[x0],#16` — load/store 4 floats, optional
+- `ld1 {v0.4s},[x0]` / `st1 {v0.4s},[x0],#16`  -  load/store 4 floats, optional
   post-increment.
-- `ld3 {v0.4s,v1.4s,v2.4s},[x]` — de-interleave 3-channel (RGB) data on load;
+- `ld3 {v0.4s,v1.4s,v2.4s},[x]`  -  de-interleave 3-channel (RGB) data on load;
   `st3` re-interleaves on store. This is why the color-space conversions are
   clean 4-wide SIMD.
-- `fmla v0.4s, v1.4s, v2.s[0]` — fused multiply-accumulate, optionally by a
+- `fmla v0.4s, v1.4s, v2.s[0]`  -  fused multiply-accumulate, optionally by a
   broadcast lane (used for the matrix-column combine).
-- `faddp` / `fmaxp` — pairwise reduce for horizontal sum/max.
-- `frsqrte` + `frsqrts` — reciprocal-sqrt estimate + Newton-Raphson refinement.
+- `faddp` / `fmaxp`  -  pairwise reduce for horizontal sum/max.
+- `frsqrte` + `frsqrts`  -  reciprocal-sqrt estimate + Newton-Raphson refinement.
 - Every loop is 4-wide with a scalar tail for `n` not divisible by 4.
 
 ## Measured wins (`make bench`, Apple M3 Pro)
 
 `mat4_mul` (compute-dense) runs **~6× faster** than the `-O3` C reference.
 Streaming kernels (saxpy, color conversion) are memory-bandwidth-bound, so the
-compiler's auto-vectorization already ties hand asm — expected, and documented
+compiler's auto-vectorization already ties hand asm  -  expected, and documented
 so nobody "optimizes" a memory-bound kernel expecting a 6× that isn't physically
 available.
 
-## Adding a new kernel — the checklist
+## Adding a new kernel  -  the checklist
 
 1. Declare it in a header (extern C), with a `_ref` C sibling.
 2. Write the C reference first (it's the spec).

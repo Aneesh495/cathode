@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_fluid.c — interactive colored fluid (stable Navier-Stokes) with
+ * scene_fluid.c  -  interactive colored fluid (stable Navier-Stokes) with
  * animated swirling emitters.
  * ========================================================================== */
 #include "cathode/scene.h"

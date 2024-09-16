@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/tracker.h — a pattern-based music sequencer (a "tracker").
+ * cathode/tracker.h  -  a pattern-based music sequencer (a "tracker").
  *
  * This is the data model + playback clock of a classic MOD/XM-style tracker,
  * written in pure C so it is testable with no audio backend. It does NOT make
@@ -16,16 +16,16 @@
  *     row boundaries (this simple engine triggers on row starts only).
  *
  * A pattern cell's `note` uses these sentinels:
- *   NOTE_NONE (0)  — no change this row (let the channel keep playing)
- *   NOTE_OFF (255) — release whatever is playing on this channel
- *   otherwise      — a MIDI note number (1..127); 60 = middle C.
+ *   NOTE_NONE (0)   -  no change this row (let the channel keep playing)
+ *   NOTE_OFF (255)  -  release whatever is playing on this channel
+ *   otherwise       -  a MIDI note number (1..127); 60 = middle C.
  * `instrument` selects a synth waveform (0..3); 0 in a fresh cell means "keep".
  *
  * The `effect` byte carries a per-cell effect packed as a command nibble in the
  * high 4 bits and a parameter nibble in the low 4 bits (0xCP → command C,
  * param P). Supported commands (others are ignored):
  *   0x0  arpeggio: within the row, cycle the pitch through offsets 0, P, 2P
- *        semitones on successive ticks — the classic chiptune "chord" played
+ *        semitones on successive ticks  -  the classic chiptune "chord" played
  *        by one channel by rapidly retriggering (P=3 → diminished-ish, P=4 →
  *        augmented). P=0 is a no-op.
  *   0xC  note cut:  release the note P ticks into the row (ECx-style).

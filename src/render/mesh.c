@@ -1,5 +1,5 @@
 /* ==========================================================================
- * mesh.c — procedural mesh generators + normal computation.
+ * mesh.c  -  procedural mesh generators + normal computation.
  * ========================================================================== */
 #include "cathode/raster.h"
 #include "cathode/noise.h"

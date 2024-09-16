@@ -1,5 +1,5 @@
 /* ==========================================================================
- * rigidbody.c — 2D impulse-based rigid-body dynamics over convex polygons.
+ * rigidbody.c  -  2D impulse-based rigid-body dynamics over convex polygons.
  *
  * A compact sequential-impulse solver in the Box2D-lite tradition:
  *
@@ -161,7 +161,7 @@ static void proj(const Vec2 *v, int n, Vec2 ax, f32 *mn, f32 *mx){
 }
 /* Over all of A's edge normals, find the axis of MINIMUM overlap between the
  * two polygons' projections. Returns that minimum overlap and its axis. If any
- * axis shows a gap (overlap < 0) we return that negative value immediately —
+ * axis shows a gap (overlap < 0) we return that negative value immediately  - 
  * the shapes are separated and no contact should be generated. */
 static f32 axis_least_pen(const Vec2 *a,int na,const Vec2 *b,int nb, Vec2 *axis){
     f32 best=1e30f; Vec2 bestax=v2(0,0);
@@ -231,7 +231,7 @@ static void apply_impulse(Body *b, Vec2 P, Vec2 r){
 #define REST_VN_THRESHOLD 1.0f
 
 /* Velocity solve for one contact: restitution impulse + Coulomb friction. No
- * positional bias here — penetration is fixed by a separate position pass, so
+ * positional bias here  -  penetration is fixed by a separate position pass, so
  * this loop can only ever REMOVE kinetic energy and is unconditionally stable. */
 static void solve_contact(Body *A, Body *B, Vec2 n, Contact ct, f32 dt, f32 inv_dt){
     (void)dt; (void)inv_dt;
@@ -364,7 +364,7 @@ void rb_step(RigidWorld *rw, f32 dt, i32 iterations){
     }
 
     /* 3b. positional correction pass: push overlapping body pairs apart along
-     * the contact normal (energy-safe — edits position, not velocity). A few
+     * the contact normal (energy-safe  -  edits position, not velocity). A few
      * passes converge stacks without the bias-in-velocity energy pumping. */
     for (int it=0; it<iterations/2+1; ++it){
         for (int i=0;i<rw->n;++i){

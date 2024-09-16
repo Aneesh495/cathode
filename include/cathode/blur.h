@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/blur.h — NEON-accelerated separable blur kernels.
+ * cathode/blur.h  -  NEON-accelerated separable blur kernels.
  *
  * A 2D Gaussian blur factors into a horizontal then a vertical 1D pass. The
  * horizontal pass over contiguous rows vectorizes cleanly (4 pixels at once);

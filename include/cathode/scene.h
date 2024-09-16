@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/scene.h — the demo scene interface + registry.
+ * cathode/scene.h  -  the demo scene interface + registry.
  * Each scene is a self-contained module implementing this vtable.
  * ========================================================================== */
 #ifndef CATHODE_SCENE_H
@@ -25,7 +25,7 @@ struct Scene {
     void  *state;
 };
 
-/* Registry — scenes register themselves; app iterates them. */
+/* Registry  -  scenes register themselves; app iterates them. */
 typedef Scene *(*SceneFactory)(void);
 void   scene_register(const char *name, SceneFactory f);
 i32    scene_count(void);

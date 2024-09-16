@@ -1,5 +1,5 @@
 // ==========================================================================
-// synth.cpp — headless polyphonic synthesizer (cpp_synth_* in cppcore.h)
+// synth.cpp  -  headless polyphonic synthesizer (cpp_synth_* in cppcore.h)
 //
 // A subtractive polyphonic synth that NEVER touches an audio device: it only
 // renders sample buffers on request, so it is safe to run in a terminal / CI.
@@ -18,7 +18,7 @@
 //     the pool is full so a busy sequencer never silently drops notes.
 //   * One global waveform + one global filter shared by all voices (classic
 //     paraphonic-ish layout; matches the flat cpp_synth_set_* ABI).
-//   * The filter is Andrew Simper's "Cytomic" TPT state-variable filter —
+//   * The filter is Andrew Simper's "Cytomic" TPT state-variable filter  - 
 //     unconditionally stable, zero-delay-feedback, cheap per sample.
 //   * A rolling history ring stores the most recent CAP output samples so
 //     cpp_synth_spectrum can run a windowed DFT over "the last block" at any
@@ -38,7 +38,7 @@
 // radix-2 FFT computes the magnitude spectrum in O(n log n) instead of the
 // naive O(bins*window) DFT below. The standalone `test_synth` compiles this
 // file WITHOUT the Rust staticlib, so the fast path is guarded and falls back
-// to the reference DFT there — both produce the same windowed magnitudes, so
+// to the reference DFT there  -  both produce the same windowed magnitudes, so
 // the test's "dominant bin matches pitch" assertions hold either way.
 #ifdef CATHODE_HAVE_RUST_FFT
 #include "cathode/rustcore.h"
@@ -55,7 +55,7 @@ constexpr int    DFT_MAXWIN  = 2048;   // hard cap on DFT window length (bounded
 constexpr int    DFT_MAXBINS = 4096;   // hard cap on spectrum bins (bounded cost)
 constexpr float  MASTER_GAIN = 0.30f;  // pre-clip headroom for summed voices
 
-// ADSR times, in seconds (linear ramps — deterministic and click-free enough).
+// ADSR times, in seconds (linear ramps  -  deterministic and click-free enough).
 constexpr float  ATT_SEC = 0.006f;     // attack
 constexpr float  DEC_SEC = 0.120f;     // decay
 constexpr float  SUS_LVL = 0.70f;      // sustain level (0..1)
@@ -240,7 +240,7 @@ struct CppSynth {
         if (rng == 0) rng = 0xA5A5A5A5u;
     }
 
-    // xorshift32 PRNG — fast, deterministic, good enough for note choice.
+    // xorshift32 PRNG  -  fast, deterministic, good enough for note choice.
     inline uint32_t rand_u32() {
         uint32_t x = rng;
         x ^= x << 13; x ^= x >> 17; x ^= x << 5;
@@ -388,7 +388,7 @@ struct CppSynth {
         // off the bins. FFT bin j sits at 2*pi*j/N rad/sample, so it coincides
         // with omega_k when j = k*N/(2*nbins). For the analyzer's steady-state
         // window (W = 2048, a power of two) this is an exact integer map, so the
-        // FFT sum equals the reference DFT sum bin-for-bin — same magnitudes,
+        // FFT sum equals the reference DFT sum bin-for-bin  -  same magnitudes,
         // O(N log N) instead of O(bins*W). We reuse the identical 2/wnorm gain.
         {
             int N = 1; while (N < W) N <<= 1;          // next power of two >= W

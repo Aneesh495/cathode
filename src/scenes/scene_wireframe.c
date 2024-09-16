@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_wireframe.c — neon vector-display "wireframe city", driven by the C++
+ * scene_wireframe.c  -  neon vector-display "wireframe city", driven by the C++
  * retained-mode scene graph (src/cpp/scenegraph.cpp, contract in cppcore.h).
  *
  * We build a hierarchy: a ground grid plus a field of nested, rotating boxes

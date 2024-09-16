@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # ==========================================================================
-# cathode.sh — build-and-run launcher for CATHODE.
+# cathode.sh  -  build-and-run launcher for CATHODE.
 #
 #   ./cathode.sh                 build (if needed) and run the interactive demo
 #   ./cathode.sh <scene>         start on a named scene, e.g. ./cathode.sh plasma
@@ -31,7 +31,7 @@ build_if_needed() {
   # the real dependency tracking; this just avoids a pointless make on every run).
   if [[ ! -x $BIN ]] || [[ -n "$(find src include rustsrc/src Makefile -newer "$BIN" -type f 2>/dev/null | head -1)" ]]; then
     info "building…"
-    make -s all || die "build failed — run 'make' to see the errors"
+    make -s all || die "build failed  -  run 'make' to see the errors"
   fi
 }
 
@@ -47,7 +47,7 @@ check_terminal() {
   if [[ "${COLORTERM:-}" == "truecolor" || "${COLORTERM:-}" == "24bit" ]]; then
     printf '  truecolor   : \033[32myes\033[0m (COLORTERM)\n'; ok=1
   else
-    printf '  truecolor   : \033[33munknown\033[0m — COLORTERM is not truecolor.\n'
+    printf '  truecolor   : \033[33munknown\033[0m  -  COLORTERM is not truecolor.\n'
     printf '                If the gradient below is smooth, you are fine.\n'
   fi
 
@@ -95,7 +95,7 @@ main() {
       build_if_needed
       local out="${2:-/tmp/cathode_song.wav}"
       "$CAP" --song "$out" 2 44100 0.35
-      info "wrote $out — play it with: afplay $out"
+      info "wrote $out  -  play it with: afplay $out"
       ;;
     --gif)
       build_if_needed
@@ -116,7 +116,7 @@ main() {
       local rows cols
       read -r rows cols < <(stty size 2>/dev/null || echo '24 80')
       if (( cols < 40 || rows < 12 )); then
-        printf '\033[33mwarning:\033[0m terminal is %sx%s — quite small. Maximize it for the full effect.\n' "$cols" "$rows"
+        printf '\033[33mwarning:\033[0m terminal is %sx%s  -  quite small. Maximize it for the full effect.\n' "$cols" "$rows"
         sleep 1
       fi
       info "launching (q or ESC to quit, ? for help, n/p to change scene)"

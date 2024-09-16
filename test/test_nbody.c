@@ -1,4 +1,4 @@
-/* test_nbody.c — Barnes-Hut correctness + orbit stability. */
+/* test_nbody.c  -  Barnes-Hut correctness + orbit stability. */
 #include "cathode/physics.h"
 #include "cathode/vec.h"
 #include "cathode/noise.h"

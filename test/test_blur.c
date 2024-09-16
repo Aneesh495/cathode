@@ -1,4 +1,4 @@
-/* test_blur.c — NEON separable blur vs C reference + blur properties. */
+/* test_blur.c  -  NEON separable blur vs C reference + blur properties. */
 #include "cathode/blur.h"
 #include <stdio.h>
 #include <stdlib.h>

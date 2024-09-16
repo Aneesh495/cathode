@@ -1,4 +1,4 @@
-//! Terrain — deterministic multi-fractal value-noise heightfield sampler.
+//! Terrain  -  deterministic multi-fractal value-noise heightfield sampler.
 //!
 //! Implements `rust_terrain_tile` from `include/cathode/rustcore.h`. Given a
 //! tile origin `(ox, oy)`, a world-space `scale`, and a grid resolution
@@ -6,14 +6,14 @@
 //! noise at each cell's world coordinate and write the resulting heights.
 //!
 //! Design goals dictated by the contract:
-//!   * **Deterministic** — height is a pure function of `(world_x, world_y,
+//!   * **Deterministic**  -  height is a pure function of `(world_x, world_y,
 //!     octaves, seed)`. Same inputs always yield the same bits.
-//!   * **Seamless** — because sampling is keyed on absolute *world*
+//!   * **Seamless**  -  because sampling is keyed on absolute *world*
 //!     coordinates (not tile-local indices), two adjacent tiles that share a
 //!     world coordinate produce identical heights there. No seams.
-//!   * **Continuous** — value noise uses a smoothstep (Hermite) fade, so the
+//!   * **Continuous**  -  value noise uses a smoothstep (Hermite) fade, so the
 //!     field and its first derivative are continuous across lattice cells.
-//!   * **Large-coordinate safe** — all sampling math is `f64`; only the final
+//!   * **Large-coordinate safe**  -  all sampling math is `f64`; only the final
 //!     height is down-cast to `f32`, so precision holds far from the origin.
 
 use core::slice;
