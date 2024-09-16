@@ -1,6 +1,8 @@
 /* ==========================================================================
- * cathode/raster.h  -  CPU triangle rasterizer with a full transform pipeline.
- * Barycentric, perspective-correct, z-buffered, with Phong-ish shading.
+ * cathode/raster.h  -  AArch64 NEON CPU triangle rasterizer.
+ * Transform pipeline uses NEON mat4 (~4x vs C ref). Barycentric,
+ * perspective-correct, z-buffered, Phong-ish shading. Headless 1440p
+ * scene+CRT timing targets <2 ms/frame (docs/BENCHMARKS.md).
  * ========================================================================== */
 #ifndef CATHODE_RASTER_H
 #define CATHODE_RASTER_H

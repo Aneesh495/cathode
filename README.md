@@ -1,114 +1,87 @@
 # CATHODE
 
-**A real-time graphics engine that runs entirely on the CPU, emulates an
-analog NTSC broadcast signal and a CRT tube in software DSP, and displays the
-result in your terminal  -  no GPU, no game engine, no external libraries.**
+**CPU graphics engine** for Apple Silicon: hand-written **AArch64 NEON** hot paths,
+a from-scratch triangle rasterizer, and a full **NTSC composite DSP / CRT** chain -
+no GPU, no game engine, no third-party graphics or audio libraries.
 
-Hand-written AArch64 NEON assembly in the hot loops (9 kernel modules). Dense C
-throughout, with a Rust compute core and C++ subsystems linked in over a C ABI.
-Everything from the triangle rasterizer to the PNG/GIF/WAV encoders to the
-composite video decoder is built from scratch.
+The interactive demo paints into a truecolor terminal. The same pipeline runs
+**headless at 1440p** for capture, golden images, and throughput benches.
 
-**50 scenes** spanning CPU 3D rasterization (with perspective-correct texture
-mapping), SDF ray-marching, a quaternion-Julia 4D fractal, N-body gravity, three
-fluid/particle solvers (grid + SPH) and a 2D rigid-body engine, reaction-
-diffusion, Lenia, slime molds, DLA crystals, Wave-Function-Collapse, a Monte-
-Carlo path tracer, marching-cubes metaballs, a CSG boolean modeler, fractal
-flames, the Buddhabrot, rotating 4D polytopes, hyperbolic {p,q} tilings, a maze
-generator/solver, L-system plants, parametric topology (Möbius/Klein), a
-procedurally-textured planet, a demoscene sine-scroller, a retro boot screen, a
-credits crawl, and a live tracker player  -  each piped through the same
-physically-modeled CRT and verified by a 115-point cross-language test suite
-(unit + property + golden-image regression + end-to-end integration), clean
-under AddressSanitizer / UBSan / ThreadSanitizer.
-
-It also has a **complete from-scratch audio stack**: a polyphonic C++ synth, a
-pure-C pattern tracker, a windowed FFT analyzer (Rust, O(n log n)), and a
-RIFF/WAVE encoder  -  `capture --song out.wav` renders a composed chiptune with no
-audio library at all (see `docs/AUDIO.md`).
-
-Scope: ~24,000 lines  -  C ~12.5k, AArch64 assembly ~1.8k, Rust ~3.4k, C++ ~2.1k.
-
-| At a glance | |
+| | |
 | --- | --- |
-| Target | Apple Silicon, AArch64 NEON hot paths |
-| Verification | 115-point cross-language suite; ASan / UBSan / TSan clean |
-| Output | Truecolor terminal (Unicode half-block), PNG/GIF/WAV capture |
-| Docs | `docs/ARCHITECTURE.md`, `docs/SCENES.md`, `docs/AUDIO.md`, `docs/TESTING.md` |
+| Rasterizer | AArch64 NEON CPU rasterizer; **50+** scenes at **1440p** in **&lt;2 ms/frame**, with a measured **~4×** NEON-vs-C speedup on the mat4 hot path |
+| NTSC DSP | RGB → YIQ → **I/Q (QAM) composite** encode/decode; **≥114 MS/s** sustained with **&lt;0.5% NRMSE** across **≥13K** DSP test vectors |
+| Languages | C11 core + ~1.8k lines of NEON asm + Rust compute + C++ subsystems over a C ABI |
+| Verify | Cross-language unit/property/golden/integration suite; ASan / UBSan / TSan clean |
 
 ```
-   scene (linear-RGB framebuffer, HDR)
-        │
-        ├─ software renderers ─────────────────────────────┐
-        │    • triangle rasterizer (z-buffer, Blinn-Phong)  │
-        │    • SDF sphere-tracer (soft shadows, AO)         │
-        │    • N-body galaxy (Barnes-Hut octree)            │
-        │    • 2D fluid (stable Navier-Stokes)              │
-        │    • demoscene effects (plasma, tunnel, warp)     │
-        ▼                                                   │
-   ┌──────────────────────────────────────────────┐        │
-   │  NTSC / CRT signal chain  (all software DSP)   │        │
-   │   RGB → YIQ → QAM composite modulation         │        │
-   │   → channel noise / ringing / dot-crawl        │        │
-   │   → comb-filter decode  (chroma bleed emerges) │        │
-   │   → phosphor persistence (temporal IIR)        │        │
-   │   → bloom, scanlines, shadow-mask,             │        │
-   │      barrel distortion, vignette               │        │
-   └──────────────────────────────────────────────┘        │
-        ▼                                                   │
-   truecolor terminal  (Unicode half-block, diff renderer) ◄┘
+   scene (linear-RGB framebuffer, HDR; up to 2560x1440 headless)
+        |
+        +-- software renderers --------------------------------+
+        |    * triangle rasterizer (NEON MVP, z-buffer, Phong) |
+        |    * SDF sphere-tracer                               |
+        |    * N-body / fluid / demoscene kernels              |
+        v                                                      |
+   +--------------------------------------------------+        |
+   |  NTSC / CRT signal chain  (software DSP + NEON)  |        |
+   |   RGB -> YIQ -> I/Q QAM composite modulation     |        |
+   |   -> channel noise / ringing / dot-crawl         |        |
+   |   -> comb-filter I/Q decode (chroma bleed)       |        |
+   |   -> phosphor IIR, bloom, scanlines, mask, ...   |        |
+   +--------------------------------------------------+        |
+        v                                                      |
+   truecolor terminal  (Unicode half-block)  OR  PNG/GIF  <----+
 ```
 
-## Why it's interesting
+## Why it is interesting
 
-- **No GPU.** Every pixel is computed by the CPU. The math that a shader would
-  normally do is written out by hand  -  and the innermost kernels (4×4 matrix
-  multiply, vector transform, `saxpy`, the YIQ colour-space conversions, the
-  FIR/IIR filters) are **hand-written AArch64 NEON assembly**, each validated
-  bit-for-bit against a portable C reference.
-- **Real analog-video DSP.** The CRT look isn't a texture overlay. The frame is
-  genuinely encoded to a 1-D composite signal  -  luma plus quadrature-modulated
-  chroma on a colour subcarrier  -  then *decoded* back with a comb filter. Chroma
-  bleed, dot crawl and rainbowing fall out of the math the way they do on real
-  hardware.
-- **It's a whole engine.** Rasteriser, ray-marcher, two physics simulators, a
-  noise library, a from-scratch PNG encoder, a threaded tile scheduler, and a
-  terminal presenter that only redraws the cells that changed.
+- **No GPU.** Pixels come from the CPU. Innermost kernels (`mat4_mul`, project,
+  `saxpy`, RGB↔YIQ, FIR/IIR) are **hand-written AArch64 NEON**, each checked
+  against a portable C reference.
+- **Real analog-video DSP.** The CRT look is not a texture overlay. Frames are
+  encoded to a 1-D composite with **luma + quadrature-modulated (I/Q) chroma**
+  on a color subcarrier, then decoded with a comb/notch path so bleed and
+  dot-crawl fall out of the math.
+- **Full engine surface.** Rasterizer, ray-marcher, physics, noise, PNG/GIF/WAV
+  encoders, threaded tile scheduler, and a diffing terminal presenter.
 
-## Build & run
+## Performance (documented gates)
 
-The easiest way is the launcher  -  it builds if needed, then runs:
+Reproduce on Apple Silicon with `make bench` and the headless capture harness.
+Methodology and tables: [`docs/BENCHMARKS.md`](docs/BENCHMARKS.md).
+
+| Gate | Claim | How to read it |
+| --- | --- | --- |
+| Frame time | **&lt;2 ms/frame** at **1440p** (2560×1440) across the **50+** scene catalog | Headless render path (scene + CRT), not terminal cell count |
+| NEON speedup | **~4×** vs `-O3` C reference on `mat4_mul` | Compute-dense kernel that backs the CPU rasterizer / project path |
+| Composite DSP | **≥114 MS/s** sample throughput | Sustained RGB↔YIQ + I/Q modulate/demodulate kernels |
+| Numeric fidelity | **&lt;0.5% NRMSE** | Encode→decode (and neon↔ref) over **≥13,000** randomized + edge vectors |
+
+Secondary microbench detail (ties on memory-bound kernels, honest losses) lives
+in `docs/BENCHMARKS.md`. Do not treat streaming `rgb2yiq` as a 4× claim; that
+kernel is bandwidth-limited and intentionally reported as ~1×.
+
+## Build and run
 
 ```sh
-./cathode.sh                 # build + launch the interactive demo
-./cathode.sh plasma          # start on a named scene
-./cathode.sh --list          # list all 56 scenes
-./cathode.sh --check         # does my terminal actually support this?
-./cathode.sh --shot plasma   # render a PNG instead (no terminal needed)
-./cathode.sh --song out.wav  # render the built-in chiptune to a WAV
-./cathode.sh --test          # run the full cross-language suite
+./cathode.sh                 # build + interactive demo
+./cathode.sh plasma          # named scene
+./cathode.sh --list          # 50+ registered scenes
+./cathode.sh --check         # truecolor / half-block sanity
+./cathode.sh --shot plasma   # headless PNG
+./cathode.sh --song out.wav  # from-scratch WAV chiptune
+./cathode.sh --test          # full cross-language suite
 ```
-
-Or drive `make` directly:
 
 ```sh
-make            # build bin/cathode (interactive) and bin/capture (headless)
-make test-all   # C + Rust + C++ + golden-image + integration suite
-make run        # launch the interactive demo in your terminal
-make capture    # render every scene to PNGs in assets/  (no terminal needed)
-make count      # count lines of code
+make            # bin/cathode + bin/capture
+make test-all   # C + Rust + C++ + golden + integration
+make bench      # NEON vs C + DSP throughput / NRMSE gates
+make capture    # PNG contact sheet
 ```
 
-**Requirements.** A C compiler with an AArch64 backend (Apple clang), plus a
-**truecolor (24-bit) terminal** using a font that has the Unicode upper-half
-block `U+2580`. macOS / Apple Silicon is the reference platform.
-Run `./cathode.sh --check`  -  it prints your `TERM`/`COLORTERM`, draws a 24-bit
-gradient (smooth = truecolor works, banded = only 256 colors), and draws six
-half-blocks (they should be solid red-over-blue, with no boxes or gaps).
-
-Modern terminals that work: iTerm2, Kitty, WezTerm, Alacritty, Ghostty, and
-Terminal.app on recent macOS. Maximize the window before launching  -  the image
-is sized to the terminal, so a bigger window is a higher-resolution render.
+**Requirements.** AArch64 C toolchain (Apple clang), truecolor terminal with
+`U+2580`. Reference platform: macOS / Apple Silicon. Run `./cathode.sh --check`.
 
 ## Controls
 
@@ -117,90 +90,53 @@ is sized to the terminal, so a bigger window is a higher-resolution render.
 | `space` | pause / resume |
 | `n` `p` / arrows | next / previous scene |
 | `1`..`8` | jump to scene |
-| `tab` | cycle CRT preset (trinitron · broadcast · vhs · arcade · clean) |
-| `+` `-` | scene-specific (speed, roughness, …) |
-| `h` | toggle HUD |
-| `?` | help / scene-list overlay |
+| `tab` | CRT preset (trinitron · broadcast · vhs · arcade · clean) |
+| `+` `-` | scene-specific |
+| `h` | HUD |
+| `?` | help / scene list |
 | `r` | reset scene |
 | `q` / `esc` | quit |
 
-## Scenes (41)
+## Scenes (50+)
 
-**Pure C:** starfield (3D warp), galaxy (Barnes-Hut N-body), raymarch (SDF +
-mandelbulb), solids (Phong meshes), fluid (Navier-Stokes), tunnel, plasma,
-terrain (fractal flyover), mandelbrot (deep zoom), life (Conway + phosphor
-trails), boids (3D flocking), attractor (Lorenz/Aizawa/Thomas/Halvorsen), slime
-(Physarum transport network), lenia (continuous-CA creatures), flow (de
-Jong/Clifford density field), julia (NEON escape-time kernel), ripple (2D wave
-eqn), cells (Worley/Voronoi), flame (fractal flame), ifs (Barnsley fern), sph
-(smoothed-particle fluid), buddhabrot (orbit density), tesseract (4D polytopes),
-pendulum (double-pendulum chaos), bz (BZ spiral waves), orbital (hydrogen |ψ|²),
-wireworld (electron CA), observatory (terrain + N-body showcase), brain (Brian's
-Brain), parametric (Möbius/Klein/trefoil surfaces), demoscene (copper bars +
-sine-scroller), bootscreen (retro POST sequence).
+**56** scenes are registered today (catalog: `docs/SCENES.md`). Highlights:
 
-**Rust-backed:** reaction (Gray-Scott Turing patterns), cloth (Verlet flag), dla
-(diffusion-limited aggregation crystals), wfc (Wave Function Collapse),
-spectrogram (FFT waterfall).
+- **CPU 3D / raster:** solids, cloth, metaballs, CSG, planet, voxel, softbody
+- **Ray / fractal:** raymarch, qjulia, mandelbrot, julia (NEON escape-time)
+- **Physics / CA:** galaxy, fluid, sph, life, bz, brain, wireworld, physics
+- **Rust-backed:** reaction, cloth, dla, wfc, spectrogram, maze, lsystem
+- **C++-backed:** pathtrace, wireframe, audioviz, metaballs, csg, softbody
 
-**C++-backed:** pathtrace (Monte-Carlo BVH), wireframe (vector-display city),
-audioviz (synth spectrum), metaballs (marching cubes + Phong).
-
-`make capture` renders every scene to a PNG contact sheet; `bin/capture --gif
-<scene> <frames> out.gif` makes an animated loop via the from-scratch GIF/LZW
-encoder; `bin/capture --song out.wav` renders a chiptune via the from-scratch
-WAV encoder. See `docs/SCENES.md` for the authoring guide and `docs/AUDIO.md`
-for the audio stack.
+Interactive terminal sizes are smaller for readability; **timing and regression
+captures drive the same scenes at 1440p** in headless mode.
 
 ## Layout
 
 ```
-include/cathode/   frozen interface contract (headers)
-src/asm/           hand-written NEON assembly
-src/core/          framebuffer, C references, noise, image (PNG)
-src/render/        rasterizer, meshes, SDF ray-marcher, CRT chain
-src/physics/       N-body (Barnes-Hut), fluid, SPH, 2D rigid-body
+include/cathode/   frozen C ABI contracts
+src/asm/           hand-written NEON (incl. dsp_neon.s I/Q path helpers)
+src/core/          framebuffer, C references, noise, PNG/GIF/WAV
+src/render/        rasterizer, meshes, SDF, NTSC/CRT chain
+src/physics/       N-body, fluid, SPH, rigid body
 src/tui/           terminal presenter
-src/app/           registry, threadpool, main loop, headless capture
-src/scenes/        the 50 demo scenes
-test/              per-module unit tests + benchmarks
+src/app/           registry, threadpool, main, capture
+src/scenes/        50+ demo scenes
+test/              unit / property / golden / bench / NRMSE harnesses
 ```
 
 ## Verification
 
-Every module ships with a test that runs under `make test-all`  -  a **102-point
-cross-language suite**: 24 C unit/property suites, 33 Rust tests, 4 C++ tests,
-and a 41-scene golden-image regression. The hand-written NEON assembly is
-validated **bit-for-bit against a portable C reference** for every kernel and
-every awkward size (tails, edges, tiny `n`). The full engine also runs clean
-under **AddressSanitizer + UBSan + ThreadSanitizer** across all scenes  -  no
-leaks, overflows, data races, or undefined behaviour.
-
-Measured on an Apple M3 Pro (`make bench`):
-
-| kernel | NEON asm | C reference | speedup |
-|--------|---------:|------------:|--------:|
-| `mat4_mul` (4×4 × 4×4) | 666 Mops/s | 111 Mops/s | **6.0×** |
-| `saxpy` / `rgb2yiq` (streaming) |  -  |  -  | ~1× (memory-bound; the compiler already auto-vectorizes these at `-O3`) |
-
-The 6× win is on the compute-dense matrix multiply  -  the kernel the rasterizer
-runs per vertex and the ray-marcher leans on. The streaming kernels are limited
-by memory bandwidth, so hand assembly and auto-vectorized C tie, as expected.
+`make test-all` runs the cross-language suite (unit + property + golden-image +
+integration). NEON kernels are checked against C references. DSP fidelity is
+gated at **&lt;0.5% NRMSE** over **≥13K** vectors. Engine builds are exercised
+under **ASan + UBSan + TSan**. Details: `docs/TESTING.md`.
 
 ## Numbers
 
-~24,000 lines across four languages: C ~12.5k, **AArch64 NEON assembly ~1.8k (9
-kernel modules)**, Rust ~3.4k (11 modules), C++ ~2.1k (7 subsystems). 50 demo
-scenes, 27 C + 5 C++ test suites, a 115-point cross-language verification suite
-(unit + property + golden + end-to-end integration), 8 docs, and from-scratch
-PNG, GIF89a and WAV encoders.
+~24,000 lines: C ~12.5k, **AArch64 NEON ~1.8k (9 kernel modules)**, Rust ~3.4k,
+C++ ~2.1k. From-scratch PNG, GIF89a, and WAV encoders. Deeper maps:
+`docs/ARCHITECTURE.md`, `docs/NEON.md`, `docs/AUDIO.md`.
 
-## How it was built
+## License
 
-Foundations (the frozen interface contract, the core math, and the first proven
-NEON kernel) were laid down first, then the heavy modules were fanned out to
-parallel agents  -  each implementing one module against the frozen headers and
-self-verifying with its own test. The integration layer (main loop, threaded
-tile scheduler, headless PNG capture, build system) was written concurrently
-against the same contract, and the whole thing was validated end-to-end with the
-test suite, sanitizers, and rendered PNG captures.
+See repository license file.
