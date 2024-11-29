@@ -1,0 +1,40 @@
+name: Apple Silicon CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check native toolchain
+        run: |
+          test "$(uname -m)" = arm64
+          clang --version
+          rustup toolchain install stable --profile minimal
+          rustup default stable
+          cargo --version
+      - name: Build engine and capture tool
+        run: make -j3 all
+      - name: Run C, Rust, C++, golden, and integration tests
+        run: make -j3 test-all
+      - name: Exercise headless preview capture
+        run: |
+          build/bin/capture --gif demoscene 30 assets/ci-preview.gif 320 240
+          test -s assets/ci-preview.gif
+      - name: Upload test logs and rendered preview
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cathode-checks
+          path: |
+            build/*.log
+            assets/ci-preview.gif
+          if-no-files-found: warn

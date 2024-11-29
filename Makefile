@@ -58,7 +58,7 @@ CPP_OBJ  := $(patsubst src/%.cpp,$(BUILD)/%.o,$(CPP_SRC))
 ALL_LIB  := $(LIB_OBJ) $(ASM_OBJ) $(CPP_OBJ)
 
 # ---- top-level targets ------------------------------------------------------
-.PHONY: all clean test tests run capture contact dirs count help rust rust-test cpp
+.PHONY: all clean test tests run capture contact dirs count help rust rust-test cpp cpp-test golden golden-update integration test-all
 all: dirs rust $(BIN)/cathode $(BIN)/capture
 	@echo "==> built $(BIN)/cathode and $(BIN)/capture"
 
@@ -109,7 +109,8 @@ rust-test:
 # C++ subsystem tests (compiled + run standalone).
 CPP_TESTS := test_tracer test_synth test_scenegraph test_marchingcubes test_csg test_softbody
 cpp-test: dirs
-	@for t in $(CPP_TESTS); do \
+	@pass=0; fail=0; \
+	for t in $(CPP_TESTS); do \
 	  printf "%-18s " $$t; \
 	  case $$t in \
 	    test_tracer)         src="src/cpp/tracer.cpp src/core/framebuffer.c";; \
@@ -119,10 +120,16 @@ cpp-test: dirs
 	    test_csg)            src="src/cpp/csg.cpp";; \
 	    test_softbody)       src="src/cpp/softbody.cpp";; \
 	  esac; \
-	  if $(CXX) $(filter-out $(DEPFLAGS),$(CXXFLAGS)) test/$$t.cpp $$src -o $(BIN)/$$t -lm 2>$(BUILD)/$$t.build.log \
-	     && $(BIN)/$$t > $(BUILD)/$$t.log 2>&1; then echo "PASS"; \
-	  else echo "FAIL (see $(BUILD)/$$t.log)"; fi; \
-	done
+	  if ! $(CXX) $(filter-out $(DEPFLAGS),$(CXXFLAGS)) test/$$t.cpp $$src -o $(BIN)/$$t -lm 2>$(BUILD)/$$t.build.log; then \
+	    echo "FAIL (see $(BUILD)/$$t.build.log)"; fail=$$((fail+1)); \
+	  elif $(BIN)/$$t > $(BUILD)/$$t.log 2>&1; then \
+	    echo "PASS"; pass=$$((pass+1)); \
+	  else \
+	    echo "FAIL (see $(BUILD)/$$t.log)"; fail=$$((fail+1)); \
+	  fi; \
+	done; \
+	echo "passed=$$pass failed=$$fail"; \
+	[ $$fail -eq 0 ]
 
 # Golden-image regression: render every scene deterministically, hash it, and
 # compare to test/golden.txt. Needs the whole engine linked (all scenes +

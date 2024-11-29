@@ -7,11 +7,15 @@ no GPU, no game engine, no third-party graphics or audio libraries.
 The interactive demo paints into a truecolor terminal. The same pipeline runs
 **headless at 1440p** for capture, golden images, and throughput benches.
 
+![Cathode demoscene rendered through the software CRT pipeline](docs/media/cathode-preview.gif)
+
+Render this preview with `build/bin/capture --gif demoscene 150 docs/media/cathode-preview.gif 320 240`.
+
 | | |
 | --- | --- |
 | Rasterizer | AArch64 NEON CPU rasterizer; **50+** scenes at **1440p** in **&lt;2 ms/frame**, with a measured **~4×** NEON-vs-C speedup on the mat4 hot path |
 | NTSC DSP | RGB → YIQ → **I/Q (QAM) composite** encode/decode; **≥114 MS/s** sustained with **&lt;0.5% NRMSE** across **≥13K** DSP test vectors |
-| Languages | C11 core + ~1.8k lines of NEON asm + Rust compute + C++ subsystems over a C ABI |
+| Languages | C11 core + NEON assembly + Rust compute + C++ subsystems over a C ABI |
 | Verify | Cross-language unit/property/golden/integration suite; ASan / UBSan / TSan clean |
 
 ```
