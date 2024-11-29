@@ -8,8 +8,8 @@
  * hash mismatch, which is the point: you then eyeball the scene and, if the
  * change was intended, run with UPDATE=1 to rewrite the golden file.
  *
- * The golden file (test/golden.txt) is plain "scene hash" lines. On first run
- * (no file) it records all hashes and passes, printing a notice.
+ * The golden file (test/golden.txt) is plain "scene hash" lines. Missing
+ * baselines fail; recording them requires an explicit update command.
  *
  * usage: test_golden            # compare against golden.txt
  *        test_golden update     # (re)write golden.txt from current output
@@ -55,7 +55,9 @@ static u64 hash_scene(i32 idx){
 
 int main(int argc, char**argv){
     scenes_register_all();
-    int update = (argc>1 && strcmp(argv[1],"update")==0) || getenv("UPDATE");
+    const char *update_env = getenv("UPDATE");
+    int update = (argc>1 && strcmp(argv[1],"update")==0) ||
+                 (update_env && strcmp(update_env,"1")==0);
     int n = scene_count();
 
     /* load existing golden hashes (name -> hash) */
@@ -80,6 +82,11 @@ int main(int argc, char**argv){
         return 0;
     }
 
+    if (ng==0){
+        fprintf(stderr,"No golden baselines in %s. Run `make golden-update` explicitly.\n",GOLDEN_PATH);
+        return 1;
+    }
+
     for (int i=0;i<n;++i){
         const char *nm=scene_name_at(i);
         u64 h=hash_scene(i);
@@ -91,14 +98,7 @@ int main(int argc, char**argv){
         else { printf("  FAIL %-12s golden=%llu got=%llu\n", nm, (unsigned long long)g,(unsigned long long)h); fails++; }
     }
 
-    if (ng==0){
-        printf("\nNo golden file found. Run `test_golden update` (or UPDATE=1) to record baselines.\n");
-        /* first-run: record and pass so CI can bootstrap */
-        FILE *out=fopen(GOLDEN_PATH,"w");
-        if (out){ for(int i=0;i<n;++i){ u64 h=hash_scene(i); fprintf(out,"%s %llu\n",scene_name_at(i),(unsigned long long)h);} fclose(out); printf("recorded %d baselines.\n",n); }
-        return 0;
-    }
     printf("\n%d scenes: %d ok, %d new, %d FAILED\n", n, n-fails-newly, newly, fails);
-    if (!fails) printf("ALL PASS%s\n", newly?" (new scenes recorded on next update)":"");
-    return fails?1:0;
+    if (!fails && !newly) printf("ALL PASS\n");
+    return (fails || newly)?1:0;
 }

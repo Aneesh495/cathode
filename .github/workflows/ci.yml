@@ -10,7 +10,9 @@ permissions:
 
 jobs:
   build-and-test:
-    runs-on: macos-15
+    # Exact pixel baselines were recorded with Clang 21. Keep their compiler
+    # generation fixed instead of changing expected hashes during CI.
+    runs-on: macos-26
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
@@ -18,6 +20,7 @@ jobs:
         run: |
           test "$(uname -m)" = arm64
           clang --version
+          clang --version | head -1 | grep 'clang version 21\.'
           rustup toolchain install stable --profile minimal
           rustup default stable
           cargo --version
