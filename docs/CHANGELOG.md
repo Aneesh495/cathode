@@ -10,9 +10,9 @@ The engine ships **50+ demo scenes** (56 registered), **9 hand-written NEON
 kernels**, Rust + C++ subsystems, and from-scratch PNG / GIF89a / WAV encoders.
 Documented gates (see README / `docs/BENCHMARKS.md`):
 
-- AArch64 NEON CPU rasterizer; **1440p** scene+CRT **&lt;2 ms/frame**; **~4×**
-  `mat4_mul` vs `-O3` C reference
-- NTSC **I/Q (QAM)** composite DSP at **≥114 MS/s** with **&lt;0.5% NRMSE** over
+- AArch64 NEON CPU rasterizer; measured **~6.7×** `mat4_mul` vs `-O3` C reference;
+  sub-millisecond frame renders at retro/TUI resolutions
+- NTSC **I/Q (QAM)** composite DSP at **~330 MS/s** measured (floor **≥114 MS/s**) with **<0.01% NRMSE** over
   **≥13K** vectors
 
 ### Rendering

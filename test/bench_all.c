@@ -1,9 +1,7 @@
 /* ==========================================================================
- * bench_all.c  -  throughput benchmarks for every NEON kernel vs its C
- * reference. Prints Mops/s and speedup. Compile-time note: build the C
- * references at the SAME -O3 -ffast-math as production so the comparison is
- * fair (auto-vectorized C vs hand asm), except fractalkernel which needs
- * strict FP  -  measured separately.
+ * bench_all.c  -  throughput benchmarks for NEON kernels vs C references,
+ * sustained composite DSP throughput, and CRT frame render timing across
+ * resolutions.
  * ========================================================================== */
 #include "cathode/simd.h"
 #include "cathode/dsp.h"
@@ -11,6 +9,8 @@
 #include "cathode/raykernel.h"
 #include "cathode/blur.h"
 #include "cathode/fractalkernel.h"
+#include "cathode/crt.h"
+#include "cathode/framebuffer.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -25,7 +25,7 @@ static void line(const char*name, double neon_s, double ref_s, double ops){
 }
 
 int main(void){
-    printf("== CATHODE NEON kernel benchmarks (Apple silicon) ==\n");
+    printf("== CATHODE NEON kernel microbenchmarks (Apple Silicon) ==\n");
     volatile float sink=0;
 
     /* mat4_mul */
@@ -82,6 +82,71 @@ int main(void){
       double tn=TIME(R, fk_mandel4_neon(out,cre,cim,256,256.0f)); sink+=out[0];
       double tr=TIME(R, fk_mandel4_ref(out,cre,cim,256,256.0f));  sink+=out[0];
       line("fk_mandel4 (256it)", tn,tr,(double)R*4); }
+
+    /* Composite I/Q DSP path throughput (modulate + demodulate) */
+    printf("\n== CATHODE NTSC composite DSP throughput ==\n");
+    {
+        unsigned long W = 1920;
+        float *rgb = malloc(W*3*sizeof(float));
+        float *yiq = malloc(W*3*sizeof(float));
+        float *comp = malloc(W*sizeof(float));
+        float *tmp = malloc(W*sizeof(float));
+        float *cosph = malloc(W*sizeof(float));
+        float *sinph = malloc(W*sizeof(float));
+        float *dY = malloc(W*sizeof(float));
+        float *dI = malloc(W*sizeof(float));
+        float *dQ = malloc(W*sizeof(float));
+        float *out_rgb = malloc(W*3*sizeof(float));
+        float lk[3] = {0.5f, 0.22f, 0.03f};
+        float ck[5] = {0.3f, 0.25f, 0.15f, 0.1f, 0.05f};
+        for(unsigned long i=0; i<W*3; ++i) rgb[i] = (float)(i%255)/255.0f;
+        for(unsigned long i=0; i<W; ++i) { cosph[i] = 0.707f; sinph[i] = 0.707f; }
+
+        long reps = 20000;
+        double t0 = now();
+        for(long r=0; r<reps; ++r) {
+            dsp_rgb2yiq_neon(yiq, rgb, W);
+            for(unsigned long x=0; x<W; ++x) comp[x] = yiq[3*x+0] + yiq[3*x+1]*cosph[x] + yiq[3*x+2]*sinph[x];
+            dsp_fir_sym_neon(dY, comp, W, lk, 2);
+            for(unsigned long x=0; x<W; ++x) tmp[x] = 2.0f * comp[x] * cosph[x];
+            dsp_fir_sym_neon(dI, tmp, W, ck, 4);
+            for(unsigned long x=0; x<W; ++x) tmp[x] = 2.0f * comp[x] * sinph[x];
+            dsp_fir_sym_neon(dQ, tmp, W, ck, 4);
+            for(unsigned long x=0; x<W; ++x) { yiq[3*x+0] = dY[x]; yiq[3*x+1] = dI[x]; yiq[3*x+2] = dQ[x]; }
+            dsp_yiq2rgb_neon(out_rgb, yiq, W);
+        }
+        double elapsed = now() - t0;
+        double samples = (double)W * reps;
+        double msps = (samples / elapsed) / 1e6;
+        printf("  Composite I/Q encode+decode: %8.1f MS/s (gate: >=114 MS/s) -> %s\n",
+               msps, msps >= 114.0 ? "PASS" : "FAIL");
+        sink += out_rgb[0];
+        free(rgb); free(yiq); free(comp); free(tmp); free(cosph); free(sinph);
+        free(dY); free(dI); free(dQ); free(out_rgb);
+    }
+
+    /* CRT signal chain frame timing across resolutions */
+    printf("\n== CATHODE CRT frame timing (single-threaded CPU) ==\n");
+    {
+        int res[][2] = { {96,72}, {320,240}, {640,480}, {1280,720}, {2560,1440} };
+        const char *labels[] = { "96x72   (baseline)", "320x240 (retro capture)", "640x480 (VGA)", "1280x720 (720p)", "2560x1440 (1440p)" };
+        for(int i=0; i<5; ++i) {
+            int w = res[i][0], h = res[i][1];
+            CrtConfig cfg = crt_config_default();
+            CrtState *crt = crt_create(w, h, &cfg);
+            Framebuffer *sfb = fb_create(w, h);
+            Framebuffer *dfb = fb_create(w, h);
+            for(int k=0; k<w*h*3; ++k) sfb->px[k] = 0.5f;
+            crt_process(crt, sfb, dfb); // warmup
+            int iters = (i >= 4) ? 2 : (i >= 3 ? 5 : 20);
+            double t0 = now();
+            for(int it=0; it<iters; ++it) crt_process(crt, sfb, dfb);
+            double ms = (now() - t0) / iters * 1000.0;
+            printf("  %-24s: %6.2f ms/frame (%7d px)\n", labels[i], ms, w*h);
+            sink += dfb->px[0];
+            crt_destroy(crt); fb_destroy(sfb); fb_destroy(dfb);
+        }
+    }
 
     printf("(sink=%g)\n",(double)sink);
     return 0;

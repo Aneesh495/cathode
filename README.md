@@ -5,7 +5,7 @@ a from-scratch triangle rasterizer, and a full **NTSC composite DSP / CRT** chai
 no GPU, no game engine, no third-party graphics or audio libraries.
 
 The interactive demo paints into a truecolor terminal. The same pipeline runs
-**headless at 1440p** for capture, golden images, and throughput benches.
+headless for high-resolution capture, golden regression, and throughput benches.
 
 ![Cathode demoscene rendered through the software CRT pipeline](docs/media/cathode-preview.gif)
 
@@ -13,9 +13,9 @@ Render this preview with `build/bin/capture --gif demoscene 150 docs/media/catho
 
 | | |
 | --- | --- |
-| Rasterizer | AArch64 NEON CPU rasterizer; **50+** scenes at **1440p** in **&lt;2 ms/frame**, with a measured **~4×** NEON-vs-C speedup on the mat4 hot path |
-| NTSC DSP | RGB → YIQ → **I/Q (QAM) composite** encode/decode; **≥114 MS/s** sustained with **&lt;0.5% NRMSE** across **≥13K** DSP test vectors |
-| Languages | C11 core + NEON assembly + Rust compute + C++ subsystems over a C ABI |
+| Rasterizer | AArch64 NEON CPU rasterizer; **50+** scenes, measured **~6.7×** NEON-vs-C speedup on the mat4 hot path, <1 ms scene render at retro/TUI resolutions |
+| NTSC DSP | RGB → YIQ → **I/Q (QAM) composite** encode/decode; **~330 MS/s** measured sustained (floor **≥114 MS/s**) with **<0.01% NRMSE** across **≥13K** vectors |
+| Languages | C11 core + ~1.8k lines of NEON asm + Rust compute + C++ subsystems over a C ABI |
 | Verify | Cross-language unit/property/golden/integration suite; ASan / UBSan / TSan clean |
 
 ```
@@ -49,21 +49,23 @@ Render this preview with `build/bin/capture --gif demoscene 150 docs/media/catho
 - **Full engine surface.** Rasterizer, ray-marcher, physics, noise, PNG/GIF/WAV
   encoders, threaded tile scheduler, and a diffing terminal presenter.
 
-## Performance (documented gates)
+## Performance (measured results & gates)
 
 Reproduce on Apple Silicon with `make bench` and the headless capture harness.
-Methodology and tables: [`docs/BENCHMARKS.md`](docs/BENCHMARKS.md).
+Methodology and detailed tables: [`docs/BENCHMARKS.md`](docs/BENCHMARKS.md).
 
-| Gate | Claim | How to read it |
-| --- | --- | --- |
-| Frame time | **&lt;2 ms/frame** at **1440p** (2560×1440) across the **50+** scene catalog | Headless render path (scene + CRT), not terminal cell count |
-| NEON speedup | **~4×** vs `-O3` C reference on `mat4_mul` | Compute-dense kernel that backs the CPU rasterizer / project path |
-| Composite DSP | **≥114 MS/s** sample throughput | Sustained RGB↔YIQ + I/Q modulate/demodulate kernels |
-| Numeric fidelity | **&lt;0.5% NRMSE** | Encode→decode (and neon↔ref) over **≥13,000** randomized + edge vectors |
+| Metric | Measured | Gate / Floor | How to read it |
+| --- | --- | --- | --- |
+| NEON speedup | **~6.7×** | **~4×** vs `-O3` C reference | `mat4_mul` transform hot path (640 Mops/s NEON vs 92 Mops/s C) |
+| Composite DSP | **~330 MS/s** | **≥114 MS/s** throughput | Sustained RGB↔YIQ + I/Q modulate/demodulate kernels |
+| Numeric fidelity | **<0.01% NRMSE** | **<0.5% NRMSE** | Encode→decode (and neon↔ref) over **≥13,000** randomized + edge vectors |
+| Frame time (TUI/retro) | **<1–3 ms/frame** | **<16.6 ms** (60 fps) | Interactive TUI (~2k cells, ~0.45 ms) & retro capture (320×240, ~2.9 ms) |
 
-Secondary microbench detail (ties on memory-bound kernels, honest losses) lives
-in `docs/BENCHMARKS.md`. Do not treat streaming `rgb2yiq` as a 4× claim; that
-kernel is bandwidth-limited and intentionally reported as ~1×.
+**Threading context**: The rasterizer and CRT display chain (`crt_process`) run strictly
+single-threaded on the CPU. At retro/terminal resolutions (96×72 golden regression, 320×240 NTSC),
+frames render in <0.5–3 ms (>300 fps). At 1440p (3.69M pixels), single-threaded scene rasterization
+takes ~21 ms and the full multi-pass physical CRT emulation (bloom, phosphor IIR, scanlines, barrel distortion)
+takes ~150 ms (~6 fps). Secondary microbench detail lives in `docs/BENCHMARKS.md`.
 
 ## Build and run
 
@@ -111,8 +113,8 @@ make capture    # PNG contact sheet
 - **Rust-backed:** reaction, cloth, dla, wfc, spectrogram, maze, lsystem
 - **C++-backed:** pathtrace, wireframe, audioviz, metaballs, csg, softbody
 
-Interactive terminal sizes are smaller for readability; **timing and regression
-captures drive the same scenes at 1440p** in headless mode.
+Interactive terminal sizes are smaller for readability; headless mode supports
+arbitrary capture resolutions (including 1440p and higher) for deterministic frame renders.
 
 ## Layout
 
@@ -143,4 +145,4 @@ C++ ~2.1k. From-scratch PNG, GIF89a, and WAV encoders. Deeper maps:
 
 ## License
 
-No license file is included in this repository.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

@@ -7,9 +7,8 @@
  *  z-buffer test, Blinn-Phong shading (ambient + diffuse + specular).
  *  Backface culling by screen-space winding. Optional wireframe.
  *
- * Hot path: hand-written NEON mat4 (~4x vs portable C reference at -O3).
- * Headless timing drives scenes that use this rasterizer at 1440p with a
- * documented <2 ms/frame gate (scene + CRT); see docs/BENCHMARKS.md.
+ * Hot path: hand-written NEON mat4 (~4-7x vs portable C reference at -O3).
+ * Performance scaling and benchmark gates documented in docs/BENCHMARKS.md.
  * ========================================================================== */
 #include "cathode/raster.h"
 #include "cathode/simd.h"

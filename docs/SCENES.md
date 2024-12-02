@@ -8,8 +8,8 @@ framebuffer through the CRT chain to the terminal.
 ## The catalog (50+ scenes; 56 registered)
 
 Run `bin/capture` with no args for the authoritative live list; indices shift as
-scenes are added. Headless timing drives the same roster at **1440p**
-(2560×1440) with a **&lt;2 ms/frame** gate - see `docs/BENCHMARKS.md`. Current
+scenes are added. The engine supports headless rendering for deterministic captures
+and benchmarks - see `docs/BENCHMARKS.md`. Current
 roster and backing language:
 
 | name | what it is | backing |
@@ -98,8 +98,8 @@ struct Scene {
    - `render` writes **linear RGB**; never tonemap (the CRT/TUI do that). HDR
      values > 1.0 are encouraged  -  they drive bloom.
    - Keep per-frame work **bounded** (no unbounded loops). Interactive TUI
-     sizes are modest; headless / bench still expects the scene to meet the
-     **1440p &lt;2 ms/frame** gate when measured with CRT enabled. Downscale a
+     sizes are modest; keep per-frame scene render efficient (<1–2 ms per frame
+     at standard interactive resolutions) to maintain smooth 60+ fps. Downscale a
      sim grid and upscale on render if the per-cell cost is high (see
      `reaction`, `lenia`).
    - Never read stdin or block.

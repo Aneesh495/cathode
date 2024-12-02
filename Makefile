@@ -225,6 +225,7 @@ bench: dirs
 	    src/asm/raykernel_neon.s src/core/raykernel_ref.c \
 	    src/asm/blur_neon.s src/core/blur_ref.c \
 	    src/asm/fractalkernel_neon.s src/core/fractalkernel.c src/core/fractalkernel_ref.c \
+	    src/render/crt.c src/core/framebuffer.c \
 	    -o $(BIN)/bench_all $(LDFLAGS)
 	$(BIN)/bench_all
 

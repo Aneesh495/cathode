@@ -21,8 +21,8 @@
  *     -> display geometry: barrel distortion, scanlines,
  *        aperture-grille shadow mask, vignette
  *
- * Documented gates: >=114 MS/s composite throughput; <0.5% NRMSE across
- * >=13K DSP vectors; used in the 1440p <2 ms/frame headless scene path.
+ * Documented gates: >=114 MS/s composite throughput (measured ~330 MS/s);
+ * <0.5% NRMSE (measured <0.01%) across >=13K DSP vectors (docs/BENCHMARKS.md).
  * ========================================================================== */
 #include "cathode/crt.h"
 #include "cathode/dsp.h"

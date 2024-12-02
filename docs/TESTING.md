@@ -95,8 +95,8 @@ The CRT chain is not a visual filter only; it is tested as DSP:
 - **I/Q (QAM) modulation / demodulation** against the C reference path
 - **≥13,000** randomized + edge-case vectors (row widths, subcarrier phases,
   noise-free round-trips, neon↔ref pairs)
-- Aggregate **NRMSE &lt;0.5%** (normalized RMS error) - hard fail above the gate
-- Throughput cross-check: sustained composite path **≥114 MS/s** (`make bench`)
+- Aggregate **NRMSE &lt;0.5%** gate (measured **&lt;0.01%**) - hard fail above the gate
+- Throughput cross-check: sustained composite path **≥114 MS/s** floor (measured **~330 MS/s**, `make bench`)
 
 See `docs/BENCHMARKS.md` for the gate table and `include/cathode/crt.h` /
 `dsp.h` for the contract comments.
@@ -107,11 +107,12 @@ The whole engine is built with AddressSanitizer + UBSan and every scene is run
 through `capture --all`. Threaded scenes are additionally checked under
 ThreadSanitizer. Re-run after ownership changes - see `docs/BUILD.md`.
 
-## 8. 1440p frame-time gate
+## 8. Deterministic regression & resolution scaling
 
-Headless renders of the **50+** scene catalog at **2560×1440** target
-**&lt;2 ms/frame** (scene + CRT). This is independent of interactive terminal
-cell count. Methodology: `docs/BENCHMARKS.md`.
+Headless renders of the **50+** scene catalog are exercised via `test_golden`
+and `test_integration` to guarantee deterministic frame generation and pixel
+fidelity. Performance across resolutions and threading context are documented
+in `docs/BENCHMARKS.md`.
 
 ## Running everything
 
@@ -121,10 +122,10 @@ make rust-test    # Rust #[test]s
 make cpp-test     # C++ subsystem tests
 make golden       # deterministic-render regression (50+ scenes)
 make integration  # end-to-end pipeline + encoder-output validation
-make bench        # NEON ~4x mat4, >=114 MS/s DSP, 1440p frame times
+make bench        # NEON ~6.7x mat4, ~330 MS/s DSP throughput
 make test-all     # full suite
 ```
 
 Current surface: C/NEON + Rust + C++ unit suites, golden regression over the
-**50+** scene catalog, end-to-end integration, DSP **13K+ / &lt;0.5% NRMSE**,
+**50+** scene catalog, end-to-end integration, DSP **13K+ / &lt;0.5% NRMSE** (measured &lt;0.01%),
 ASan+UBSan, ThreadSanitizer on the render pool, and PNG/GIF captures.

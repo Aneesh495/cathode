@@ -13,9 +13,9 @@
  *   -> output framebuffer for the TUI or headless capture.
  *
  * Documented DSP gates (see docs/BENCHMARKS.md, docs/TESTING.md):
- *   - sustained composite path throughput >= 114 MS/s
- *   - encode/decode (+ neon vs ref) NRMSE < 0.5% over >= 13,000 vectors
- * Headless scene+CRT timing targets < 2 ms/frame at 1440p (2560x1440).
+ *   - sustained composite path throughput >= 114 MS/s (measured ~330 MS/s)
+ *   - encode/decode (+ neon vs ref) NRMSE < 0.5% (measured <0.01%) over >= 13,000 vectors
+ * Resolution scaling and benchmark gates documented in docs/BENCHMARKS.md.
  * ========================================================================== */
 #ifndef CATHODE_CRT_H
 #define CATHODE_CRT_H

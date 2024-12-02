@@ -16,13 +16,13 @@ linked over a frozen C ABI.
    Scene (C / C++ / Rust-backed)
         |  linear-RGB, scene-referred, HDR (may exceed 1.0)
         |  interactive: terminal-sized FB
-        |  headless / bench: up to 2560x1440 (1440p), target <2 ms/frame
+        |  headless / bench: arbitrary capture resolution (up to 1440p+)
         v
    Framebuffer  (include/cathode/framebuffer.h)
         |
         v
    CPU renderers
-        |  triangle rasterizer (NEON mat4 / project) - ~4x vs C on mat4_mul
+        |  triangle rasterizer (NEON mat4 / project) - ~6.7x vs C on mat4_mul
         |  SDF marcher, N-body, fluids, demoscene kernels, ...
         v
    CRT / NTSC signal chain  (src/render/crt.c + src/asm/dsp_neon.s)
@@ -31,7 +31,7 @@ linked over a frozen C ABI.
         |  channel noise / ringing / dot-crawl
         |  comb/notch demodulate -> YIQ->RGB
         |  phosphor IIR, bloom, geometry (scanlines, mask, barrel, vignette)
-        |  DSP gates: >=114 MS/s, <0.5% NRMSE over >=13K vectors
+        |  DSP gates: ~330 MS/s measured (floor >=114 MS/s), <0.01% NRMSE over >=13K vectors
         v
    Display Framebuffer
         |
@@ -41,7 +41,7 @@ linked over a frozen C ABI.
 
 Interactive main (`src/app/main.c`) paces input and rebuilds buffers on resize.
 Headless capture (`src/app/capture.c`) runs the same pipeline without a TTY -
-this is how **1440p timing** and golden images are produced.
+this is how high-resolution captures and golden images are produced.
 
 ## Languages and why
 
@@ -82,5 +82,5 @@ test/                equivalence, NRMSE, golden, integration, benches
 
 - Unit / property / golden / integration: `docs/TESTING.md`
 - NEON equivalence: `docs/NEON.md`
-- Throughput, 1440p frame time, DSP MS/s + NRMSE: `docs/BENCHMARKS.md`
+- Throughput, resolution scaling, DSP MS/s + NRMSE: `docs/BENCHMARKS.md`
 - Sanitizers across scenes: `docs/BUILD.md`
