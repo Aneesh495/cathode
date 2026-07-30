@@ -1,0 +1,11 @@
+# build output
+/build/
+# Rust
+/rustsrc/target/
+# rendered captures / scratch
+/assets/*.png
+/assets/*.gif
+*.o
+*.log
+# editor / OS
+.DS_Store
