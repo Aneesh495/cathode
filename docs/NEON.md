@@ -54,13 +54,14 @@ asm ships without a passing equivalence test.
 - `frsqrte` + `frsqrts`  -  reciprocal-sqrt estimate + Newton-Raphson refinement.
 - Every loop is 4-wide with a scalar tail for `n` not divisible by 4.
 
-## Measured wins (`make bench`, Apple M3 Pro)
+## Measured wins (`make bench`, Apple Silicon)
 
-`mat4_mul` (compute-dense) runs **~6× faster** than the `-O3` C reference.
-Streaming kernels (saxpy, color conversion) are memory-bandwidth-bound, so the
-compiler's auto-vectorization already ties hand asm  -  expected, and documented
-so nobody "optimizes" a memory-bound kernel expecting a 6× that isn't physically
-available.
+`mat4_mul` (compute-dense; backs the CPU rasterizer / project path) runs
+**~4× faster** than the `-O3` C reference. That **~4×** figure is the documented
+rasterizer speedup. Streaming kernels (saxpy, `rgb2yiq`) are memory-bandwidth-
+bound, so auto-vectorized C ties hand asm - expected. Do not claim 4× on those
+kernels. Composite I/Q DSP throughput and NRMSE gates are in `docs/BENCHMARKS.md`
+(≥114 MS/s, &lt;0.5% NRMSE over ≥13K vectors).
 
 ## Adding a new kernel  -  the checklist
 

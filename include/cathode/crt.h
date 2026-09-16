@@ -1,15 +1,21 @@
 /* ==========================================================================
  * cathode/crt.h  -  physically-modeled NTSC composite + CRT display chain.
  *
- * Pipeline (all in software DSP):
+ * Pipeline (all in software DSP; NEON helpers in dsp.h / dsp_neon.s):
  *   linear RGB framebuffer
- *     -> gamma / YIQ encode
- *     -> composite modulation (luma + QAM chroma on color subcarrier)
+ *     -> gain / YIQ encode
+ *     -> I/Q (QAM) composite modulation on the color subcarrier:
+ *          c = Y + I*cos(phi) + Q*sin(phi)
  *     -> channel: noise, ringing, dot-crawl
- *     -> comb/notch filter decode back to YIQ -> RGB   (chroma bleed emerges)
+ *     -> comb/notch I/Q demodulate -> YIQ -> RGB   (chroma bleed emerges)
  *     -> phosphor persistence (temporal IIR), bloom, scanlines,
  *        shadow-mask, barrel distortion, vignette
- *   -> output framebuffer for the TUI.
+ *   -> output framebuffer for the TUI or headless capture.
+ *
+ * Documented DSP gates (see docs/BENCHMARKS.md, docs/TESTING.md):
+ *   - sustained composite path throughput >= 114 MS/s
+ *   - encode/decode (+ neon vs ref) NRMSE < 0.5% over >= 13,000 vectors
+ * Headless scene+CRT timing targets < 2 ms/frame at 1440p (2560x1440).
  * ========================================================================== */
 #ifndef CATHODE_CRT_H
 #define CATHODE_CRT_H

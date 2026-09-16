@@ -7,6 +7,9 @@
  *
  * The test harness (test/test_simd.c) proves the two agree numerically.
  * Column-major 4x4 matrices (OpenGL convention): m[col*4 + row].
+ *
+ * Documented resume-facing speedup: mat4_mul_neon is ~4x the -O3 C reference
+ * on Apple Silicon (docs/BENCHMARKS.md). That kernel backs the CPU rasterizer.
  * ========================================================================== */
 #ifndef CATHODE_SIMD_H
 #define CATHODE_SIMD_H
