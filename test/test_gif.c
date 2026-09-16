@@ -1,4 +1,4 @@
-/* test_gif.c — build a small animated GIF and validate it with Python (PIL if
+/* test_gif.c  -  build a small animated GIF and validate it with Python (PIL if
  * present, else a structural parse). Exercises the from-scratch LZW encoder. */
 #include "cathode/image.h"
 #include "cathode/framebuffer.h"

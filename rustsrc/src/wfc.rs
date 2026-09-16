@@ -1,4 +1,4 @@
-//! Wave Function Collapse — simple tiled model with edge-adjacency constraints.
+//! Wave Function Collapse  -  simple tiled model with edge-adjacency constraints.
 //!
 //! Each cell holds a bitmask of still-possible tiles (a "superposition"). We
 //! repeatedly:
@@ -66,10 +66,10 @@ fn make_tiles(ruleset: i32) -> Vec<Tile> {
         0 => {
             let c_pipe = [0.2f32, 0.8, 0.9];
             let c_bg = [0.03f32, 0.05, 0.08];
-            // blank — LOW weight so pipes dominate and form long connected runs
+            // blank  -  LOW weight so pipes dominate and form long connected runs
             // (a high blank weight fragments the network into isolated dots).
             t.push(Tile { edges: [0, 0, 0, 0], weight: 0.25, color: c_bg });
-            // straight N-S and E-W — favored, so pipes tend to run straight
+            // straight N-S and E-W  -  favored, so pipes tend to run straight
             t.push(Tile { edges: [1, 0, 1, 0], weight: 2.4, color: c_pipe });
             t.push(Tile { edges: [0, 1, 0, 1], weight: 2.4, color: c_pipe });
             // four elbows

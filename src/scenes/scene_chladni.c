@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_chladni.c — Chladni plate / cymatics standing-wave patterns.
+ * scene_chladni.c  -  Chladni plate / cymatics standing-wave patterns.
  *
  * A square plate driven at a resonant frequency forms standing waves; sand
  * sprinkled on it collects along the *nodal lines* where the displacement is
@@ -11,7 +11,7 @@
  * whose zero set is the classic Chladni figure for mode (n,m). We render the
  * plate colored by |z| (bright metal where it vibrates, dark along the nodes),
  * and scatter "sand" particles that random-walk downhill in |z| so they
- * accumulate on the nodal lines over time — an actual little cymatics sim. The
+ * accumulate on the nodal lines over time  -  an actual little cymatics sim. The
  * mode (n,m) sweeps continuously, morphing one figure into the next.
  *
  * Pure C over the framebuffer + a self-contained PRNG for the sand.

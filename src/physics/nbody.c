@@ -1,5 +1,5 @@
 /* ==========================================================================
- * nbody.c — gravitational N-body with a Barnes-Hut octree (O(N log N)).
+ * nbody.c  -  gravitational N-body with a Barnes-Hut octree (O(N log N)).
  *
  * Each step:
  *   1. build an octree bounding all bodies; each node stores total mass and
@@ -69,7 +69,7 @@ static void oct_insert(Octree *ot, i32 ni, const Vec3 *pos, const f32 *mass, i32
     }
     if (n->is_leaf && n->body >= 0){
         /* Two bodies in one leaf. If the cell is already tiny, coincident (or
-         * near-coincident) bodies would recurse forever — keep them both
+         * near-coincident) bodies would recurse forever  -  keep them both
          * aggregated in this leaf (mass/COM already updated) rather than split.
          * Their mutual force is handled by softening. */
         if (n->half < 1e-5f){
@@ -78,7 +78,7 @@ static void oct_insert(Octree *ot, i32 ni, const Vec3 *pos, const f32 *mass, i32
         /* split: push existing body down, then this one.
          * oct_new() may realloc the pool, invalidating `n`, so capture the
          * child params into locals first and write the result back through the
-         * re-indexed node (ot->nodes[ni]) — never through the stale `n`. */
+         * re-indexed node (ot->nodes[ni])  -  never through the stale `n`. */
         i32 existing = n->body;
         n->body = -1; n->is_leaf = 0;
         int oe = octant_of(n->center, pos[existing]);

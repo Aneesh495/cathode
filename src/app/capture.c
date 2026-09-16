@@ -1,5 +1,5 @@
 /* ==========================================================================
- * capture.c — headless renderer. Runs a scene for N frames (advancing sim
+ * capture.c  -  headless renderer. Runs a scene for N frames (advancing sim
  * time deterministically) and writes selected frames to PNG, both the raw
  * scene output and the CRT-processed output. Used for visual verification
  * and for generating a contact sheet of all scenes.

@@ -1,5 +1,5 @@
 /* ==========================================================================
- * crt.c — physically-flavored NTSC composite + CRT display emulator.
+ * crt.c  -  physically-flavored NTSC composite + CRT display emulator.
  *
  * The signal path mirrors real analog video hardware:
  *
@@ -181,7 +181,7 @@ void crt_process(CrtState *s, const Framebuffer *src, Framebuffer *dst) {
      * way real NTSC dot crawl repeats every 4 fields. Letting it drift without
      * bound (frame * dot_crawl) meant every pixel's decoded chroma changed on
      * every single frame forever, so the terminal presenter's frame-to-frame
-     * diff could never skip a cell — that alone was ~80% of the escape-code
+     * diff could never skip a cell  -  that alone was ~80% of the escape-code
      * traffic and the reason the interactive demo crawled. With a 4-frame cycle
      * the crawl still visibly shimmers, but static content returns to bit-identical
      * values and the diff renderer does its job. */
@@ -352,7 +352,7 @@ void crt_process(CrtState *s, const Framebuffer *src, Framebuffer *dst) {
 
             /* Scanline darkening. NOTE: the obvious `sinf(y*PI)` is ~0 for every
              * integer y, so it produced a CONSTANT dim instead of alternating
-             * lines — use row parity directly. Because the terminal shows two
+             * lines  -  use row parity directly. Because the terminal shows two
              * framebuffer rows per character cell, we darken every other PAIR of
              * rows so the scanline is actually visible as a line rather than
              * cancelling out inside a cell. */

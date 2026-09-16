@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/tui.h — truecolor terminal presenter + retro CRT chrome.
+ * cathode/tui.h  -  truecolor terminal presenter + retro CRT chrome.
  *
  * Presents a Framebuffer using the Unicode upper-half-block trick: each
  * character cell shows two vertical pixels (fg=top via 24-bit color,
@@ -31,7 +31,7 @@ void  tui_query_size(Tui *t, i32 *cols, i32 *rows);
 /* Framebuffer height should be 2x the rows you want (half-block). */
 void  tui_present(Tui *t, const Framebuffer *fb);
 /* Present with each framebuffer cell painted as a zoom x zoom block of terminal
- * cells. Keeps the image full-screen at a fraction of the cell count — the
+ * cells. Keeps the image full-screen at a fraction of the cell count  -  the
  * terminal emulator's per-cell cost is what limits frame rate, so a zoom of 2-3
  * is the difference between ~3 fps and a smooth 30-60 on a maximized window. */
 void  tui_present_zoom(Tui *t, const Framebuffer *fb, i32 zoom);

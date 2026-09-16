@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_raymarch.c — SDF showcase: cycles primitives / mandelbulb / infinite.
+ * scene_raymarch.c  -  SDF showcase: cycles primitives / mandelbulb / infinite.
  * ========================================================================== */
 #include "cathode/scene.h"
 #include "cathode/tui.h"
@@ -60,7 +60,7 @@ static void rm_render(Scene*sc, Framebuffer*fb){
     RmState *s=(RmState*)sc->state;
     if (!s->pool) s->pool = tp_create(0);   /* lazily create; 0 = hw threads */
     s->fb = fb;
-    /* fan the scanlines across all cores — the SDF marcher is embarrassingly
+    /* fan the scanlines across all cores  -  the SDF marcher is embarrassingly
      * parallel per row, and sdf_render_band is exactly this contract. */
     tp_run_bands(s->pool, fb->h, rm_band, s);
 }

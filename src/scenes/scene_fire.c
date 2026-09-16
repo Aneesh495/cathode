@@ -1,11 +1,11 @@
 /* ==========================================================================
- * scene_fire.c — the classic "Doom PSX" fire effect.
+ * scene_fire.c  -  the classic "Doom PSX" fire effect.
  *
  * The famous 1990s fire algorithm: a heat grid whose bottom row is held at
  * maximum. Each cell above cools by a small random amount as heat propagates
  * upward, with a random horizontal wind so the flames flicker and lean. A
  * palette maps heat (0..1) to the black→red→orange→yellow→white fire ramp. It's
- * astonishingly convincing for how little it computes — and a perfect fit for
+ * astonishingly convincing for how little it computes  -  and a perfect fit for
  * the CRT chain's bloom.
  *
  * We also let the fire spell CATHODE: a masked set of hot "emitter" cells in

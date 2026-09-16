@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_ripple.c — 2D wave-equation water ripples with caustic shading.
+ * scene_ripple.c  -  2D wave-equation water ripples with caustic shading.
  *
  * Integrates the discrete wave equation on a height grid:
  *   h_next = 2h - h_prev + c^2 * laplacian(h),  with mild damping.

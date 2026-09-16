@@ -1,5 +1,5 @@
 // ==========================================================================
-// tracer.cpp — BVH Monte-Carlo path tracer (implements cpp_tracer_* in
+// tracer.cpp  -  BVH Monte-Carlo path tracer (implements cpp_tracer_* in
 // cathode/cppcore.h).
 //
 // This translation unit uses C++20 internally (RAII containers, templates,
@@ -10,7 +10,7 @@
 // Pipeline overview
 // -----------------
 //   * Geometry: spheres (accelerated by a bounding-volume hierarchy) and
-//     planes (tested linearly — usually few of them, and they have infinite
+//     planes (tested linearly  -  usually few of them, and they have infinite
 //     extent so they do not fit an AABB well).
 //   * Materials: Lambert (cosine-weighted diffuse), Metal (mirror + fuzz),
 //     Dielectric (Schlick-fresnel refract/reflect), Emissive (light source).
@@ -49,7 +49,7 @@ static inline f32 maxf3(Vec3 v) { return ct_maxf(v.x, ct_maxf(v.y, v.z)); }
 struct Ray { Vec3 o, d; };
 
 // ------------------------------------------------------------------ PRNG
-// PCG32 — small, fast, statistically excellent. One instance per pixel keeps
+// PCG32  -  small, fast, statistically excellent. One instance per pixel keeps
 // worker threads independent (no shared RNG state, so no data races).
 struct Pcg {
     uint64_t state = 0x853c49e6748fea9bULL;
@@ -74,7 +74,7 @@ struct Pcg {
     inline f32 f() { return (f32)(next() >> 8) * (1.0f / 16777216.0f); }
 };
 
-// splitmix64 — mixes integer seeds so adjacent pixels/frames decorrelate.
+// splitmix64  -  mixes integer seeds so adjacent pixels/frames decorrelate.
 static inline uint64_t splitmix64(uint64_t x) {
     x += 0x9E3779B97F4A7C15ULL;
     x = (x ^ (x >> 30)) * 0xBF58476D1CE4E5B9ULL;
@@ -372,7 +372,7 @@ static inline Vec3 refract(Vec3 uv, Vec3 n, f32 ratio) {
 
 // Given an incoming ray and a hit, produce the scattered ray + attenuation.
 // Returns false for a fully absorbed interaction (path ends). Emissive
-// surfaces never "scatter" — they are handled in the integrator (add & stop).
+// surfaces never "scatter"  -  they are handled in the integrator (add & stop).
 static bool scatter(const Ray &in, const Hit &rec, Pcg &rng,
                     Vec3 &attenuation, Ray &scattered) {
     switch (rec.mat->kind) {
@@ -615,7 +615,7 @@ void cpp_tracer_render(CppTracer *t, i32 spp, i32 max_bounces) {
 
     // Render disjoint horizontal bands on worker threads. Each band owns its
     // own accum rows (no shared writes) and its own ray counter, folded into
-    // the atomic once at the end — so results are deterministic regardless of
+    // the atomic once at the end  -  so results are deterministic regardless of
     // thread count.
     auto worker = [&](i32 y0, i32 y1) {
         int64_t local_rays = 0;

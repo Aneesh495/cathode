@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_plasma.c — classic demoscene plasma: sum of sines + fbm, palette-mapped.
+ * scene_plasma.c  -  classic demoscene plasma: sum of sines + fbm, palette-mapped.
  * ========================================================================== */
 #include "cathode/scene.h"
 #include "cathode/tui.h"

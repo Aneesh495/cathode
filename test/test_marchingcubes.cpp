@@ -1,4 +1,4 @@
-// test_marchingcubes.cpp — validate the marching-cubes isosurface extractor.
+// test_marchingcubes.cpp  -  validate the marching-cubes isosurface extractor.
 #include "cathode/cppcore.h"
 #include <cstdio>
 #include <cmath>
@@ -49,7 +49,7 @@ int main(){
     printf("  normals unit=%d, worst radial dot=%.3f\n", normals_ok, worst_dot);
     ok("normals are unit length", normals_ok);
     // our gradient is (low-high) so for f=dist-R it points inward (toward center):
-    // radial dot should be consistently negative (or consistently positive) — i.e.
+    // radial dot should be consistently negative (or consistently positive)  -  i.e.
     // consistent orientation. Accept |worst_dot| indicates alignment.
     ok("normals radially aligned", std::fabs(worst_dot) > 0.5);
 

@@ -1,8 +1,8 @@
-//! Strange attractors — chaotic ODE integrators emitting 3D point streams.
+//! Strange attractors  -  chaotic ODE integrators emitting 3D point streams.
 //!
 //! Implements `rust_attractor_generate` from `include/cathode/rustcore.h`. We
 //! integrate one of four classic autonomous chaotic systems (Lorenz, Aizawa,
-//! Thomas, Halvorsen) with a fixed-step 4th-order Runge–Kutta (RK4) scheme and
+//! Thomas, Halvorsen) with a fixed-step 4th-order Runge-Kutta (RK4) scheme and
 //! write the resulting trajectory as a stream of [`Vec3`] points.
 //!
 //! Precision note: the ODE state is carried in `f64` throughout the RK4 steps
@@ -156,7 +156,7 @@ mod tests {
     use super::*;
 
     /// The Lorenz orbit must stay bounded (no NaN/inf, no blow-up) over a long
-    /// run and must actually wander across a region — its hallmark is the
+    /// run and must actually wander across a region  -  its hallmark is the
     /// two-lobed butterfly, so the x-coordinate should span a wide range.
     #[test]
     fn lorenz_bounded_and_explores() {
@@ -220,7 +220,7 @@ mod tests {
         assert_eq!(got, 0);
     }
 
-    /// Every attractor variant must produce finite, bounded output — a smoke
+    /// Every attractor variant must produce finite, bounded output  -  a smoke
     /// test that the parameter sets and cyclic equations are wired correctly.
     #[test]
     fn all_variants_finite() {

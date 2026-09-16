@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/noise.h — deterministic PRNG + value/Perlin/simplex/fbm noise.
+ * cathode/noise.h  -  deterministic PRNG + value/Perlin/simplex/fbm noise.
  * Used by scenes (terrain, plasma, nebula) and the CRT channel noise.
  * ========================================================================== */
 #ifndef CATHODE_NOISE_H
@@ -11,7 +11,7 @@
 extern "C" {
 #endif
 
-/* xoshiro256** PRNG — fast, high quality. */
+/* xoshiro256** PRNG  -  fast, high quality. */
 typedef struct { u64 s[4]; } Rng;
 void  rng_seed(Rng *r, u64 seed);
 u64   rng_next(Rng *r);

@@ -2,7 +2,7 @@
 
 **A real-time graphics engine that runs entirely on the CPU, emulates an
 analog NTSC broadcast signal and a CRT tube in software DSP, and displays the
-result in your terminal — no GPU, no game engine, no external libraries.**
+result in your terminal  -  no GPU, no game engine, no external libraries.**
 
 Hand-written AArch64 NEON assembly in the hot loops (9 kernel modules). Dense C
 throughout, with a Rust compute core and C++ subsystems linked in over a C ABI.
@@ -17,17 +17,17 @@ Carlo path tracer, marching-cubes metaballs, a CSG boolean modeler, fractal
 flames, the Buddhabrot, rotating 4D polytopes, hyperbolic {p,q} tilings, a maze
 generator/solver, L-system plants, parametric topology (Möbius/Klein), a
 procedurally-textured planet, a demoscene sine-scroller, a retro boot screen, a
-credits crawl, and a live tracker player — each piped through the same
+credits crawl, and a live tracker player  -  each piped through the same
 physically-modeled CRT and verified by a 115-point cross-language test suite
 (unit + property + golden-image regression + end-to-end integration), clean
 under AddressSanitizer / UBSan / ThreadSanitizer.
 
 It also has a **complete from-scratch audio stack**: a polyphonic C++ synth, a
 pure-C pattern tracker, a windowed FFT analyzer (Rust, O(n log n)), and a
-RIFF/WAVE encoder — `capture --song out.wav` renders a composed chiptune with no
+RIFF/WAVE encoder  -  `capture --song out.wav` renders a composed chiptune with no
 audio library at all (see `docs/AUDIO.md`).
 
-Scope: ~24,000 lines — C ~12.5k, AArch64 assembly ~1.8k, Rust ~3.4k, C++ ~2.1k.
+Scope: ~24,000 lines  -  C ~12.5k, AArch64 assembly ~1.8k, Rust ~3.4k, C++ ~2.1k.
 
 ```
    scene (linear-RGB framebuffer, HDR)
@@ -35,8 +35,8 @@ Scope: ~24,000 lines — C ~12.5k, AArch64 assembly ~1.8k, Rust ~3.4k, C++ ~2.1k
         ├─ software renderers ─────────────────────────────┐
         │    • triangle rasterizer (z-buffer, Blinn-Phong)  │
         │    • SDF sphere-tracer (soft shadows, AO)         │
-        │    • N-body galaxy (Barnes–Hut octree)            │
-        │    • 2D fluid (stable Navier–Stokes)              │
+        │    • N-body galaxy (Barnes-Hut octree)            │
+        │    • 2D fluid (stable Navier-Stokes)              │
         │    • demoscene effects (plasma, tunnel, warp)     │
         ▼                                                   │
    ┌──────────────────────────────────────────────┐        │
@@ -55,13 +55,13 @@ Scope: ~24,000 lines — C ~12.5k, AArch64 assembly ~1.8k, Rust ~3.4k, C++ ~2.1k
 ## Why it's interesting
 
 - **No GPU.** Every pixel is computed by the CPU. The math that a shader would
-  normally do is written out by hand — and the innermost kernels (4×4 matrix
+  normally do is written out by hand  -  and the innermost kernels (4×4 matrix
   multiply, vector transform, `saxpy`, the YIQ colour-space conversions, the
   FIR/IIR filters) are **hand-written AArch64 NEON assembly**, each validated
   bit-for-bit against a portable C reference.
 - **Real analog-video DSP.** The CRT look isn't a texture overlay. The frame is
-  genuinely encoded to a 1-D composite signal — luma plus quadrature-modulated
-  chroma on a colour subcarrier — then *decoded* back with a comb filter. Chroma
+  genuinely encoded to a 1-D composite signal  -  luma plus quadrature-modulated
+  chroma on a colour subcarrier  -  then *decoded* back with a comb filter. Chroma
   bleed, dot crawl and rainbowing fall out of the math the way they do on real
   hardware.
 - **It's a whole engine.** Rasteriser, ray-marcher, two physics simulators, a
@@ -70,7 +70,7 @@ Scope: ~24,000 lines — C ~12.5k, AArch64 assembly ~1.8k, Rust ~3.4k, C++ ~2.1k
 
 ## Build & run
 
-The easiest way is the launcher — it builds if needed, then runs:
+The easiest way is the launcher  -  it builds if needed, then runs:
 
 ```sh
 ./cathode.sh                 # build + launch the interactive demo
@@ -95,12 +95,12 @@ make count      # count lines of code
 **Requirements.** A C compiler with an AArch64 backend (Apple clang), plus a
 **truecolor (24-bit) terminal** using a font that has the Unicode upper-half
 block `U+2580`. macOS / Apple Silicon is the reference platform.
-Run `./cathode.sh --check` — it prints your `TERM`/`COLORTERM`, draws a 24-bit
+Run `./cathode.sh --check`  -  it prints your `TERM`/`COLORTERM`, draws a 24-bit
 gradient (smooth = truecolor works, banded = only 256 colors), and draws six
 half-blocks (they should be solid red-over-blue, with no boxes or gaps).
 
 Modern terminals that work: iTerm2, Kitty, WezTerm, Alacritty, Ghostty, and
-Terminal.app on recent macOS. Maximize the window before launching — the image
+Terminal.app on recent macOS. Maximize the window before launching  -  the image
 is sized to the terminal, so a bigger window is a higher-resolution render.
 
 ## Controls
@@ -119,8 +119,8 @@ is sized to the terminal, so a bigger window is a higher-resolution render.
 
 ## Scenes (41)
 
-**Pure C:** starfield (3D warp), galaxy (Barnes–Hut N-body), raymarch (SDF +
-mandelbulb), solids (Phong meshes), fluid (Navier–Stokes), tunnel, plasma,
+**Pure C:** starfield (3D warp), galaxy (Barnes-Hut N-body), raymarch (SDF +
+mandelbulb), solids (Phong meshes), fluid (Navier-Stokes), tunnel, plasma,
 terrain (fractal flyover), mandelbrot (deep zoom), life (Conway + phosphor
 trails), boids (3D flocking), attractor (Lorenz/Aizawa/Thomas/Halvorsen), slime
 (Physarum transport network), lenia (continuous-CA creatures), flow (de
@@ -132,7 +132,7 @@ wireworld (electron CA), observatory (terrain + N-body showcase), brain (Brian's
 Brain), parametric (Möbius/Klein/trefoil surfaces), demoscene (copper bars +
 sine-scroller), bootscreen (retro POST sequence).
 
-**Rust-backed:** reaction (Gray–Scott Turing patterns), cloth (Verlet flag), dla
+**Rust-backed:** reaction (Gray-Scott Turing patterns), cloth (Verlet flag), dla
 (diffusion-limited aggregation crystals), wfc (Wave Function Collapse),
 spectrogram (FFT waterfall).
 
@@ -152,7 +152,7 @@ include/cathode/   frozen interface contract (headers)
 src/asm/           hand-written NEON assembly
 src/core/          framebuffer, C references, noise, image (PNG)
 src/render/        rasterizer, meshes, SDF ray-marcher, CRT chain
-src/physics/       N-body (Barnes–Hut), fluid, SPH, 2D rigid-body
+src/physics/       N-body (Barnes-Hut), fluid, SPH, 2D rigid-body
 src/tui/           terminal presenter
 src/app/           registry, threadpool, main loop, headless capture
 src/scenes/        the 50 demo scenes
@@ -161,12 +161,12 @@ test/              per-module unit tests + benchmarks
 
 ## Verification
 
-Every module ships with a test that runs under `make test-all` — a **102-point
+Every module ships with a test that runs under `make test-all`  -  a **102-point
 cross-language suite**: 24 C unit/property suites, 33 Rust tests, 4 C++ tests,
 and a 41-scene golden-image regression. The hand-written NEON assembly is
 validated **bit-for-bit against a portable C reference** for every kernel and
 every awkward size (tails, edges, tiny `n`). The full engine also runs clean
-under **AddressSanitizer + UBSan + ThreadSanitizer** across all scenes — no
+under **AddressSanitizer + UBSan + ThreadSanitizer** across all scenes  -  no
 leaks, overflows, data races, or undefined behaviour.
 
 Measured on an Apple M3 Pro (`make bench`):
@@ -174,9 +174,9 @@ Measured on an Apple M3 Pro (`make bench`):
 | kernel | NEON asm | C reference | speedup |
 |--------|---------:|------------:|--------:|
 | `mat4_mul` (4×4 × 4×4) | 666 Mops/s | 111 Mops/s | **6.0×** |
-| `saxpy` / `rgb2yiq` (streaming) | — | — | ~1× (memory-bound; the compiler already auto-vectorizes these at `-O3`) |
+| `saxpy` / `rgb2yiq` (streaming) |  -  |  -  | ~1× (memory-bound; the compiler already auto-vectorizes these at `-O3`) |
 
-The 6× win is on the compute-dense matrix multiply — the kernel the rasterizer
+The 6× win is on the compute-dense matrix multiply  -  the kernel the rasterizer
 runs per vertex and the ray-marcher leans on. The streaming kernels are limited
 by memory bandwidth, so hand assembly and auto-vectorized C tie, as expected.
 
@@ -192,7 +192,7 @@ PNG, GIF89a and WAV encoders.
 
 Foundations (the frozen interface contract, the core math, and the first proven
 NEON kernel) were laid down first, then the heavy modules were fanned out to
-parallel agents — each implementing one module against the frozen headers and
+parallel agents  -  each implementing one module against the frozen headers and
 self-verifying with its own test. The integration layer (main loop, threaded
 tile scheduler, headless PNG capture, build system) was written concurrently
 against the same contract, and the whole thing was validated end-to-end with the

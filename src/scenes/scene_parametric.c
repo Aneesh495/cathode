@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_parametric.c — rotating parametric surfaces (Möbius, Klein, trefoil,
+ * scene_parametric.c  -  rotating parametric surfaces (Möbius, Klein, trefoil,
  * Boy's-ish), mesh-generated and Phong-shaded via the rasterizer.
  *
  * Builds a triangle mesh by sampling a parametric map (u,v) -> R^3 over a grid,
@@ -24,7 +24,7 @@ typedef struct { int kind; Mesh *mesh; i32 w,h; f32 t; } ParamState;
 /* parametric maps: u in [0,2pi], v in [-1,1] or [0,2pi] depending on surface */
 static Vec3 surf(int kind, f32 u, f32 v){
     switch(kind){
-        case 0: { /* Möbius strip — wide ribbon so the single-sided twist reads */
+        case 0: { /* Möbius strip  -  wide ribbon so the single-sided twist reads */
             f32 hu=u*0.5f;
             f32 r=2.4f + v*1.1f*cosf(hu);
             return v3(r*cosf(u), r*sinf(u), v*1.1f*sinf(hu));

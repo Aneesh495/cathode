@@ -1,4 +1,4 @@
-/* framebuffer.c — allocation, clear, and bilinear splat for the shared surface. */
+/* framebuffer.c  -  allocation, clear, and bilinear splat for the shared surface. */
 #include "cathode/framebuffer.h"
 #include "cathode/vec.h"
 #include <stdlib.h>

@@ -3,7 +3,7 @@
 //! Two virtual chemicals `U` and `V` diffuse across a toroidal (wrap-around)
 //! grid while reacting via the autocatalytic rule `U + 2V -> 3V`. Depending on
 //! the feed/kill rates the system self-organizes into spots, stripes, mazes,
-//! and mitosis-like patterns — the classic Pearson parameter zoo.
+//! and mitosis-like patterns  -  the classic Pearson parameter zoo.
 //!
 //! Discrete update per cell, with `dt = 1.0` and `substeps` iterations per
 //! [`rust_rd_step`] call:
@@ -34,7 +34,7 @@ const W_ORTHO: f32 = 0.2;
 const W_DIAG: f32 = 0.05;
 
 /// A minimal `splitmix64` PRNG. Deterministic, dependency-free, excellent
-/// avalanche — ideal for seeding reproducible random blobs. Same seed always
+/// avalanche  -  ideal for seeding reproducible random blobs. Same seed always
 /// produces the same stream, which the determinism test relies on.
 struct SplitMix64 {
     state: u64,
@@ -338,7 +338,7 @@ pub unsafe extern "C" fn rust_rd_height(rd: *const RustReactionDiffusion) -> i32
 mod tests {
     use super::*;
 
-    /// Classic Pearson "coral/mitosis" preset — grows stable structures.
+    /// Classic Pearson "coral/mitosis" preset  -  grows stable structures.
     const FEED: f32 = 0.055;
     const KILL: f32 = 0.062;
     const DU: f32 = 0.16;

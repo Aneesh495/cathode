@@ -1,12 +1,12 @@
 /* ==========================================================================
- * tui.c — truecolor terminal presenter using the Unicode UPPER HALF BLOCK.
+ * tui.c  -  truecolor terminal presenter using the Unicode UPPER HALF BLOCK.
  *
  * Each character cell displays two vertically-stacked pixels:
  *   set foreground = TOP pixel color, background = BOTTOM pixel color,
  *   print U+2580 '▀'. A framebuffer of height H shows in H/2 rows.
  *
  * A diff renderer keeps a shadow of the last-presented cells and only emits
- * escape codes for cells that changed — huge bandwidth savings on a mostly
+ * escape codes for cells that changed  -  huge bandwidth savings on a mostly
  * static frame. The core cell-encoding is a PURE function (tui_render_to_buf)
  * that needs no terminal, so it is unit-testable headless.
  * ========================================================================== */
@@ -25,7 +25,7 @@
 typedef struct { u8 fr,fg,fb, br,bg,bb; int set; } Cell;
 
 /* Sum-of-absolute-channel-difference below which two cells count as identical.
- * 6 channels, so ~4 per channel — under a JND on screen, but enough to absorb
+ * 6 channels, so ~4 per channel  -  under a JND on screen, but enough to absorb
  * the CRT chain's dither/noise so the diff renderer can actually skip cells. */
 #define TUI_CELL_EPS 24
 #define ABSD(a,b) ((a)>(b) ? (int)((a)-(b)) : (int)((b)-(a)))
@@ -35,7 +35,7 @@ typedef struct { u8 fr,fg,fb, br,bg,bb; int set; } Cell;
  * emulator's cost is per painted cell. */
 static i32 g_origin_x = 0, g_origin_y = 0;
 
-/* write(2) is allowed to transfer FEWER bytes than requested — on a pty or a
+/* write(2) is allowed to transfer FEWER bytes than requested  -  on a pty or a
  * pipe a full frame (tens of KB) routinely short-writes. Ignoring that silently
  * drops the tail of the frame, which showed up as only the first couple of rows
  * being painted (a smear of colored blocks at the top of the screen). Always
@@ -53,7 +53,7 @@ static void write_all(int fd, const char *buf, size_t n){
             nanosleep(&ts,NULL);
             continue;
         }
-        break;   /* real error (EPIPE etc.) — give up on this frame */
+        break;   /* real error (EPIPE etc.)  -  give up on this frame */
     }
 }
 
@@ -187,7 +187,7 @@ static size_t tui_render_to_buf(const Framebuffer *fb, Cell *prev,
                 else {
                     /* Perceptual dead-zone. The CRT chain adds per-pixel noise and
                      * dot-crawl, so a strict != comparison marks essentially EVERY
-                     * cell dirty every frame and the diff renderer saves nothing —
+                     * cell dirty every frame and the diff renderer saves nothing  - 
                      * that is what pinned the frame rate at ~3 fps (≈330 KB of
                      * escapes per frame). Ignoring changes below a just-noticeable
                      * threshold lets static regions be skipped while motion still
@@ -206,7 +206,7 @@ static size_t tui_render_to_buf(const Framebuffer *fb, Cell *prev,
             }
             /* Emit the colors. Combining fg+bg into ONE SGR sequence (they can
              * share a single ESC[...m) saves ~9 bytes per cell versus two
-             * separate escapes — a ~25% cut in total frame bytes, which is the
+             * separate escapes  -  a ~25% cut in total frame bytes, which is the
              * binding constraint on frame rate here. */
             int need_fg = (c.fr!=last_fr||c.fg!=last_fg||c.fb!=last_fb);
             int need_bg = (c.br!=last_br||c.bg!=last_bg||c.bb!=last_bb);
@@ -305,7 +305,7 @@ void tui_present_zoom(Tui *t, const Framebuffer *fb, i32 zoom){
     if (zoom < 1) zoom = 1;
     /* Painting `zoom` terminal cells per framebuffer cell keeps the picture
      * full-screen while cutting the number of cells (and therefore escape bytes
-     * and emulator glyph work) by zoom^2 — this is what makes a maximized window
+     * and emulator glyph work) by zoom^2  -  this is what makes a maximized window
      * run smoothly instead of at a few frames per second.
      *
      * CLAMP to the real terminal size: the framebuffer's cell-rows times zoom can
@@ -321,7 +321,7 @@ void tui_present_zoom(Tui *t, const Framebuffer *fb, i32 zoom){
     if (cols<1) cols=1; if (rows<1) rows=1;
     ensure_shadow(t,cols,rows);
     /* NOTE on cost: zooming shrinks the FRAMEBUFFER (less scene + CRT work) but
-     * the number of TERMINAL cells painted is fixed by the window — the emulator
+     * the number of TERMINAL cells painted is fixed by the window  -  the emulator
      * still renders cols*rows glyphs. What zoom buys on the wire is that adjacent
      * cells within a zoom-block are identical, so they share one SGR escape and
      * cost ~3 bytes each instead of ~25. That is the difference between ~300 KB
@@ -378,7 +378,7 @@ void tui_hud(Tui *t, const char *scene_name, f32 fps, i32 frame, const char *sta
  * refuse to disappear:
  *
  *  1. The diff presenter's shadow still believes those cells hold scene pixels,
- *    so on the next frame it only repaints the ones that "changed" — leaving the
+ *    so on the next frame it only repaints the ones that "changed"  -  leaving the
  *    box half-overwritten (the flashing). We therefore INVALIDATE the shadow
  *    cells the box covers, so the presenter unconditionally repaints that region
  *    every frame: the box is redrawn cleanly on top while it's open, and the

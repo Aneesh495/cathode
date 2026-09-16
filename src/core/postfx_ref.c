@@ -1,4 +1,4 @@
-/* postfx_ref.c — portable C reference for the NEON post-FX kernels. */
+/* postfx_ref.c  -  portable C reference for the NEON post-FX kernels. */
 #include "app/postfx.h"
 
 void postfx_accumulate_ref(float *dst, const float *src, float scale, unsigned long n) {

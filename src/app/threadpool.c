@@ -1,5 +1,5 @@
 /* ==========================================================================
- * threadpool.c — persistent pthread pool. Workers sleep on a condvar until a
+ * threadpool.c  -  persistent pthread pool. Workers sleep on a condvar until a
  * batch of bands is posted, run their band, and signal completion. Reused
  * every frame to avoid thread-spawn overhead in the hot render loop.
  * ========================================================================== */

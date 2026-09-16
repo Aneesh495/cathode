@@ -1,5 +1,5 @@
 // ==========================================================================
-// scenegraph.cpp — retained-mode wireframe scene graph (cpp_sg_* in cppcore.h)
+// scenegraph.cpp  -  retained-mode wireframe scene graph (cpp_sg_* in cppcore.h)
 //
 // A tree of transformed nodes. Each node owns:
 //   * a parent index (-1 == a direct child of the passed-in `root`),

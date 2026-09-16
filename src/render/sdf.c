@@ -1,5 +1,5 @@
 /* ==========================================================================
- * sdf.c — signed-distance-field sphere tracer.
+ * sdf.c  -  signed-distance-field sphere tracer.
  *
  *   * primitives: sphere, box, torus, plane
  *   * operators: union, smooth-union (polynomial smin), subtract, repeat

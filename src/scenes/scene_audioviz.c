@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_audioviz.c — audio-reactive visualizer driven by the C++ synth.
+ * scene_audioviz.c  -  audio-reactive visualizer driven by the C++ synth.
  *
  * The C++ synth (src/cpp/synth.cpp) runs a generative sequencer and renders
  * audio blocks; we pull its magnitude spectrum and waveform each frame and
@@ -49,7 +49,7 @@ static void av_update(Scene *sc, f32 dt, f32 t){
     /* advance the generative sequencer (drives note on/off) */
     cpp_synth_sequencer_tick(s->synth, dt);
     /* Render a block for the visualizer ONLY when the audio device is NOT
-     * driving the synth — otherwise the device callback owns cpp_synth_render
+     * driving the synth  -  otherwise the device callback owns cpp_synth_render
      * on its own thread and calling it here too would be a data race. When
      * audio is live we still read the spectrum of the device's last block. */
     if (!cpp_audio_running())

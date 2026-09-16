@@ -1,4 +1,4 @@
-/* test_sph.c — SPH fluid: containment, settling, stability. */
+/* test_sph.c  -  SPH fluid: containment, settling, stability. */
 #include "cathode/physics.h"
 #include <stdio.h>
 #include <stdlib.h>

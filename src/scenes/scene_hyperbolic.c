@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_hyperbolic.c — animated {p,q} tilings of the hyperbolic plane, drawn
+ * scene_hyperbolic.c  -  animated {p,q} tilings of the hyperbolic plane, drawn
  * in the Poincaré disk model.
  *
  * The hyperbolic plane can be tiled by regular p-gons meeting q at a vertex
@@ -9,15 +9,15 @@
  *
  *   1. reflect across the two diameters at angles 0 and π/p (dihedral fold)
  *      until the point lies in the wedge [0, π/p];
- *   2. if it lies inside the "edge" geodesic — a circle orthogonal to the unit
- *      disk — invert it back out across that circle;
+ *   2. if it lies inside the "edge" geodesic  -  a circle orthogonal to the unit
+ *      disk  -  invert it back out across that circle;
  *   repeat until stable. The number of reflections used gives the tile identity
  *   (parity → checkerboard, inversion depth → hue), which is exactly how the
  *   tessellation's combinatorics fall out of the group action.
  *
  * The whole disk is pushed through an animating hyperbolic translation (a real
  * Möbius map of the disk), so the tiling appears to glide past the viewer while
- * staying a perfect tessellation — the hallmark "infinite descent into the
+ * staying a perfect tessellation  -  the hallmark "infinite descent into the
  * boundary" look. Runs on the thread pool: rows are split across cores.
  *
  * The reflecting circle for {p,q}: centered at (cx,0), radius rc, orthogonal to

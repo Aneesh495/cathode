@@ -1,16 +1,16 @@
 /* ==========================================================================
- * cathode/text.h — bitmap text rendering into the linear-RGB framebuffer.
+ * cathode/text.h  -  bitmap text rendering into the linear-RGB framebuffer.
  *
  * A classic 5x7 ASCII font (printable range 0x20..0x7E) rasterized directly
  * into a Framebuffer, so all drawn text flows through the full NTSC/CRT signal
- * chain downstream — glyphs bloom, bleed chroma, and pick up scanlines exactly
+ * chain downstream  -  glyphs bloom, bleed chroma, and pick up scanlines exactly
  * like real broadcast titling. This is the substrate for boot screens,
  * demoscene sine-scrollers, HUD text, and credits.
  *
  * The font is stored ROW-major: each glyph is 7 bytes (one per row, top to
  * bottom). Within a byte, bit 4 is the LEFT column and bit 0 the RIGHT column
  * (5 columns used; the upper 3 bits are ignored). Row-major makes the glyph
- * table legible in source — each byte reads as the pixels of that row.
+ * table legible in source  -  each byte reads as the pixels of that row.
  * ========================================================================== */
 #ifndef CATHODE_TEXT_H
 #define CATHODE_TEXT_H

@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_maze.c — animated maze generation + BFS flood-fill solve (Rust core).
+ * scene_maze.c  -  animated maze generation + BFS flood-fill solve (Rust core).
  *
  * Uses the Rust maze module (recursive-backtracker generation + BFS solve):
  * we draw the maze walls, then animate a flood filling outward from the start

@@ -1,8 +1,8 @@
-/* fractalkernel_ref.c — C reference for the NEON escape-time fractal kernels.
+/* fractalkernel_ref.c  -  C reference for the NEON escape-time fractal kernels.
  *
  * Escape-time fractals are chaotic: a single differing rounding near the
  * bailout boundary flips a point's iteration count. The NEON kernel uses
- * strict (non-fused) multiply/add, so this reference must too — otherwise the
+ * strict (non-fused) multiply/add, so this reference must too  -  otherwise the
  * compiler may contract `2*zr*zi + ci` into an FMA and the two diverge. Pin it
  * off here so the equivalence holds under any build flags. */
 #include "cathode/fractalkernel.h"

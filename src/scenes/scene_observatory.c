@@ -1,14 +1,14 @@
 /* ==========================================================================
- * scene_observatory.c — a subsystem-combining showcase.
+ * scene_observatory.c  -  a subsystem-combining showcase.
  *
  * Renders, through ONE camera and into one framebuffer:
- *   • a fractal terrain horizon  — the C rasterizer + noise heightfield,
- *   • a live Barnes–Hut N-body star swarm orbiting overhead — the C physics
+ *   • a fractal terrain horizon   -  the C rasterizer + noise heightfield,
+ *   • a live Barnes-Hut N-body star swarm orbiting overhead  -  the C physics
  *     module, its particles projected with the hand-written NEON batched
  *     projector (project_points_neon),
  *   • a graded night sky.
  * It exists to prove the pieces compose: rasterizer + physics + assembly +
- * CRT all cooperating in a single coherent shot — a galaxy rising over
+ * CRT all cooperating in a single coherent shot  -  a galaxy rising over
  * mountains at night.
  * ========================================================================== */
 #include "cathode/scene.h"

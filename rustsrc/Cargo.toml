@@ -2,7 +2,7 @@
 name = "cathode_rustcore"
 version = "0.1.0"
 edition = "2021"
-description = "CATHODE Rust compute core — colorimetry, reaction-diffusion, cloth, attractors, terrain. Exposes a C ABI (see include/cathode/rustcore.h)."
+description = "CATHODE Rust compute core  -  colorimetry, reaction-diffusion, cloth, attractors, terrain. Exposes a C ABI (see include/cathode/rustcore.h)."
 
 [lib]
 name = "cathode_rustcore"

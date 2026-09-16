@@ -1,12 +1,12 @@
 /* ==========================================================================
- * scene_brain.c — Brian's Brain, a 3-state cellular automaton (Brian Silverman).
+ * scene_brain.c  -  Brian's Brain, a 3-state cellular automaton (Brian Silverman).
  *
  * Cells are OFF, ON (firing), or DYING. Rules per tick:
  *   OFF   -> ON    iff exactly 2 of its 8 neighbors are ON
  *   ON    -> DYING (always)
  *   DYING -> OFF   (always)
- * The forced ON→DYING→OFF refractory cycle means nothing ever stays lit, so —
- * unlike Life — the field never settles: it teems with perpetual gliders and
+ * The forced ON→DYING→OFF refractory cycle means nothing ever stays lit, so  - 
+ * unlike Life  -  the field never settles: it teems with perpetual gliders and
  * exploding fronts. ON cells flash bright, DYING cells glow as an afterimage
  * that the CRT phosphor smears into comet trails.
  * ========================================================================== */
@@ -110,7 +110,7 @@ static void bb_destroy(Scene *sc){ if(sc){ BrainState*s=sc->state; free(s->cur);
 Scene *scene_brain_create(void){
     Scene *sc=calloc(1,sizeof(Scene));
     sc->name="brain";
-    sc->description="Brian's Brain 3-state CA — perpetual gliders and firing fronts";
+    sc->description="Brian's Brain 3-state CA  -  perpetual gliders and firing fronts";
     sc->state=calloc(1,sizeof(BrainState));
     sc->init=bb_init; sc->update=bb_update; sc->render=bb_render;
     sc->on_key=bb_key; sc->destroy=bb_destroy; sc->preferred_crt=bb_crt;

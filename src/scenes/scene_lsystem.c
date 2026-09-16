@@ -1,10 +1,10 @@
 /* ==========================================================================
- * scene_lsystem.c — animated L-system plants (Rust turtle-graphics generator).
+ * scene_lsystem.c  -  animated L-system plants (Rust turtle-graphics generator).
  *
  * The Rust L-system module (rust_lsystem_*) expands a production grammar and
  * returns normalized 2D line segments tagged with branch depth. We draw them
  * with an animated "growth" wipe (segments appear in draw order over time) and
- * color by depth — trunk warm, leaves cool/green — so the plant appears to grow
+ * color by depth  -  trunk warm, leaves cool/green  -  so the plant appears to grow
  * and leaf out. Cycles through the built-in presets (fractal plant, Koch,
  * dragon, Sierpinski, bushy tree).
  * ========================================================================== */

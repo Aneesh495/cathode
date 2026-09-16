@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_tunnel.c — classic demoscene tunnel: per-pixel angle/depth texturing.
+ * scene_tunnel.c  -  classic demoscene tunnel: per-pixel angle/depth texturing.
  * ========================================================================== */
 #include "cathode/scene.h"
 #include "cathode/tui.h"

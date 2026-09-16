@@ -1,9 +1,9 @@
 /* ==========================================================================
- * scene_qjulia.c — ray-marched quaternion Julia set (a true 4D fractal).
+ * scene_qjulia.c  -  ray-marched quaternion Julia set (a true 4D fractal).
  *
  * The quaternion Julia set is the filled Julia set of z -> z^2 + c over the
  * quaternions H (a 4D division algebra). We fix the 4D point's w-slice and
- * march rays through the remaining 3D slice, using the classic Hart–Sandin
+ * march rays through the remaining 3D slice, using the classic Hart-Sandin
  * distance estimator:
  *
  *     DE(z0) = 0.5 * |z_n| * ln|z_n| / |z'_n|

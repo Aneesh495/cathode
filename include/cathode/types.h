@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/types.h — foundational types shared across every module.
+ * cathode/types.h  -  foundational types shared across every module.
  * FROZEN CONTRACT: do not change without updating all modules.
  * ========================================================================== */
 #ifndef CATHODE_TYPES_H

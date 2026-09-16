@@ -1,5 +1,5 @@
 /* ==========================================================================
- * fractalkernel.c — public NEON fractal kernels.
+ * fractalkernel.c  -  public NEON fractal kernels.
  *
  * The heavy per-lane iteration runs in hand-written NEON (fk_iter4_neon in
  * src/asm/fractalkernel_neon.s); here we apply the O(1) smooth-escape log

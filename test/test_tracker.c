@@ -1,5 +1,5 @@
 /* ==========================================================================
- * test_tracker.c — unit tests for the pattern-sequencer playback engine.
+ * test_tracker.c  -  unit tests for the pattern-sequencer playback engine.
  *
  * Checks: row/tick timing math (samples_per_row from speed & tempo), that a
  * held note is released before a replacing note, NOTE_OFF releases, events land

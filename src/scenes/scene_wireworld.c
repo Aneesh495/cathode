@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_wireworld.c — Wireworld cellular automaton (Silverman, 1987).
+ * scene_wireworld.c  -  Wireworld cellular automaton (Silverman, 1987).
  *
  * A 4-state CA that models electronics: cells are EMPTY, WIRE (conductor),
  * HEAD (electron head), or TAIL (electron tail). Rules per tick:
@@ -8,8 +8,8 @@
  *   tail         -> wire
  *   wire         -> head IFF exactly 1 or 2 of its 8 neighbors are heads
  * Electrons (head→tail pairs) travel along wires; the 1-or-2 rule makes wires
- * act as diodes and enables logic gates. We build a self-running circuit —
- * loops of wire seeded with electrons — that pulses forever. HEAD/TAIL glow;
+ * act as diodes and enables logic gates. We build a self-running circuit  - 
+ * loops of wire seeded with electrons  -  that pulses forever. HEAD/TAIL glow;
  * wire is dim copper. A living circuit board.
  * ========================================================================== */
 #include "cathode/scene.h"

@@ -1,5 +1,5 @@
 /* ==========================================================================
- * test_properties.c — property-based tests.
+ * test_properties.c  -  property-based tests.
  *
  * Unlike the equivalence tests (NEON asm == C reference), these assert
  * *mathematical invariants* that must hold for ANY input, checked over many

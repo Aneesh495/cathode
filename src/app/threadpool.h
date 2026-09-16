@@ -1,5 +1,5 @@
 /* ==========================================================================
- * threadpool.h — minimal persistent worker pool for splitting a row range
+ * threadpool.h  -  minimal persistent worker pool for splitting a row range
  * [0,h) across N threads. Internal app helper (not part of the frozen ABI).
  * ========================================================================== */
 #ifndef CATHODE_THREADPOOL_H

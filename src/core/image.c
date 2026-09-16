@@ -1,5 +1,5 @@
 /* ==========================================================================
- * image.c — framebuffer -> PPM/PNG exporter.
+ * image.c  -  framebuffer -> PPM/PNG exporter.
  *
  * Pipeline for every channel:
  *   linear HDR f32  --Reinhard-->  [0,1)  --sRGB gamma-->  [0,1]  --> u8

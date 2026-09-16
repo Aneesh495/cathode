@@ -1,5 +1,5 @@
 /* ==========================================================================
- * scene_lenia.c — Lenia: continuous-state, continuous-space cellular automaton.
+ * scene_lenia.c  -  Lenia: continuous-state, continuous-space cellular automaton.
  *
  * Lenia (Bert Chan, 2019) generalizes Conway's Life to real-valued cells, a
  * smooth ring-shaped convolution kernel, and a smooth growth function. The
@@ -102,7 +102,7 @@ static void le_init(Scene *sc, i32 w, i32 h){
 static void le_update(Scene *sc, f32 dt, f32 t){
     LeniaState *s=sc->state; (void)dt; s->t=t;
     i32 gw=s->gw, gh=s->gh; int K=2*KR+1;
-    /* convolve A with kernel -> U (toroidal). O(gw*gh*K*K) — grid kept small. */
+    /* convolve A with kernel -> U (toroidal). O(gw*gh*K*K)  -  grid kept small. */
     for (i32 y=0;y<gh;++y){
         for (i32 x=0;x<gw;++x){
             f32 acc=0;
@@ -167,7 +167,7 @@ static void le_destroy(Scene *sc){ if(sc){ LeniaState*s=sc->state; free(s->A);fr
 Scene *scene_lenia_create(void){
     Scene *sc=calloc(1,sizeof(Scene));
     sc->name="lenia";
-    sc->description="Lenia — continuous cellular automaton with lifelike creatures";
+    sc->description="Lenia  -  continuous cellular automaton with lifelike creatures";
     sc->state=calloc(1,sizeof(LeniaState));
     sc->init=le_init; sc->update=le_update; sc->render=le_render;
     sc->on_key=le_key; sc->destroy=le_destroy; sc->preferred_crt=le_crt;

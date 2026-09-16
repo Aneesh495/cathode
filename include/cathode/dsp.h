@@ -1,5 +1,5 @@
 /* ==========================================================================
- * cathode/dsp.h — NEON-accelerated signal-processing kernels.
+ * cathode/dsp.h  -  NEON-accelerated signal-processing kernels.
  * Like simd.h: each routine has a hand-written asm impl and a C reference,
  * proven equal by test/test_dsp.c. Used heavily by the CRT signal chain.
  * ========================================================================== */
