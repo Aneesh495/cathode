@@ -139,4 +139,4 @@ C++ ~2.1k. From-scratch PNG, GIF89a, and WAV encoders. Deeper maps:
 
 ## License
 
-See repository license file.
+No license file is included in this repository.
