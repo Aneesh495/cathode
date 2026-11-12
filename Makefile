@@ -18,7 +18,7 @@ CXXFLAGS := -O3 -std=c++20 -Iinclude -Isrc -Isrc/app -Wall -Wextra \
 # Opt-in real audio output: `make AUDIO=1` links macOS AudioToolbox and enables
 # device playback via cpp_audio_* . Default off keeps the build headless-safe.
 AUDIO_LIBS :=
-ifdef AUDIO
+ifeq ($(AUDIO),1)
 CXXFLAGS   += -DCATHODE_AUDIO
 AUDIO_LIBS := -framework AudioToolbox -framework CoreFoundation
 endif
