@@ -80,7 +80,7 @@ takes ~150 ms (~6 fps). Secondary microbench detail lives in `docs/BENCHMARKS.md
 ```
 
 ```sh
-make            # bin/cathode + bin/capture
+make            # build/bin/cathode + build/bin/capture
 make test-all   # C + Rust + C++ + golden + integration
 make bench      # NEON vs C + DSP throughput / NRMSE gates
 make capture    # PNG contact sheet

@@ -16,7 +16,7 @@ all linked into two binaries. Driven by a single `Makefile`.
 
 | command | what it does |
 |---------|--------------|
-| `make` / `make all` | build the Rust staticlib, then `bin/cathode` (interactive) and `bin/capture` (headless) |
+| `make` / `make all` | build the Rust staticlib, then `build/bin/cathode` (interactive) and `build/bin/capture` (headless) |
 | `make test` | build & run the C + NEON unit/property test suite |
 | `make rust-test` | `cargo test --release` for the Rust core |
 | `make cpp-test` | compile & run the C++ subsystem tests |
