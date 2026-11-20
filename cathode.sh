@@ -27,9 +27,10 @@ die() { printf '\033[31merror:\033[0m %s\n' "$*" >&2; exit 1; }
 info() { printf '\033[36m==>\033[0m %s\n' "$*"; }
 
 build_if_needed() {
+  local target=$1
   # Rebuild whenever a source file is newer than the binary (the Makefile does
   # the real dependency tracking; this just avoids a pointless make on every run).
-  if [[ ! -x $BIN ]] || [[ -n "$(find src include rustsrc/src Makefile -newer "$BIN" -type f 2>/dev/null | head -1)" ]]; then
+  if [[ ! -x $target ]] || [[ -n "$(find src include rustsrc/src Makefile -type f -newer "$target" -print -quit)" ]]; then
     info "building…"
     make -s all || die "build failed  -  run 'make' to see the errors"
   fi
@@ -68,7 +69,7 @@ check_terminal() {
 }
 
 list_scenes() {
-  build_if_needed
+  build_if_needed "$BIN"
   "$BIN" --help | sed -n '/^scenes/,$p'
 }
 
@@ -86,19 +87,19 @@ main() {
       make -s test-all
       ;;
     --shot)
-      build_if_needed
+      build_if_needed "$CAP"
       local scene="${2:-plasma}" out="${3:-/tmp/cathode_${2:-plasma}.png}"
       "$CAP" "$scene" 90 "$out" 320 240
       info "wrote $out"
       ;;
     --song)
-      build_if_needed
+      build_if_needed "$CAP"
       local out="${2:-/tmp/cathode_song.wav}"
       "$CAP" --song "$out" 2 44100 0.35
       info "wrote $out  -  play it with: afplay $out"
       ;;
     --gif)
-      build_if_needed
+      build_if_needed "$CAP"
       local scene="${2:-plasma}" out="${3:-/tmp/cathode_${2:-plasma}.gif}"
       "$CAP" --gif "$scene" 120 "$out" 240 180
       info "wrote $out"
@@ -112,7 +113,7 @@ main() {
         die "stdout is not a terminal. The demo needs a real TTY.
        Try:  ./cathode.sh --shot plasma   (renders a PNG instead)"
       fi
-      build_if_needed
+      build_if_needed "$BIN"
       local rows cols
       read -r rows cols < <(stty size 2>/dev/null || echo '24 80')
       if (( cols < 40 || rows < 12 )); then
