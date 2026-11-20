@@ -1,11 +1,15 @@
 # CATHODE
 
+[![Apple Silicon CI](https://github.com/Aneesh495/cathode/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/Aneesh495/cathode/actions/workflows/ci.yml)
+
 **CPU graphics engine** for Apple Silicon: hand-written **AArch64 NEON** hot paths,
 a from-scratch triangle rasterizer, and a full **NTSC composite DSP / CRT** chain -
 no GPU, no game engine, no third-party graphics or audio libraries.
 
 The interactive demo paints into a truecolor terminal. The same pipeline runs
 headless for high-resolution capture, golden regression, and throughput benches.
+
+[Download the Apple Silicon preview](https://github.com/Aneesh495/cathode/releases/tag/v0.1.0-preview.1) for macOS 26, or follow the [headless capture walkthrough](https://github.com/Aneesh495/cathode/discussions/4) to generate PNG, GIF, and WAV output.
 
 ![Cathode demoscene rendered through the software CRT pipeline](docs/media/cathode-preview.gif)
 
