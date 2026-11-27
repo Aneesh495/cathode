@@ -33,7 +33,7 @@ jobs:
           test -s assets/ci-preview.gif
       - name: Upload test logs and rendered preview
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: cathode-checks
           path: |
